@@ -1,0 +1,30 @@
+{
+  "name": "바이킹 룬 문자 변환기",
+  "short_name": "룬 변환기",
+  "description": "한글 이름을 북유럽 바이킹 룬 문자로 변환하는 앱",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5e6c8",
+  "theme_color": "#8b4513",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "lang": "ko",
+  "dir": "ltr",
+  "orientation": "portrait",
+  "categories": ["utilities", "education", "entertainment"]
+}
