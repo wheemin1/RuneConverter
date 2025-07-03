@@ -1,0 +1,108 @@
+바이킹 룬 문자 변환기 (Viking Rune Converter) 프로젝트 분석
+1. 프로젝트 개요
+이 프로젝트는 사용자의 이름(한국어/영어)을 고대 바이킹의 룬 문자(Elder Futhark)로 변환해주는 웹 애플리케이션입니다. 주요 기능으로는 한국어 이름의 로마자 자동 변환, 룬 문자 변환, 각 룬 문자의 의미 및 상징 설명, 변환 결과 공유 기능, 로컬 저장 기능 등이 있습니다.
+
+2. 기술 스택
+프론트엔드
+React: 사용자 인터페이스 구축
+TypeScript: 타입 안전성 확보
+TailwindCSS: UI 스타일링
+Radix UI: 접근성 있는 UI 컴포넌트 라이브러리
+React Query: 서버 상태 관리
+Wouter: 라우팅 라이브러리
+Zod: 데이터 유효성 검증
+백엔드
+Express: 웹 서버 프레임워크
+Drizzle ORM: 데이터베이스 ORM
+PostgreSQL: 데이터베이스 (Neon 서버리스 PostgreSQL 사용)
+3. 프로젝트 구조
+디렉토리 구조 개요
+client/: 프론트엔드 코드
+src/: React 애플리케이션 소스
+components/: UI 컴포넌트
+contexts/: 전역 상태 관리 (언어 설정 등)
+hooks/: 커스텀 훅
+lib/: 유틸리티 함수들
+pages/: 페이지 컴포넌트
+server/: 백엔드 코드
+index.ts: Express 서버 설정
+routes.ts: API 엔드포인트 정의
+storage.ts: 데이터 저장소 인터페이스 및 메모리 구현
+shared/: 프론트엔드와 백엔드 간 공유 코드
+schema.ts: 데이터베이스 스키마 및 유효성 검증 스키마
+서비스 실행 스크립트:
+start-local.bat: Windows 배치 파일로 로컬 서비스 실행
+start-local.ps1: PowerShell 스크립트로 로컬 서비스 실행
+4. 주요 기능 설명
+한국어 이름 변환 기능
+koreanRomanizer.ts: 한국어 이름을 로마자로 변환하는 알고리즘 구현
+한글 자모를 분리하여 각각의 로마자 표기로 변환
+일반적인 한국 이름에 대한 특별 매핑 제공 (예: 김 → Kim, 이 → Lee)
+룬 문자 변환 기능
+runeConverter.ts: 영문 텍스트를 고대 바이킹 룬 문자(Elder Futhark)로 변환
+24개 룬 문자에 해당하는 영문자 매핑 제공
+특수 조합 (th, ng, ei 등) 지원
+룬 문자 의미 데이터베이스
+runeDatabase.ts: 각 룬 문자의 이름, 발음, 의미, 상징 등의 정보 제공
+각 문자별 키워드와 점술적 의미 포함
+다국어 지원
+i18n.ts: 다국어 지원 시스템 (한국어, 영어, 일본어, 중국어, 스페인어, 프랑스어)
+LanguageContext.tsx: 언어 설정 및 번역 함수 제공
+로컬 저장 기능
+localStorageUtils.ts: 브라우저 로컬 스토리지를 활용한 결과 저장 및 관리
+SavedRunesDialog.tsx: 저장된 룬 결과 조회 및 관리 대화상자
+서버 연결 상태 표시
+ConnectionStatus.tsx: 서버 연결 상태를 실시간으로 표시하는 컴포넌트
+api.ts: 서버와의 통신을 관리하는 API 유틸리티
+서버 API 엔드포인트
+/api/rune-conversions: 룬 변환 결과 저장 (POST)
+/api/rune-conversions: 모든 룬 변환 결과 조회 (GET)
+/api/rune-conversions/popular: 인기 있는 룬 변환 결과 조회 (GET)
+5. 핵심 컴포넌트
+프론트엔드 컴포넌트
+NameInput.tsx: 한국어/영어 이름 입력 폼
+RuneResult.tsx: 변환된 룬 문자 결과 표시
+RuneExplanation.tsx: 각 룬 문자의 의미 설명
+RuneReference.tsx: 룬 문자 참조 가이드
+HistoricalInfo.tsx: 룬 문자의 역사적 배경 정보
+LanguageSelector.tsx: 언어 선택 컴포넌트
+ShareModal.tsx: 결과 공유 모달
+SavedRunesDialog.tsx: 저장된 결과 조회 및 관리 모달
+ConnectionStatus.tsx: 서버 연결 상태 표시
+커스텀 훅
+useRuneConverter.ts: 룬 변환 로직을 관리하는 훅
+use-mobile.tsx: 모바일 환경 감지 훅
+use-toast.ts: 토스트 알림 기능 훅
+6. 데이터 흐름
+사용자가 한국어 이름을 입력하면 자동으로 영문으로 변환됨
+사용자가 변환 버튼을 클릭하면 영문 이름이 룬 문자로 변환됨
+변환된 룬 문자와 각 문자의 의미가 표시됨
+변환 결과는 서버에 저장되거나 로컬 스토리지에 저장될 수 있음
+사용자는 결과를 이미지로 저장하거나 공유할 수 있음
+저장된 결과는 나중에 조회하고 관리할 수 있음
+7. 스타일링 특징
+고대 북유럽 스타일의 테마 적용
+양피지(parchment) 배경 디자인
+특별한 글꼴(Cinzel, Cinzel Decorative)을 사용한 고대 느낌 강조
+애니메이션 효과(floating-animation, pulse-glow 등)로 신비로운 분위기 연출
+반응형 디자인으로 모바일 환경 지원
+8. 서버 구현
+Express.js를 사용한 간단한 REST API 서버
+현재는 메모리 기반 스토리지(MemStorage) 사용
+Drizzle ORM을 사용한 PostgreSQL 데이터베이스 스키마 정의
+개발 환경과 프로덕션 환경에 따른 서버 설정 분리
+로컬 실행을 위한 스크립트 제공 (start-local.bat, start-local.ps1)
+9. 확장성 고려
+다양한 언어 지원을 위한 i18n 시스템 구현
+다양한 룬 문자 시스템(Elder Futhark 외) 추가 가능성
+사용자 계정 시스템 기반 마련(users 테이블 스키마 존재)
+인기 있는 변환 결과 조회 기능으로 커뮤니티 요소 도입
+로컬 저장소와 서버 저장소의 동기화 기능 추가 가능성
+10. 최근 업데이트 (2025.07.04)
+로컬 스토리지 기능 추가: 변환 결과를 브라우저에 저장하고 관리하는 기능
+서버 연결 상태 표시 기능 추가: 서버와의 연결 상태를 실시간으로 확인
+로컬 실행 스크립트 개선: Windows 환경에서 안정적으로 실행되도록 수정
+윈도우 환경 호환성 향상: 환경 변수 설정 방식 수정
+네트워크 설정 최적화: 서버 리스닝 설정 개선
+
+이 프로젝트는 고대 바이킹 문화에 대한 관심과 한국어 이름의 글로벌화를 결합한 독특한 웹 애플리케이션으로, 현대적인 웹 기술을 활용하여 고대 문화와 현대 기술을 연결하는 흥미로운 예시입니다. 로컬 저장 기능과 서버 연결 상태 표시 등의 추가로 사용자 경험이 더욱 향상되었습니다.

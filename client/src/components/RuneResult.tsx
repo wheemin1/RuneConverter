@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Share2, Download, Copy, Sparkles, Eye, ChevronDown } from "lucide-react";
+import { Share2, Download, Copy, Sparkles, Eye, ChevronDown, Save, History } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
 import { getRuneDetails } from "@/lib/runeDatabase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ShareModal from "./ShareModal";
+import { saveRuneConversion } from "@/lib/localStorageUtils";
+import SavedRunesDialog from "./SavedRunesDialog";
 
 interface RuneResultProps {
   runeText: string;
@@ -19,6 +21,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
   const { t } = useLanguage();
   const [isDownloading, setIsDownloading] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [showSavedRunes, setShowSavedRunes] = useState(false);
   const { toast } = useToast();
 
   // Get rune details for quick preview
@@ -109,6 +112,32 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
     setIsDownloading(false);
   };
 
+  const handleSaveToLocal = () => {
+    try {
+      saveRuneConversion(koreanName, englishName, runeText);
+      toast({
+        title: t('savedSuccessfully'),
+        description: `${koreanName} (${englishName})`,
+      });
+    } catch (error) {
+      toast({
+        title: "Error saving result",
+        description: "Could not save to local storage",
+        variant: "destructive",
+      });
+    }
+  };
+
+  // Function to handle loading saved result
+  const handleLoadSavedResult = (savedResult: any) => {
+    // 로컬 저장에서 불러온 결과를 처리하는 로직은 
+    // 실제로는 상위 컴포넌트에서 처리해야 할 수 있습니다.
+    toast({
+      title: savedResult.koreanName,
+      description: savedResult.runeText,
+    });
+  };
+
   return (
     <>
       <section className="mb-8 scroll-reveal">
@@ -181,7 +210,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
             </div>
             
             {/* Action Buttons */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Button
                 onClick={() => setShowShareModal(true)}
                 className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
@@ -198,6 +227,19 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                 <Download className="w-5 h-5" />
                 {isDownloading ? t('downloadingButton') : t('downloadButton')}
               </Button>
+              
+              <Button
+                onClick={handleSaveToLocal}
+                className="btn-viking-alt text-viking-brown font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
+              >
+                <Save className="w-5 h-5" />
+                {t('saveLocal')}
+              </Button>
+            </div>
+
+            {/* Load From Local Storage */}
+            <div className="mt-4 text-center">
+              <SavedRunesDialog onSelectResult={handleLoadSavedResult} />
             </div>
             
             {/* Combined Rune Meaning */}

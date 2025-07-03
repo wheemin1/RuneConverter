@@ -7,6 +7,7 @@ import RuneExplanation from "@/components/RuneExplanation";
 import RuneReference from "@/components/RuneReference";
 import HistoricalInfo from "@/components/HistoricalInfo";
 import LanguageSelector from "@/components/LanguageSelector";
+import ConnectionStatus from "@/components/ConnectionStatus";
 import ConvertingPage from "./ConvertingPage";
 
 export default function RuneConverter() {
@@ -109,6 +110,9 @@ export default function RuneConverter() {
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 pb-12">
+        {/* 서버 연결 상태 표시 */}
+        <ConnectionStatus />
+
         <NameInput
           koreanName={koreanName}
           englishName={englishName}

@@ -51,6 +51,25 @@ export const translations = {
     copyRune: '룬 문자 복사',
     detailButton: '각 룬의 세부 의미 보기',
     
+    // Local Storage Features
+    saveLocal: '내 기기에 저장',
+    loadLocal: '저장된 결과 불러오기',
+    savedSuccessfully: '변환 결과가 저장되었습니다',
+    noSavedResults: '저장된 결과가 없습니다',
+    savedResults: '저장된 결과',
+    deleteResult: '삭제',
+    confirmDelete: '정말 삭제하시겠습니까?',
+    cancel: '취소',
+    
+    // Connection Status
+    serverConnected: '서버 연결됨',
+    serverDisconnected: '서버 연결 안됨',
+    checkingConnection: '연결 확인 중...',
+    connectionSuccess: '서버 연결이 성공적으로 확립되었습니다.',
+    connectionFailed: '서버 연결에 실패했습니다.',
+    retryConnection: '연결 다시 확인',
+    serverAddress: '로컬 API 서버 주소:',
+    
     // Detailed explanation
     detailTitle: '룬 문자 상세 해석',
     detailSubtitle: '당신의 이름을 구성하는 각 룸 문자의 신비로운 의미와 고대의 지혜를 알아보세요',
@@ -105,6 +124,25 @@ export const translations = {
     downloadingButton: 'Saving...',
     copyRune: 'Copy Runes',
     detailButton: 'View Detailed Meanings',
+    
+    // Local Storage Features
+    saveLocal: 'Save to my device',
+    loadLocal: 'Load saved results',
+    savedSuccessfully: 'Conversion result saved',
+    noSavedResults: 'No saved results found',
+    savedResults: 'Saved results',
+    deleteResult: 'Delete',
+    confirmDelete: 'Are you sure you want to delete?',
+    cancel: 'Cancel',
+    
+    // Connection Status
+    serverConnected: 'Server Connected',
+    serverDisconnected: 'Server Disconnected',
+    checkingConnection: 'Checking connection...',
+    connectionSuccess: 'Server connection successfully established.',
+    connectionFailed: 'Failed to connect to server.',
+    retryConnection: 'Check connection again',
+    serverAddress: 'Local API server address:',
     
     // Detailed explanation
     detailTitle: 'Detailed Rune Analysis',
@@ -161,6 +199,25 @@ export const translations = {
     copyRune: 'ルーン文字をコピー',
     detailButton: '各ルーンの詳細を見る',
     
+    // Local Storage Features
+    saveLocal: 'デバイスに保存',
+    loadLocal: '保存された結果を読み込む',
+    savedSuccessfully: '変換結果が保存されました',
+    noSavedResults: '保存された結果がありません',
+    savedResults: '保存された結果',
+    deleteResult: '削除',
+    confirmDelete: '本当に削除しますか？',
+    cancel: 'キャンセル',
+    
+    // Connection Status
+    serverConnected: 'サーバーに接続されました',
+    serverDisconnected: 'サーバーに接続されていません',
+    checkingConnection: '接続を確認中...',
+    connectionSuccess: 'サーバーへの接続が成功しました。',
+    connectionFailed: 'サーバーへの接続に失敗しました。',
+    retryConnection: '再接続を試みる',
+    serverAddress: 'ローカルAPIサーバーアドレス:',
+    
     // Detailed explanation
     detailTitle: 'ルーン文字詳細解析',
     detailSubtitle: 'あなたの名前を構成する各ルーン文字の神秘的な意味と古代の知恵を学びましょう',
@@ -215,6 +272,25 @@ export const translations = {
     downloadingButton: '保存中...',
     copyRune: '复制符文',
     detailButton: '查看各符文详细含义',
+    
+    // Local Storage Features
+    saveLocal: '保存到本地',
+    loadLocal: '加载已保存的结果',
+    savedSuccessfully: '转换结果已保存',
+    noSavedResults: '没有保存的结果',
+    savedResults: '已保存的结果',
+    deleteResult: '删除',
+    confirmDelete: '您确定要删除吗？',
+    cancel: '取消',
+    
+    // Connection Status
+    serverConnected: '服务器已连接',
+    serverDisconnected: '服务器未连接',
+    checkingConnection: '检查连接中...',
+    connectionSuccess: '服务器连接成功建立。',
+    connectionFailed: '连接服务器失败。',
+    retryConnection: '重新检查连接',
+    serverAddress: '本地API服务器地址:',
     
     // Detailed explanation
     detailTitle: '符文详细解析',
@@ -349,22 +425,39 @@ export const translations = {
 };
 
 export function getTranslation(language: Language, key: string): string {
+  // Try to get translation for the requested language
+  let value = getNestedTranslation(translations[language], key);
+  
+  // If not found, fallback to Korean
+  if (value === key && language !== 'ko') {
+    value = getNestedTranslation(translations.ko, key);
+  }
+  
+  // If still not found, fallback to English
+  if (value === key && language !== 'en') {
+    value = getNestedTranslation(translations.en, key);
+  }
+  
+  return value;
+}
+
+function getNestedTranslation(translationObj: any, key: string): string {
+  if (!translationObj) return key;
+  
+  // Handle simple keys (no dots)
+  if (key in translationObj) {
+    return translationObj[key];
+  }
+  
+  // Handle nested keys (with dots)
   const keys = key.split('.');
-  let value: any = translations[language];
+  let value = translationObj;
   
   for (const k of keys) {
     if (value && typeof value === 'object' && k in value) {
       value = value[k];
     } else {
-      // Fallback to Korean if translation not found
-      value = translations.ko;
-      for (const fallbackKey of keys) {
-        if (value && typeof value === 'object' && fallbackKey in value) {
-          value = value[fallbackKey];
-        } else {
-          return key; // Return key if no translation found
-        }
-      }
+      return key; // Key not found at this level
     }
   }
   
