@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, Edit3 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface NameInputProps {
   koreanName: string;
@@ -21,16 +22,17 @@ export default function NameInput({
   onConvert,
   isConverting = false
 }: NameInputProps) {
+  const { t } = useLanguage();
   return (
     <section className="mb-8 scroll-reveal">
       <Card className="ancient-border manuscript-page rounded-lg pulse-glow">
         <CardContent className="p-8">
           <div className="text-center mb-6">
             <h3 className="font-cinzel-decorative text-3xl font-bold text-viking-brown mb-3 floating-animation">
-              ᛁ. 이름 입력
+              ᛁ. {t('inputTitle')}
             </h3>
             <p className="text-text-brown-light italic">
-              당신의 이름을 고대 바이킹 룬 문자로 변환해보세요
+              {t('inputSubtitle')}
             </p>
             <div className="ornamental-divider"></div>
           </div>

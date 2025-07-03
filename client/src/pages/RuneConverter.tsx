@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import { useRuneConverter } from "@/hooks/useRuneConverter";
+import { useLanguage } from "@/contexts/LanguageContext";
 import NameInput from "@/components/NameInput";
 import RuneResult from "@/components/RuneResult";
 import RuneExplanation from "@/components/RuneExplanation";
 import RuneReference from "@/components/RuneReference";
 import HistoricalInfo from "@/components/HistoricalInfo";
+import LanguageSelector from "@/components/LanguageSelector";
 import ConvertingPage from "./ConvertingPage";
 
 export default function RuneConverter() {
+  const { t } = useLanguage();
   const {
     koreanName,
     englishName,
@@ -56,6 +59,11 @@ export default function RuneConverter() {
     <div className="parchment-bg min-h-screen font-cinzel">
       {/* Enhanced Header */}
       <header className="text-center py-12 px-4 relative overflow-hidden">
+        {/* Language Selector */}
+        <div className="absolute top-4 right-4 z-20">
+          <LanguageSelector />
+        </div>
+        
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="text-9xl rune-character-large leading-none">
@@ -69,11 +77,10 @@ export default function RuneConverter() {
               ᚱᚢᚾᛖ ᚲᚮᚾᚡᛖᚱᛏᛖᚱ
             </h1>
             <h2 className="text-3xl md:text-4xl font-bold text-text-brown mb-4">
-              바이킹 룬 문자 변환기
+              {t('title')}
             </h2>
             <p className="text-xl text-text-brown-light leading-relaxed max-w-2xl mx-auto">
-              고대 노르드의 신비로운 힘을 담은 엘더 푸타르크 룬 문자로 
-              당신의 이름을 변환해보세요
+              {t('subtitle')}
             </p>
           </div>
           
@@ -83,18 +90,18 @@ export default function RuneConverter() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             <div className="text-center">
               <div className="text-3xl rune-character mb-2">ᚨ</div>
-              <h3 className="font-semibold text-viking-brown">정확한 변환</h3>
-              <p className="text-sm text-text-brown-light">한국어-영문-룬문자 3단계 변환</p>
+              <h3 className="font-semibold text-viking-brown">{t('feature1Title')}</h3>
+              <p className="text-sm text-text-brown-light">{t('feature1Desc')}</p>
             </div>
             <div className="text-center">
               <div className="text-3xl rune-character mb-2">ᛗ</div>
-              <h3 className="font-semibold text-viking-brown">의미 해석</h3>
-              <p className="text-sm text-text-brown-light">각 룬의 상징과 의미 제공</p>
+              <h3 className="font-semibold text-viking-brown">{t('feature2Title')}</h3>
+              <p className="text-sm text-text-brown-light">{t('feature2Desc')}</p>
             </div>
             <div className="text-center">
               <div className="text-3xl rune-character mb-2">ᛊ</div>
-              <h3 className="font-semibold text-viking-brown">쉬운 공유</h3>
-              <p className="text-sm text-text-brown-light">이미지 저장 및 SNS 공유</p>
+              <h3 className="font-semibold text-viking-brown">{t('feature3Title')}</h3>
+              <p className="text-sm text-text-brown-light">{t('feature3Desc')}</p>
             </div>
           </div>
         </div>
