@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Runic&display=swap');
+
+:root {
+  --background: hsl(39, 77%, 96%);
+  --foreground: hsl(30, 36%, 15%);
+  --muted: hsl(36, 23%, 90%);
+  --muted-foreground: hsl(32, 18%, 35%);
+  --popover: hsl(39, 77%, 96%);
+  --popover-foreground: hsl(30, 36%, 15%);
+  --card: hsl(36, 33%, 93%);
+  --card-foreground: hsl(30, 36%, 15%);
+  --border: hsl(25, 30%, 70%);
+  --input: hsl(36, 33%, 93%);
+  --primary: hsl(45, 100%, 35%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(36, 23%, 90%);
+  --secondary-foreground: hsl(30, 36%, 15%);
+  --accent: hsl(25, 62%, 55%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(25, 62%, 55%);
+  --radius: 0.5rem;
+  
+  /* Custom Viking theme colors */
+  --parchment: hsl(39, 77%, 96%);
+  --parchment-dark: hsl(36, 33%, 93%);
+  --viking-brown: hsl(25, 62%, 35%);
+  --viking-tan: hsl(32, 43%, 70%);
+  --viking-gold: hsl(45, 100%, 35%);
+  --viking-peru: hsl(25, 62%, 55%);
+  --text-brown: hsl(30, 36%, 15%);
+  --text-brown-light: hsl(32, 18%, 35%);
+}
+
+.dark {
+  --background: hsl(25, 20%, 8%);
+  --foreground: hsl(39, 77%, 96%);
+  --muted: hsl(25, 20%, 12%);
+  --muted-foreground: hsl(32, 18%, 65%);
+  --popover: hsl(25, 20%, 8%);
+  --popover-foreground: hsl(39, 77%, 96%);
+  --card: hsl(25, 20%, 8%);
+  --card-foreground: hsl(39, 77%, 96%);
+  --border: hsl(25, 30%, 30%);
+  --input: hsl(25, 20%, 12%);
+  --primary: hsl(45, 100%, 35%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(25, 20%, 12%);
+  --secondary-foreground: hsl(39, 77%, 96%);
+  --accent: hsl(25, 62%, 55%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(25, 62%, 55%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Cinzel', serif;
+  }
+}
+
+@layer utilities {
+  .parchment-bg {
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(120, 119, 109, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(120, 119, 109, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(120, 119, 109, 0.1) 0%, transparent 50%);
+    background-color: hsl(39, 77%, 96%);
+  }
+  
+  .ancient-border {
+    border: 3px solid hsl(25, 62%, 35%);
+    position: relative;
+  }
+  
+  .ancient-border::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    border: 1px solid hsl(25, 62%, 55%);
+    pointer-events: none;
+  }
+  
+  .rune-character {
+    font-family: 'Noto Sans Runic', monospace;
+    color: hsl(25, 62%, 35%);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  }
+  
+  .decorative-divider {
+    background: linear-gradient(90deg, transparent, hsl(25, 62%, 35%), transparent);
+    height: 2px;
+    margin: 1rem 0;
+  }
+  
+  .floating-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .glow-effect {
+    box-shadow: 0 0 20px rgba(184, 134, 11, 0.3);
+  }
+  
+  .input-parchment {
+    background: linear-gradient(135deg, hsl(36, 33%, 93%) 0%, hsl(39, 77%, 96%) 100%);
+    border: 2px solid hsl(25, 62%, 55%);
+  }
+  
+  .input-parchment:focus {
+    outline: none;
+    border-color: hsl(45, 100%, 35%);
+    box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+  }
+  
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+  
+  .font-cinzel-decorative {
+    font-family: 'Cinzel Decorative', serif;
+  }
+  
+  .text-viking-brown {
+    color: hsl(25, 62%, 35%);
+  }
+  
+  .text-viking-tan {
+    color: hsl(32, 43%, 70%);
+  }
+  
+  .text-viking-gold {
+    color: hsl(45, 100%, 35%);
+  }
+  
+  .text-viking-peru {
+    color: hsl(25, 62%, 55%);
+  }
+  
+  .text-text-brown {
+    color: hsl(30, 36%, 15%);
+  }
+  
+  .text-text-brown-light {
+    color: hsl(32, 18%, 35%);
+  }
+  
+  .bg-parchment {
+    background-color: hsl(39, 77%, 96%);
+  }
+  
+  .bg-parchment-dark {
+    background-color: hsl(36, 33%, 93%);
+  }
+  
+  .bg-viking-brown {
+    background-color: hsl(25, 62%, 35%);
+  }
+  
+  .bg-viking-tan {
+    background-color: hsl(32, 43%, 70%);
+  }
+  
+  .bg-viking-gold {
+    background-color: hsl(45, 100%, 35%);
+  }
+  
+  .bg-viking-peru {
+    background-color: hsl(25, 62%, 55%);
+  }
+  
+  .border-viking-brown {
+    border-color: hsl(25, 62%, 35%);
+  }
+  
+  .border-viking-tan {
+    border-color: hsl(32, 43%, 70%);
+  }
+  
+  .border-viking-gold {
+    border-color: hsl(45, 100%, 35%);
+  }
+  
+  .border-viking-peru {
+    border-color: hsl(25, 62%, 55%);
+  }
+  
+  .hover\:bg-viking-brown:hover {
+    background-color: hsl(25, 62%, 35%);
+  }
+  
+  .hover\:bg-viking-gold:hover {
+    background-color: hsl(45, 100%, 35%);
+  }
+  
+  .hover\:border-viking-gold:hover {
+    border-color: hsl(45, 100%, 35%);
+  }
+}
