@@ -175,30 +175,35 @@ function decomposeHangul(char: string): [string, string, string] | null {
 export function romanizeKorean(koreanText: string): string {
   if (!koreanText.trim()) return '';
   
-  // Check if it's a common name first
-  const syllables = koreanText.split('');
-  const commonNameResult = syllables.map(syllable => 
-    nameSpecificMappings[syllable] || syllable
-  ).join('');
-  
-  if (commonNameResult !== koreanText) {
-    return commonNameResult;
+  // 먼저 공통 이름 매핑 확인
+  if (commonNameMappings[koreanText]) {
+    return commonNameMappings[koreanText];
   }
   
-  // Decompose each Hangul syllable and romanize
+  const syllables = koreanText.split('');
   let result = '';
   
-  for (const char of koreanText) {
-    const decomposed = decomposeHangul(char);
+  // 각 음절에 대해 개별적으로 변환 처리
+  for (let i = 0; i < syllables.length; i++) {
+    const syllable = syllables[i];
+    
+    // 먼저 특정 음절 매핑 확인
+    if (nameSpecificMappings[syllable]) {
+      result += nameSpecificMappings[syllable];
+      continue;
+    }
+    
+    // 한글 음절 분해
+    const decomposed = decomposeHangul(syllable);
     
     if (!decomposed) {
-      result += char; // Not a Hangul character, keep as is
+      result += syllable; // 한글이 아닌 문자는 그대로 유지
       continue;
     }
     
     const [initial, vowel, final] = decomposed;
     
-    // Romanize each component
+    // 각 구성 요소 로마자 변환
     const romanizedInitial = koreanToRomanMap[initial] || '';
     const romanizedVowel = koreanToRomanMap[vowel] || '';
     const romanizedFinal = final ? (koreanToRomanMap[final + '_f'] || '') : '';
