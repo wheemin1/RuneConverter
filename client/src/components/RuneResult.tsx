@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Share2, Download, Copy, Sparkles, Eye } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Share2, Download, Copy, Sparkles, Eye, ChevronDown } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
+import { getRuneDetails } from "@/lib/runeDatabase";
 import ShareModal from "./ShareModal";
 
 interface RuneResultProps {
@@ -16,6 +18,9 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
   const [isDownloading, setIsDownloading] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const { toast } = useToast();
+
+  // Get rune details for quick preview
+  const runeDetails = getRuneDetails(runeText);
 
   const handleQuickCopy = async () => {
     try {
@@ -134,7 +139,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
             </div>
             
             {/* Action Buttons */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Button
                 onClick={() => setShowShareModal(true)}
                 className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
@@ -151,23 +156,56 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                 <Download className="w-5 h-5" />
                 {isDownloading ? "저장 중..." : "이미지 저장"}
               </Button>
-              
-              <Button
-                onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
-                variant="outline"
-                className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors font-cinzel flex items-center justify-center gap-2"
-              >
-                <Eye className="w-5 h-5" />
-                룬 의미 보기
-              </Button>
             </div>
             
+            {/* Quick Rune Meanings */}
+            <div className="mt-6">
+              <h4 className="text-lg font-semibold text-viking-brown mb-4 text-center">
+                각 룬 문자의 의미
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {runeDetails.map((rune, index) => (
+                  <div 
+                    key={index}
+                    className="bg-parchment-darker rounded-lg p-3 border border-viking-tan/20 hover:border-viking-tan/40 transition-all duration-200 cursor-pointer group"
+                    onClick={() => {
+                      // Scroll to detailed explanation
+                      const detailElement = document.querySelector('[data-scroll-target="detailed-explanation"]');
+                      if (detailElement) {
+                        detailElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="text-2xl rune-character group-hover:scale-110 transition-transform duration-200">
+                        {rune.character}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-semibold text-viking-brown text-sm">
+                          {rune.name}
+                        </div>
+                        <div className="text-xs text-text-brown-light truncate">
+                          {rune.keywords.slice(0, 2).join(', ')}
+                        </div>
+                      </div>
+                      <ChevronDown className="w-4 h-4 text-viking-tan group-hover:text-viking-brown transition-colors" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="text-center mt-3">
+                <p className="text-sm text-text-brown-light">
+                  각 룬을 클릭하면 자세한 의미를 확인할 수 있습니다
+                </p>
+              </div>
+            </div>
+
             {/* Success Message */}
             <div className="mt-6 text-center">
               <div className="inline-flex items-center gap-2 bg-viking-gold/10 border border-viking-gold/20 rounded-lg px-4 py-2">
                 <Sparkles className="w-4 h-4 text-viking-gold" />
                 <span className="text-sm text-viking-brown font-semibold">
-                  변환 완료! 아래에서 각 룬 문자의 의미를 확인해보세요.
+                  변환 완료! 위의 룬들을 클릭하여 자세한 의미를 확인해보세요.
                 </span>
               </div>
             </div>
