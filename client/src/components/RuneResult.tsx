@@ -6,6 +6,7 @@ import { Share2, Download, Copy, Sparkles, Eye, ChevronDown } from "lucide-react
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
 import { getRuneDetails } from "@/lib/runeDatabase";
+import { useLanguage } from "@/contexts/LanguageContext";
 import ShareModal from "./ShareModal";
 
 interface RuneResultProps {
@@ -15,6 +16,7 @@ interface RuneResultProps {
 }
 
 export default function RuneResult({ runeText, englishName, koreanName }: RuneResultProps) {
+  const { t } = useLanguage();
   const [isDownloading, setIsDownloading] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const { toast } = useToast();
@@ -66,13 +68,13 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
     try {
       await navigator.clipboard.writeText(runeText);
       toast({
-        title: "룬 문자가 복사되었습니다",
-        description: `${runeText}가 클립보드에 복사되었습니다.`,
+        title: t('copySuccess'),
+        description: t('copySuccessDesc'),
       });
     } catch (error) {
       toast({
-        title: "복사 실패",
-        description: "룬 문자 복사 중 오류가 발생했습니다.",
+        title: t('copyFailed'),
+        description: "Error copying runes.",
         variant: "destructive",
       });
     }
@@ -94,13 +96,13 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
       link.click();
       
       toast({
-        title: "이미지 다운로드 완료",
-        description: "룬 문자 변환 결과가 저장되었습니다.",
+        title: t('downloadSuccess'),
+        description: t('downloadSuccessDesc'),
       });
     } catch (error) {
       toast({
-        title: "다운로드 실패",
-        description: "이미지 생성 중 오류가 발생했습니다.",
+        title: t('downloadFailed'),
+        description: "Error generating image.",
         variant: "destructive",
       });
     }
@@ -114,10 +116,10 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
           <CardContent className="p-8">
             <div className="text-center mb-6">
               <h3 className="font-cinzel-decorative text-3xl font-bold text-viking-brown mb-3 floating-animation">
-                ᛁᛁ. 룬 문자 변환 결과
+                ᛁᛁ. {t('resultTitle')}
               </h3>
               <p className="text-text-brown-light italic">
-                고대 바이킹의 신비로운 힘이 담긴 당신의 이름
+                {t('resultSubtitle')}
               </p>
               <div className="ornamental-divider"></div>
             </div>
@@ -135,7 +137,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                 <div className="relative z-10 text-center">
                   {/* Korean Name */}
                   <div className="mb-4">
-                    <div className="text-lg text-text-brown-light mb-1">한국어</div>
+                    <div className="text-lg text-text-brown-light mb-1">{t('koreanName')}</div>
                     <div className="text-2xl font-bold text-viking-brown font-cinzel">
                       {koreanName}
                     </div>
@@ -143,7 +145,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                   
                   {/* English Name */}
                   <div className="mb-6">
-                    <div className="text-lg text-text-brown-light mb-1">영문명</div>
+                    <div className="text-lg text-text-brown-light mb-1">{t('englishName')}</div>
                     <div className="text-xl font-semibold text-text-brown font-cinzel">
                       {englishName.toUpperCase()}
                     </div>
@@ -151,7 +153,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                   
                   {/* Rune Text - Main Feature */}
                   <div className="mb-6 relative">
-                    <div className="text-lg text-text-brown-light mb-3">고대 바이킹 룬 문자</div>
+                    <div className="text-lg text-text-brown-light mb-3">Elder Futhark Runes</div>
                     <div className="text-6xl md:text-8xl rune-character-large mb-4 leading-tight">
                       {runeText}
                     </div>
@@ -164,7 +166,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                       className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors"
                     >
                       <Copy className="w-4 h-4 mr-2" />
-                      룬 문자 복사
+                      {t('copyRune')}
                     </Button>
                   </div>
                   
@@ -185,7 +187,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                 className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
               >
                 <Share2 className="w-5 h-5" />
-                상세 공유
+                {t('shareButton')}
               </Button>
               
               <Button
@@ -194,7 +196,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                 className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
               >
                 <Download className="w-5 h-5" />
-                {isDownloading ? "저장 중..." : "이미지 저장"}
+                {isDownloading ? t('downloadingButton') : t('downloadButton')}
               </Button>
             </div>
             
@@ -202,7 +204,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
             <div className="mt-6">
               <div className="bg-gradient-to-r from-viking-gold/10 to-viking-peru/10 rounded-lg p-6 border border-viking-gold/20">
                 <h4 className="text-lg font-semibold text-viking-brown mb-3 text-center">
-                  종합적인 의미
+                  {t('combinedMeaning')}
                 </h4>
                 <div className="text-center">
                   <p className="text-text-brown text-lg leading-relaxed font-medium">

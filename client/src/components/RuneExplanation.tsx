@@ -2,12 +2,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { RuneDetail } from "@/lib/runeDatabase";
 import { BookOpen, Star, Heart } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface RuneExplanationProps {
   runeDetails: RuneDetail[];
 }
 
 export default function RuneExplanation({ runeDetails }: RuneExplanationProps) {
+  const { t } = useLanguage();
   if (runeDetails.length === 0) return null;
 
   return (
@@ -16,10 +18,10 @@ export default function RuneExplanation({ runeDetails }: RuneExplanationProps) {
         <CardContent className="p-8">
           <div className="text-center mb-8">
             <h3 className="font-cinzel-decorative text-3xl font-bold text-viking-brown mb-3 floating-animation">
-              ᛁᛁᛁ. 룬 문자 상세 해석
+              ᛁᛁᛁ. {t('detailTitle')}
             </h3>
             <p className="text-text-brown-light italic max-w-2xl mx-auto">
-              당신의 이름을 구성하는 각 룬 문자의 신비로운 의미와 고대의 지혜를 알아보세요
+              {t('detailSubtitle')}
             </p>
             <div className="ornamental-divider"></div>
           </div>
@@ -70,7 +72,7 @@ export default function RuneExplanation({ runeDetails }: RuneExplanationProps) {
                     <div className="bg-parchment-darker rounded-lg p-4 border-l-4 border-viking-gold">
                       <div className="flex items-center gap-2 mb-3">
                         <BookOpen className="w-5 h-5 text-viking-brown" />
-                        <h5 className="font-bold text-viking-brown">의미</h5>
+                        <h5 className="font-bold text-viking-brown">{t('meaning')}</h5>
                       </div>
                       <p className="text-text-brown-light leading-relaxed">
                         {rune.meaning}
@@ -81,7 +83,7 @@ export default function RuneExplanation({ runeDetails }: RuneExplanationProps) {
                     <div className="bg-parchment-darker rounded-lg p-4 border-l-4 border-viking-peru">
                       <div className="flex items-center gap-2 mb-3">
                         <Star className="w-5 h-5 text-viking-brown" />
-                        <h5 className="font-bold text-viking-brown">상징</h5>
+                        <h5 className="font-bold text-viking-brown">{t('symbolism')}</h5>
                       </div>
                       <p className="text-text-brown-light leading-relaxed">
                         {rune.symbolism}
@@ -94,7 +96,7 @@ export default function RuneExplanation({ runeDetails }: RuneExplanationProps) {
                     <div className="mt-6 bg-viking-gold/5 rounded-lg p-4 border border-viking-gold/20">
                       <div className="flex items-center gap-2 mb-2">
                         <Heart className="w-5 h-5 text-viking-gold" />
-                        <h5 className="font-bold text-viking-brown">점술적 의미</h5>
+                        <h5 className="font-bold text-viking-brown">{t('divination')}</h5>
                       </div>
                       <p className="text-text-brown-light italic">
                         {rune.divination}

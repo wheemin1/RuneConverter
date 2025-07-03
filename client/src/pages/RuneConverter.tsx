@@ -147,10 +147,9 @@ export default function RuneConverter() {
             <div className="font-cinzel-decorative text-3xl mb-4 floating-animation">
               ᚱᚢᚾᛖ ᚲᚮᚾᚡᛖᚱᛏᛖᚱ
             </div>
-            <h3 className="text-xl text-viking-tan mb-2">바이킹 룬 문자 변환기</h3>
+            <h3 className="text-xl text-viking-tan mb-2">{t('footerTitle')}</h3>
             <p className="text-viking-tan/80 max-w-2xl mx-auto leading-relaxed">
-              고대 바이킹 문화와 엘더 푸타르크 룬 문자의 신비로운 아름다움을 
-              현대에 전하며, 당신의 이름에 담긴 고대의 힘을 발견하세요.
+              {t('footerDesc')}
             </p>
           </div>
           
@@ -181,7 +180,7 @@ export default function RuneConverter() {
           
           <div className="mt-6">
             <p className="text-sm text-viking-tan/80">
-              © 2025 Rune Converter. Made with ❤️ for Viking culture enthusiasts.
+              {t('copyright')}
             </p>
             <p className="text-xs text-viking-tan/60 mt-2">
               참고 자료:{" "}

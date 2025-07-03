@@ -42,14 +42,14 @@ export default function NameInput({
               <Label htmlFor="korean-name" className="block text-text-brown font-bold mb-3 text-lg">
                 <span className="flex items-center gap-2">
                   <span className="rune-character text-xl">ᚴ</span>
-                  한국어 이름
+                  {t('koreanName')}
                 </span>
               </Label>
               <Input
                 id="korean-name"
                 type="text"
                 className="input-parchment rounded-lg font-cinzel text-xl py-4 px-6 text-center"
-                placeholder="예: 조휘민, 김민수, 박지연..."
+                placeholder={t('koreanPlaceholder')}
                 value={koreanName}
                 onChange={(e) => onKoreanNameChange(e.target.value)}
               />
@@ -62,14 +62,14 @@ export default function NameInput({
               <Label htmlFor="english-name" className="block text-text-brown font-bold mb-3 text-lg">
                 <span className="flex items-center gap-2">
                   <span className="rune-character text-xl">ᛖ</span>
-                  영문 이름 (수정 가능)
+                  {t('englishName')}
                 </span>
               </Label>
               <Input
                 id="english-name"
                 type="text"
                 className="input-parchment rounded-lg font-cinzel text-xl py-4 px-6 text-center"
-                placeholder="예: jowheemin, kimminsu, parkjiyeon..."
+                placeholder={t('englishPlaceholder')}
                 value={englishName}
                 onChange={(e) => onEnglishNameChange(e.target.value)}
               />
@@ -78,8 +78,7 @@ export default function NameInput({
               </div>
               <div className="bg-parchment-darker rounded-lg p-3 mt-3 border-l-4 border-viking-gold">
                 <p className="text-sm text-text-brown-light">
-                  <strong>💡 팁:</strong> 자동 변환된 영문 이름을 원하는 방식으로 수정할 수 있습니다. 
-                  발음이나 선호하는 영문 표기법에 맞게 조정해보세요.
+                  <strong>💡 팁:</strong> {t('tipText')}
                 </p>
               </div>
             </div>
@@ -94,12 +93,12 @@ export default function NameInput({
               {isConverting ? (
                 <span className="flex items-center justify-center gap-3">
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  신비로운 변환 중...
+                  {t('convertingButton')}
                 </span>
               ) : (
                 <span className="flex items-center justify-center gap-3">
                   <span className="rune-character text-2xl">ᚱᚢᚾᛖ</span>
-                  룬 문자로 변환하기
+                  {t('convertButton')}
                   <Sparkles className="w-5 h-5" />
                 </span>
               )}
@@ -107,7 +106,7 @@ export default function NameInput({
             
             {!englishName.trim() && (
               <p className="text-center text-text-brown-light text-sm mt-3">
-                영문 이름을 입력하면 변환 버튼이 활성화됩니다
+                {t('englishName')}을 입력하면 변환 버튼이 활성화됩니다
               </p>
             )}
           </div>
