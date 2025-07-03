@@ -22,6 +22,46 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
   // Get rune details for quick preview
   const runeDetails = getRuneDetails(runeText);
 
+  // Function to generate combined meaning from multiple runes
+  const generateCombinedMeaning = (runeDetails: any[]): string => {
+    if (runeDetails.length === 0) return "신비로운 힘을 담은 이름입니다.";
+    
+    // Extract key themes from all runes
+    const allKeywords = runeDetails.flatMap(rune => rune.keywords);
+    const themes = allKeywords.filter((keyword, index) => allKeywords.indexOf(keyword) === index); // Remove duplicates
+    
+    // Create meaningful combinations based on common themes
+    const positiveThemes = themes.filter(theme => 
+      ['성공', '풍요', '지혜', '용기', '보호', '행운', '힘', '성장', '번영', '조화', '균형', '창조', '발전', '승리', '희망'].includes(theme)
+    );
+    
+    const personalityThemes = themes.filter(theme => 
+      ['리더십', '소통', '여행', '모험', '변화', '직관', '인내', '의지', '열정', '집중', '완성', '통찰'].includes(theme)
+    );
+    
+    // Generate combined meaning
+    let meaning = "";
+    
+    if (positiveThemes.length > 0 && personalityThemes.length > 0) {
+      meaning = `${positiveThemes.slice(0, 2).join('과 ')}을 바탕으로 ${personalityThemes.slice(0, 2).join('과 ')}을 발휘하여 목표를 달성하는 인물`;
+    } else if (positiveThemes.length > 0) {
+      meaning = `${positiveThemes.slice(0, 3).join(', ')}의 기운을 가진 축복받은 이름`;
+    } else if (personalityThemes.length > 0) {
+      meaning = `${personalityThemes.slice(0, 3).join(', ')}의 특성을 지닌 강인한 인물`;
+    } else {
+      // Fallback to general meaning based on rune count
+      if (runeDetails.length <= 3) {
+        meaning = "간결하면서도 강력한 에너지를 지닌 이름";
+      } else if (runeDetails.length <= 6) {
+        meaning = "균형잡힌 힘과 지혜를 겸비한 이름";
+      } else {
+        meaning = "복합적이고 깊은 의미를 담은 풍부한 이름";
+      }
+    }
+    
+    return meaning + ".";
+  };
+
   const handleQuickCopy = async () => {
     try {
       await navigator.clipboard.writeText(runeText);
@@ -158,45 +198,31 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
               </Button>
             </div>
             
-            {/* Quick Rune Meanings */}
+            {/* Combined Rune Meaning */}
             <div className="mt-6">
-              <h4 className="text-lg font-semibold text-viking-brown mb-4 text-center">
-                각 룬 문자의 의미
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                {runeDetails.map((rune, index) => (
-                  <div 
-                    key={index}
-                    className="bg-parchment-darker rounded-lg p-3 border border-viking-tan/20 hover:border-viking-tan/40 transition-all duration-200 cursor-pointer group"
+              <div className="bg-gradient-to-r from-viking-gold/10 to-viking-peru/10 rounded-lg p-6 border border-viking-gold/20">
+                <h4 className="text-lg font-semibold text-viking-brown mb-3 text-center">
+                  종합적인 의미
+                </h4>
+                <div className="text-center">
+                  <p className="text-text-brown text-lg leading-relaxed font-medium">
+                    {generateCombinedMeaning(runeDetails)}
+                  </p>
+                </div>
+                <div className="mt-4 text-center">
+                  <Button
                     onClick={() => {
-                      // Scroll to detailed explanation
                       const detailElement = document.querySelector('[data-scroll-target="detailed-explanation"]');
                       if (detailElement) {
                         detailElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }}
+                    variant="outline"
+                    className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors text-sm"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="text-2xl rune-character group-hover:scale-110 transition-transform duration-200">
-                        {rune.character}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-semibold text-viking-brown text-sm">
-                          {rune.name}
-                        </div>
-                        <div className="text-xs text-text-brown-light truncate">
-                          {rune.keywords.slice(0, 2).join(', ')}
-                        </div>
-                      </div>
-                      <ChevronDown className="w-4 h-4 text-viking-tan group-hover:text-viking-brown transition-colors" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="text-center mt-3">
-                <p className="text-sm text-text-brown-light">
-                  각 룬을 클릭하면 자세한 의미를 확인할 수 있습니다
-                </p>
+                    각 룬의 세부 의미 보기 <ChevronDown className="w-4 h-4 ml-1" />
+                  </Button>
+                </div>
               </div>
             </div>
 
