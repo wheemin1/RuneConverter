@@ -5,6 +5,7 @@ import RuneResult from "@/components/RuneResult";
 import RuneExplanation from "@/components/RuneExplanation";
 import RuneReference from "@/components/RuneReference";
 import HistoricalInfo from "@/components/HistoricalInfo";
+import ConvertingPage from "./ConvertingPage";
 
 export default function RuneConverter() {
   const {
@@ -18,21 +19,84 @@ export default function RuneConverter() {
     isConverted
   } = useRuneConverter();
 
+  const [isConverting, setIsConverting] = useState(false);
+  const [showConvertingPage, setShowConvertingPage] = useState(false);
+
+  const handleConvert = () => {
+    setIsConverting(true);
+    setShowConvertingPage(true);
+  };
+
+  const handleConvertingComplete = () => {
+    convertToRunes();
+    setShowConvertingPage(false);
+    setIsConverting(false);
+    
+    // Scroll to result after a brief delay
+    setTimeout(() => {
+      const resultElement = document.querySelector('[data-scroll-target="result"]');
+      if (resultElement) {
+        resultElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 500);
+  };
+
+  // Show converting page overlay
+  if (showConvertingPage) {
+    return (
+      <ConvertingPage
+        koreanName={koreanName}
+        englishName={englishName}
+        onComplete={handleConvertingComplete}
+      />
+    );
+  }
+
   return (
     <div className="parchment-bg min-h-screen font-cinzel">
-      {/* Header */}
-      <header className="text-center py-8 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="font-cinzel-decorative text-4xl md:text-6xl font-bold text-viking-brown mb-4 floating-animation">
-            ᚱᚢᚾᛖ ᚲᚮᚾᚡᛖᚱᛏᛖᚱ
-          </h1>
-          <h2 className="text-2xl md:text-3xl font-semibold text-text-brown mb-2">
-            바이킹 룬 문자 변환기
-          </h2>
-          <p className="text-text-brown-light text-lg">
-            당신의 이름을 고대 바이킹 룬 문자로 변환해보세요
-          </p>
-          <div className="decorative-divider"></div>
+      {/* Enhanced Header */}
+      <header className="text-center py-12 px-4 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="text-9xl rune-character-large leading-none">
+            ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ
+          </div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto relative z-10">
+          <div className="mb-6">
+            <h1 className="font-cinzel-decorative text-5xl md:text-7xl font-bold text-viking-brown mb-6 floating-animation">
+              ᚱᚢᚾᛖ ᚲᚮᚾᚡᛖᚱᛏᛖᚱ
+            </h1>
+            <h2 className="text-3xl md:text-4xl font-bold text-text-brown mb-4">
+              바이킹 룬 문자 변환기
+            </h2>
+            <p className="text-xl text-text-brown-light leading-relaxed max-w-2xl mx-auto">
+              고대 노르드의 신비로운 힘을 담은 엘더 푸타르크 룬 문자로 
+              당신의 이름을 변환해보세요
+            </p>
+          </div>
+          
+          <div className="ornamental-divider"></div>
+          
+          {/* Feature Highlights */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div className="text-center">
+              <div className="text-3xl rune-character mb-2">ᚨ</div>
+              <h3 className="font-semibold text-viking-brown">정확한 변환</h3>
+              <p className="text-sm text-text-brown-light">한국어-영문-룬문자 3단계 변환</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl rune-character mb-2">ᛗ</div>
+              <h3 className="font-semibold text-viking-brown">의미 해석</h3>
+              <p className="text-sm text-text-brown-light">각 룬의 상징과 의미 제공</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl rune-character mb-2">ᛊ</div>
+              <h3 className="font-semibold text-viking-brown">쉬운 공유</h3>
+              <p className="text-sm text-text-brown-light">이미지 저장 및 SNS 공유</p>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -43,45 +107,96 @@ export default function RuneConverter() {
           englishName={englishName}
           onKoreanNameChange={setKoreanName}
           onEnglishNameChange={setEnglishName}
-          onConvert={convertToRunes}
+          onConvert={handleConvert}
+          isConverting={isConverting}
         />
 
         {isConverted && (
-          <>
+          <div data-scroll-target="result">
             <RuneResult
               runeText={runeText}
               englishName={englishName}
+              koreanName={koreanName}
             />
             <RuneExplanation runeDetails={runeDetails} />
-          </>
+          </div>
         )}
 
         <RuneReference />
         <HistoricalInfo />
       </main>
 
-      {/* Footer */}
-      <footer className="bg-viking-brown text-white py-8 mt-12">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="font-cinzel-decorative text-2xl mb-4">
-            ᚱᚢᚾᛖ ᚲᚮᚾᚡᛖᚱᛏᛖᚱ
+      {/* Enhanced Footer */}
+      <footer className="bg-gradient-to-r from-viking-brown via-viking-brown-dark to-viking-brown text-white py-12 mt-16 relative overflow-hidden">
+        {/* Footer Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="text-6xl rune-character leading-none">
+            ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ
           </div>
-          <p className="text-viking-tan mb-2">바이킹 룬 문자 변환기</p>
-          <p className="text-sm text-viking-tan">
-            © 2024 Rune Converter. 고대 바이킹 문화와 룬 문자의 아름다움을 현대에 전합니다.
-          </p>
-          <div className="decorative-divider opacity-50 mt-4"></div>
-          <p className="text-xs text-viking-tan mt-2">
-            참고:{" "}
-            <a
-              href="https://namu.wiki/w/룬%20문자"
-              className="hover:text-white transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              나무위키 룬 문자
-            </a>
-          </p>
+        </div>
+        
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <div className="mb-6">
+            <div className="font-cinzel-decorative text-3xl mb-4 floating-animation">
+              ᚱᚢᚾᛖ ᚲᚮᚾᚡᛖᚱᛏᛖᚱ
+            </div>
+            <h3 className="text-xl text-viking-tan mb-2">바이킹 룬 문자 변환기</h3>
+            <p className="text-viking-tan/80 max-w-2xl mx-auto leading-relaxed">
+              고대 바이킹 문화와 엘더 푸타르크 룬 문자의 신비로운 아름다움을 
+              현대에 전하며, 당신의 이름에 담긴 고대의 힘을 발견하세요.
+            </p>
+          </div>
+          
+          <div className="ornamental-divider opacity-50"></div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+            <div>
+              <h4 className="font-semibold text-viking-tan mb-2">룬 문자 정보</h4>
+              <p className="text-sm text-viking-tan/70">
+                엘더 푸타르크 24개 룬 문자의 정확한 의미와 상징을 바탕으로 변환합니다.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-viking-tan mb-2">한국어 지원</h4>
+              <p className="text-sm text-viking-tan/70">
+                한국어 이름의 정확한 로마자 표기법을 지원하며, 사용자가 직접 수정할 수 있습니다.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-viking-tan mb-2">무료 서비스</h4>
+              <p className="text-sm text-viking-tan/70">
+                모든 변환 및 공유 기능을 완전 무료로 제공합니다. 광고도 없습니다.
+              </p>
+            </div>
+          </div>
+          
+          <div className="ornamental-divider opacity-50"></div>
+          
+          <div className="mt-6">
+            <p className="text-sm text-viking-tan/80">
+              © 2025 Rune Converter. Made with ❤️ for Viking culture enthusiasts.
+            </p>
+            <p className="text-xs text-viking-tan/60 mt-2">
+              참고 자료:{" "}
+              <a
+                href="https://namu.wiki/w/룬%20문자"
+                className="hover:text-white transition-colors underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                나무위키 룬 문자
+              </a>
+              {" · "}
+              <a
+                href="https://en.wikipedia.org/wiki/Elder_Futhark"
+                className="hover:text-white transition-colors underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Elder Futhark Wikipedia
+              </a>
+            </p>
+          </div>
         </div>
       </footer>
     </div>

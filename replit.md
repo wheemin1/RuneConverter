@@ -82,9 +82,31 @@ The build process creates optimized bundles for both frontend and backend, with 
 
 ## Changelog
 
-Changelog:
-- July 03, 2025. Initial setup
+- July 03, 2025. Initial setup - Basic rune converter with Korean-English-Rune conversion
+- July 03, 2025. Major UI/UX upgrade - Enhanced design with manuscript-style theme, converting animation page, advanced sharing features, and improved visual effects
+
+## Recent Changes
+
+### UI/UX Enhancements (July 03, 2025)
+- **Enhanced Visual Design**: Upgraded from basic parchment theme to sophisticated manuscript-style with gradients, shadows, and layered borders
+- **Converting Animation Page**: Added immersive loading experience with progress tracking and mystical animations during conversion
+- **Advanced Sharing Modal**: Comprehensive sharing options including social media, image generation, and clipboard functionality
+- **Improved Input Components**: Enhanced form styling with animated effects, better placeholder text, and visual feedback
+- **Responsive Layout**: Mobile-optimized design with adaptive grid layouts and touch-friendly interactions
+
+### New Features
+- **Multi-stage Conversion Process**: Added converting page with step-by-step progress visualization
+- **Enhanced Share Functionality**: Modal-based sharing with multiple options (text, image, social media)
+- **Improved Visual Hierarchy**: Better section organization with ornamental dividers and structured layouts
+- **Advanced Animations**: Floating animations, pulse effects, converting animations, and scroll reveals
+
+### Technical Improvements
+- **CSS Architecture**: Comprehensive utility classes for consistent theming
+- **Component Structure**: Modular components with enhanced props and state management
+- **Error Handling**: Improved error states and user feedback systems
+- **Performance**: Optimized animations and reduced layout shifts
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Design preferences: Manuscript/ancient book aesthetic with gradients, sophisticated animations, and immersive user experience.

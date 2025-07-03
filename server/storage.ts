@@ -56,7 +56,7 @@ export class MemStorage implements IStorage {
     // Get unique conversions by Korean name (most recent)
     const uniqueConversions = new Map<string, RuneConversion>();
     
-    for (const conversion of this.runeConversions.values()) {
+    for (const conversion of Array.from(this.runeConversions.values())) {
       const existing = uniqueConversions.get(conversion.koreanName);
       if (!existing || new Date(conversion.createdAt) > new Date(existing.createdAt)) {
         uniqueConversions.set(conversion.koreanName, conversion);

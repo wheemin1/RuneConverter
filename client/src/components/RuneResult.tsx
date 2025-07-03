@@ -1,53 +1,48 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Share2, Download } from "lucide-react";
+import { Share2, Download, Copy, Sparkles, Eye } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
+import ShareModal from "./ShareModal";
 
 interface RuneResultProps {
   runeText: string;
   englishName: string;
+  koreanName: string;
 }
 
-export default function RuneResult({ runeText, englishName }: RuneResultProps) {
-  const [isSharing, setIsSharing] = useState(false);
+export default function RuneResult({ runeText, englishName, koreanName }: RuneResultProps) {
   const [isDownloading, setIsDownloading] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
   const { toast } = useToast();
 
-  const handleShare = async () => {
-    setIsSharing(true);
+  const handleQuickCopy = async () => {
     try {
-      if (navigator.share) {
-        await navigator.share({
-          title: '바이킹 룬 문자 변환 결과',
-          text: `${englishName}의 룬 문자: ${runeText}`,
-          url: window.location.href,
-        });
-      } else {
-        // Fallback: copy to clipboard
-        await navigator.clipboard.writeText(
-          `${englishName}의 룬 문자: ${runeText}\n\n바이킹 룬 문자 변환기에서 생성: ${window.location.href}`
-        );
-        toast({
-          title: "공유 링크가 복사되었습니다",
-          description: "클립보드에 복사된 내용을 붙여넣기 하세요.",
-        });
-      }
+      await navigator.clipboard.writeText(runeText);
+      toast({
+        title: "룬 문자가 복사되었습니다",
+        description: `${runeText}가 클립보드에 복사되었습니다.`,
+      });
     } catch (error) {
       toast({
-        title: "공유 실패",
-        description: "공유 기능을 사용할 수 없습니다.",
+        title: "복사 실패",
+        description: "룬 문자 복사 중 오류가 발생했습니다.",
         variant: "destructive",
       });
     }
-    setIsSharing(false);
   };
 
   const handleDownload = async () => {
     setIsDownloading(true);
     try {
-      const imageData = await generateRuneImage(runeText, englishName);
+      const imageData = await generateRuneImage(runeText, englishName, {
+        width: 1200,
+        height: 800,
+        backgroundColor: '#FAF0E6',
+        textColor: '#8B4513',
+        runeColor: '#8B4513'
+      });
       const link = document.createElement('a');
       link.download = `${englishName}_rune_conversion.png`;
       link.href = imageData;
@@ -68,44 +63,126 @@ export default function RuneResult({ runeText, englishName }: RuneResultProps) {
   };
 
   return (
-    <section className="mb-8">
-      <Card className="ancient-border bg-parchment-dark rounded-lg glow-effect">
-        <CardContent className="p-6">
-          <h3 className="font-cinzel-decorative text-2xl font-bold text-viking-brown mb-4 text-center">
-            ᛁᛁ. 룬 문자 변환 결과
-          </h3>
-          
-          <div className="text-center mb-6">
-            <div className="bg-parchment rounded-lg p-8 ancient-border">
-              <div className="text-6xl md:text-8xl rune-character mb-4">
-                {runeText}
-              </div>
-              <div className="text-xl font-semibold text-text-brown">
-                {englishName.toUpperCase()}
+    <>
+      <section className="mb-8 scroll-reveal">
+        <Card className="ancient-border manuscript-page rounded-lg pulse-glow">
+          <CardContent className="p-8">
+            <div className="text-center mb-6">
+              <h3 className="font-cinzel-decorative text-3xl font-bold text-viking-brown mb-3 floating-animation">
+                ᛁᛁ. 룬 문자 변환 결과
+              </h3>
+              <p className="text-text-brown-light italic">
+                고대 바이킹의 신비로운 힘이 담긴 당신의 이름
+              </p>
+              <div className="ornamental-divider"></div>
+            </div>
+            
+            {/* Main Result Display */}
+            <div className="relative">
+              <div className="bg-gradient-to-br from-parchment to-parchment-darker rounded-xl p-8 ancient-border mb-6 relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-5">
+                  <div className="text-8xl rune-character-large leading-none">
+                    ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ
+                  </div>
+                </div>
+                
+                <div className="relative z-10 text-center">
+                  {/* Korean Name */}
+                  <div className="mb-4">
+                    <div className="text-lg text-text-brown-light mb-1">한국어</div>
+                    <div className="text-2xl font-bold text-viking-brown font-cinzel">
+                      {koreanName}
+                    </div>
+                  </div>
+                  
+                  {/* English Name */}
+                  <div className="mb-6">
+                    <div className="text-lg text-text-brown-light mb-1">영문명</div>
+                    <div className="text-xl font-semibold text-text-brown font-cinzel">
+                      {englishName.toUpperCase()}
+                    </div>
+                  </div>
+                  
+                  {/* Rune Text - Main Feature */}
+                  <div className="mb-6 relative">
+                    <div className="text-lg text-text-brown-light mb-3">고대 바이킹 룬 문자</div>
+                    <div className="text-6xl md:text-8xl rune-character-large mb-4 leading-tight">
+                      {runeText}
+                    </div>
+                    
+                    {/* Quick Copy Button */}
+                    <Button
+                      onClick={handleQuickCopy}
+                      variant="outline"
+                      size="sm"
+                      className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors"
+                    >
+                      <Copy className="w-4 h-4 mr-2" />
+                      룬 문자 복사
+                    </Button>
+                  </div>
+                  
+                  {/* Mystical Quote */}
+                  <div className="text-center">
+                    <p className="text-sm text-text-brown-light italic">
+                      "이 룬들은 당신의 이름에 담긴 고대의 힘을 나타냅니다"
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Button
-              onClick={handleShare}
-              disabled={isSharing}
-              className="bg-viking-peru hover:bg-viking-brown text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 font-cinzel flex items-center justify-center gap-2"
-            >
-              <Share2 className="w-5 h-5" />
-              {isSharing ? "공유 중..." : "공유하기"}
-            </Button>
-            <Button
-              onClick={handleDownload}
-              disabled={isDownloading}
-              className="bg-viking-gold hover:bg-viking-brown text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 font-cinzel flex items-center justify-center gap-2"
-            >
-              <Download className="w-5 h-5" />
-              {isDownloading ? "저장 중..." : "이미지 저장"}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </section>
+            
+            {/* Action Buttons */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Button
+                onClick={() => setShowShareModal(true)}
+                className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
+              >
+                <Share2 className="w-5 h-5" />
+                상세 공유
+              </Button>
+              
+              <Button
+                onClick={handleDownload}
+                disabled={isDownloading}
+                className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
+              >
+                <Download className="w-5 h-5" />
+                {isDownloading ? "저장 중..." : "이미지 저장"}
+              </Button>
+              
+              <Button
+                onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
+                variant="outline"
+                className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors font-cinzel flex items-center justify-center gap-2"
+              >
+                <Eye className="w-5 h-5" />
+                룬 의미 보기
+              </Button>
+            </div>
+            
+            {/* Success Message */}
+            <div className="mt-6 text-center">
+              <div className="inline-flex items-center gap-2 bg-viking-gold/10 border border-viking-gold/20 rounded-lg px-4 py-2">
+                <Sparkles className="w-4 h-4 text-viking-gold" />
+                <span className="text-sm text-viking-brown font-semibold">
+                  변환 완료! 아래에서 각 룬 문자의 의미를 확인해보세요.
+                </span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Share Modal */}
+      <ShareModal
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        runeText={runeText}
+        englishName={englishName}
+        koreanName={koreanName}
+      />
+    </>
   );
 }
