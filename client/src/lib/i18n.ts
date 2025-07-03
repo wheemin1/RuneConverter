@@ -61,15 +61,6 @@ export const translations = {
     confirmDelete: '정말 삭제하시겠습니까?',
     cancel: '취소',
     
-    // Connection Status
-    serverConnected: '서버 연결됨',
-    serverDisconnected: '서버 연결 안됨',
-    checkingConnection: '연결 확인 중...',
-    connectionSuccess: '서버 연결이 성공적으로 확립되었습니다.',
-    connectionFailed: '서버 연결에 실패했습니다.',
-    retryConnection: '연결 다시 확인',
-    serverAddress: '로컬 API 서버 주소:',
-    
     // Detailed explanation
     detailTitle: '룬 문자 상세 해석',
     detailSubtitle: '당신의 이름을 구성하는 각 룸 문자의 신비로운 의미와 고대의 지혜를 알아보세요',
@@ -134,15 +125,6 @@ export const translations = {
     deleteResult: 'Delete',
     confirmDelete: 'Are you sure you want to delete?',
     cancel: 'Cancel',
-    
-    // Connection Status
-    serverConnected: 'Server Connected',
-    serverDisconnected: 'Server Disconnected',
-    checkingConnection: 'Checking connection...',
-    connectionSuccess: 'Server connection successfully established.',
-    connectionFailed: 'Failed to connect to server.',
-    retryConnection: 'Check connection again',
-    serverAddress: 'Local API server address:',
     
     // Detailed explanation
     detailTitle: 'Detailed Rune Analysis',
@@ -209,15 +191,6 @@ export const translations = {
     confirmDelete: '本当に削除しますか？',
     cancel: 'キャンセル',
     
-    // Connection Status
-    serverConnected: 'サーバーに接続されました',
-    serverDisconnected: 'サーバーに接続されていません',
-    checkingConnection: '接続を確認中...',
-    connectionSuccess: 'サーバーへの接続が成功しました。',
-    connectionFailed: 'サーバーへの接続に失敗しました。',
-    retryConnection: '再接続を試みる',
-    serverAddress: 'ローカルAPIサーバーアドレス:',
-    
     // Detailed explanation
     detailTitle: 'ルーン文字詳細解析',
     detailSubtitle: 'あなたの名前を構成する各ルーン文字の神秘的な意味と古代の知恵を学びましょう',
@@ -282,15 +255,6 @@ export const translations = {
     deleteResult: '删除',
     confirmDelete: '您确定要删除吗？',
     cancel: '取消',
-    
-    // Connection Status
-    serverConnected: '服务器已连接',
-    serverDisconnected: '服务器未连接',
-    checkingConnection: '检查连接中...',
-    connectionSuccess: '服务器连接成功建立。',
-    connectionFailed: '连接服务器失败。',
-    retryConnection: '重新检查连接',
-    serverAddress: '本地API服务器地址:',
     
     // Detailed explanation
     detailTitle: '符文详细解析',

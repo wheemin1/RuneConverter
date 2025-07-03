@@ -75,39 +75,3 @@ export async function getPopularRuneConversions(): Promise<RuneConversion[]> {
     return [];
   }
 }
-
-/**
- * API 서버 상태 확인
- */
-export async function checkServerStatus(): Promise<boolean> {
-  try {
-    const response = await fetch(`${API_BASE_URL}/rune-conversions`, {
-      method: 'HEAD',
-      headers: { 'Cache-Control': 'no-cache' },
-    });
-    return response.ok;
-  } catch (error) {
-    console.error('Server status check failed:', error);
-    return false;
-  }
-}
-
-/**
- * 서버 연결 테스트 (로컬 테스트용)
- */
-export async function testServerConnection(): Promise<{ connected: boolean, message: string }> {
-  try {
-    const isConnected = await checkServerStatus();
-    return {
-      connected: isConnected,
-      message: isConnected 
-        ? '서버 연결이 성공적으로 확립되었습니다.' 
-        : '서버 연결에 실패했습니다.'
-    };
-  } catch (error) {
-    return {
-      connected: false,
-      message: `서버 연결 중 오류가 발생했습니다: ${error}`
-    };
-  }
-}
