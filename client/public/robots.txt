@@ -1,4 +1,12 @@
+# robots.txt for Viking Rune Converter
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
+# 사이트맵 위치
 Sitemap: https://viking-rune-converter.netlify.app/sitemap.xml
+
+# 주요 페이지 명시적 허용
+Allow: /index.html
+Allow: /manifest.json
+Allow: /schema.json
