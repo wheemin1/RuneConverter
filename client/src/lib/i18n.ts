@@ -20,7 +20,7 @@ export const translations = {
   ko: {
     // Header
     title: '바이킹 룬 문자 변환기',
-    subtitle: '고대 노르드의 신비로운 힘을 담은 엘더 푸타르크 룬 문자로 당신의 이름을 변환해보세요',
+    subtitle: '실제로 사용했던 북유럽 고대 노르드의 엘더 푸타르크 룬 문자로 당신의 이름을 변환해보세요',
     
     // Features
     feature1Title: '정확한 변환',
@@ -63,7 +63,7 @@ export const translations = {
     
     // Detailed explanation
     detailTitle: '룬 문자 상세 해석',
-    detailSubtitle: '당신의 이름을 구성하는 각 룸 문자의 신비로운 의미와 고대의 지혜를 알아보세요',
+    detailSubtitle: '당신의 이름을 구성하는 각 룬 문자가 지닌 실제 의미와 고대의 지혜를 알아보세요',
     meaning: '의미',
     symbolism: '상징',
     divination: '점술적 의미',
@@ -78,14 +78,15 @@ export const translations = {
     
     // Footer
     footerTitle: '바이킹 룬 문자 변환기',
-    footerDesc: '고대 바이킹 문화와 엘더 푸타르크 룬 문자의 신비로운 아름다움을 현대에 전하며, 당신의 이름에 담긴 고대의 힘을 발견하세요.',
+    footerDesc: '고대 바이킹 문화와 엘더 푸타르크 룬 문자의 신비로운 아름다움을 현대에 전하며, 실제 당신의 이름에 담긴 고대의 힘을 발견하세요.',
     copyright: '© 2025 Rune Converter. Made with ❤️ for Viking culture enthusiasts.',
+    bugReport: '버그 제보: jowheemin@gmail.com',
   },
   
   en: {
     // Header
     title: 'Viking Rune Converter',
-    subtitle: 'Transform your name into ancient Elder Futhark runes filled with the mystical power of Norse tradition',
+    subtitle: 'Transform your name into authentic Elder Futhark runes actually used by ancient Norse civilizations',
     
     // Features
     feature1Title: 'Accurate Conversion',
@@ -143,14 +144,15 @@ export const translations = {
     
     // Footer
     footerTitle: 'Viking Rune Converter',
-    footerDesc: 'Bringing the mystical beauty of ancient Viking culture and Elder Futhark runes to the modern world. Discover the ancient power within your name.',
+    footerDesc: 'Bringing the mystical beauty of authentic Viking culture and Elder Futhark runes to the modern world. Discover the real ancient power within your name.',
     copyright: '© 2025 Rune Converter. Made with ❤️ for Viking culture enthusiasts.',
+    bugReport: 'Report bugs: jowheemin@gmail.com',
   },
   
   ja: {
     // Header
     title: 'バイキング ルーン文字変換器',
-    subtitle: '古代ノルドの神秘的な力を宿したエルダー・フサルクのルーン文字であなたの名前を変換しましょう',
+    subtitle: '実際に使用されていた北欧古代ノルドのエルダー・フサルクのルーン文字であなたの名前を変換しましょう',
     
     // Features
     feature1Title: '正確な変換',
@@ -208,14 +210,15 @@ export const translations = {
     
     // Footer
     footerTitle: 'バイキング ルーン文字変換器',
-    footerDesc: '古代バイキング文化とエルダー・フサルクのルーン文字の神秘的な美しさを現代に伝え、あなたの名前に宿る古代の力を発見してください。',
+    footerDesc: '実際の古代バイキング文化とエルダー・フサルクのルーン文字の神秘的な美しさを現代に伝え、あなたの名前に宿る本物の古代の力を発見してください。',
     copyright: '© 2025 Rune Converter. バイキング文化愛好家のために❤️で作成。',
+    bugReport: 'バグ報告: jowheemin@gmail.com',
   },
   
   zh: {
     // Header
     title: '维京符文转换器',
-    subtitle: '用充满古代北欧神秘力量的古老弗萨克符文转换您的姓名',
+    subtitle: '用北欧古代人实际使用的古老弗萨克符文转换您的姓名',
     
     // Features
     feature1Title: '精确转换',
@@ -275,12 +278,13 @@ export const translations = {
     footerTitle: '维京符文转换器',
     footerDesc: '将古代维京文化和古老弗萨克符文的神秘之美带到现代世界，发现您姓名中蕴含的古代力量。',
     copyright: '© 2025 符文转换器。为维京文化爱好者用❤️制作。',
+    bugReport: '错误报告: jowheemin@gmail.com',
   },
   
   es: {
     // Header
     title: 'Convertidor de Runas Vikingas',
-    subtitle: 'Transforma tu nombre en antiguas runas del Futhark Elder llenas del poder místico de la tradición nórdica',
+    subtitle: 'Transforma tu nombre en antiguas runas del Futhark Elder utilizadas realmente en la tradición nórdica',
     
     // Features
     feature1Title: 'Conversión Precisa',
@@ -330,12 +334,13 @@ export const translations = {
     footerTitle: 'Convertidor de Runas Vikingas',
     footerDesc: 'Trayendo la belleza mística de la cultura vikinga ancestral y las runas del Futhark Elder al mundo moderno. Descubre el poder ancestral dentro de tu nombre.',
     copyright: '© 2025 Convertidor de Runas. Hecho con ❤️ para entusiastas de la cultura vikinga.',
+    bugReport: 'Reportar errores: jowheemin@gmail.com',
   },
   
   fr: {
     // Header
     title: 'Convertisseur de Runes Vikings',
-    subtitle: 'Transformez votre nom en anciennes runes du Futhark Elder remplies du pouvoir mystique de la tradition nordique',
+    subtitle: 'Transformez votre nom en anciennes runes du Futhark Elder réellement utilisées dans la tradition nordique',
     
     // Features
     feature1Title: 'Conversion Précise',
@@ -385,6 +390,7 @@ export const translations = {
     footerTitle: 'Convertisseur de Runes Vikings',
     footerDesc: 'Apportant la beauté mystique de la culture viking ancestrale et des runes du Futhark Elder au monde moderne. Découvrez le pouvoir ancestral dans votre nom.',
     copyright: '© 2025 Convertisseur de Runes. Fait avec ❤️ pour les passionnés de culture viking.',
+    bugReport: 'Signaler des bugs: jowheemin@gmail.com',
   }
 };
 

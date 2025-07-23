@@ -6,11 +6,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import SEOManager from "@/components/SEOManager";
 import RuneConverter from "@/pages/RuneConverter";
+import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={RuneConverter} />
+      <Route component={NotFound} />
     </Switch>
   );
 }

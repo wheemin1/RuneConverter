@@ -31,6 +31,12 @@ export default function ShareModal({
 #바이킹룬문자 #룬변환기 #고대문자`;
 
   const shareUrl = `${window.location.origin}?name=${encodeURIComponent(koreanName)}`;
+  
+  // Create meta image URL for OG image when sharing
+  const getMetaImageUrl = () => {
+    // Create a simple URL that could be used for meta image generation
+    return `${window.location.origin}/api/og?name=${encodeURIComponent(koreanName)}&rune=${encodeURIComponent(runeText)}`;
+  };
 
   const handleCopyText = async () => {
     try {
@@ -81,11 +87,29 @@ export default function ShareModal({
     const encodedText = encodeURIComponent(shareText);
     const encodedUrl = encodeURIComponent(shareUrl);
     
+    // Add meta tags for sharing preview when possible
+    const metaTags = document.querySelectorAll('meta[property^="og:"]');
+    const ogImageTag = document.querySelector('meta[property="og:image"]');
+    
+    // Try to update OG image if possible
+    if (ogImageTag) {
+      const currentUrl = ogImageTag.getAttribute('content');
+      const dynamicUrl = getMetaImageUrl();
+      ogImageTag.setAttribute('content', dynamicUrl);
+      
+      // Restore the original URL after a delay
+      setTimeout(() => {
+        if (currentUrl) {
+          ogImageTag.setAttribute('content', currentUrl);
+        }
+      }, 5000);
+    }
+    
     let url = '';
     
     switch (platform) {
       case 'facebook':
-        url = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`;
+        url = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
         break;
       case 'twitter':
         url = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
@@ -220,8 +244,13 @@ export default function ShareModal({
 
         <div className="ornamental-divider mt-6"></div>
         
-        <div className="text-center text-xs text-text-brown-light">
-          바이킹 룬 문자 변환기로 더 많은 이름을 변환해보세요!
+        <div className="text-center">
+          <p className="text-sm text-text-brown-light mb-2">
+            바이킹 룬 문자 변환기로 더 많은 이름을 변환해보세요!
+          </p>
+          <p className="text-sm font-medium text-text-brown">
+            버그 제보: jowheemin@gmail.com
+          </p>
         </div>
       </DialogContent>
     </Dialog>

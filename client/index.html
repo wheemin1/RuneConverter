@@ -1,29 +1,52 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    <base href="/" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <meta name="google-site-verification" content="CXwW2ROvezFAamVFZYXX26sxDGQ9YjNOHBPFGM7LA6U" />
     
+    <!-- 보안 정책 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://viking-rune-converter.netlify.app;" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
+    
+    <!-- Additional SEO meta tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+    <meta name="bingbot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+    <meta name="language" content="ko" />
+    <meta name="geo.region" content="KR" />
+    <meta name="geo.country" content="KR" />
+    <meta name="distribution" content="global" />
+    <meta name="rating" content="general" />
+    <meta name="revisit-after" content="1 days" />
+    <meta name="category" content="utility, tools, converter" />
+    <meta name="subject" content="바이킹 문자 변환기, 룬 문자 변환기" />
+    <meta name="coverage" content="worldwide" />
+    <meta name="target" content="all" />
+    <meta name="audience" content="all" />
+    <meta name="classification" content="utility" />
+    <meta name="reply-to" content="support@viking-rune-converter.netlify.app" />
+    
     <!-- SEO 기본 - These will be dynamically updated by SEOManager -->
-    <title>바이킹(룬) 문자 변환기 | 무료 한글 이름 변환 | 룬 문자 생성기</title>
-    <meta name="description" content="한글 이름을 바이킹 룬 문자(엘더 푸타르크)로 무료 변환해 드립니다. 무료 룬 문자 생성기로 당신의 이름을 고대 북유럽 문자로 변환하고, 각 룬의 의미와 상징을 확인하세요. 바이킹 이름 생성기, 북유럽 룬 알파벳 번역기." />
-    <meta name="keywords" content="바이킹 룬, 룬 문자, 엘더 푸타르크, 한글 이름 변환, 북유럽 문자, 룬 변환기, 고대 문자, 바이킹 이름 생성기, 룬 문자 생성기, 바이킹 이름 변환기, 룬 글자, 룬 알파벳, 무료 룬 변환, 이름 의미, 룬 의미, 북유럽 신화, 바이킹 문화, 고대 문자 번역기, 고대 문자 생성기, 한국어 이름 번역기, Viking Rune, Elder Futhark, Korean Name, Rune Converter, Rune Generator, Free Rune Converter, Norse Runes, Viking Alphabet" />
+    <title>룬 문자 변환기 | 한글 이름 바이킹 룬 변환</title>
+    <meta name="description" content="한글 이름을 바이킹 룬 문자로 무료 변환하는 사이트입니다. 엘더 푸타르크 룬 문자의 의미와 상징을 확인하세요." />
+    <meta name="keywords" content="룬 문자 변환기, 바이킹 룬, 룬 문자, 한글 이름 변환, 엘더 푸타르크, 북유럽 문자, 바이킹 문자, 고대 문자, 룬 생성기, 이름 변환, 룬 변환" />
     <meta name="author" content="RuneConverter" />
     
     <!-- Mobile App tags -->
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Viking Rune Converter" />
-    <meta name="application-name" content="Viking Rune Converter" />
+    <meta name="apple-mobile-web-app-title" content="룬 문자 변환기" />
+    <meta name="application-name" content="룬 문자 변환기" />
     <meta name="theme-color" content="#1a202c" />
     
     <!-- Open Graph / 소셜 미디어 - These will be dynamically updated by SEOManager -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://viking-rune-converter.netlify.app/" />
-    <meta property="og:title" content="바이킹(룬) 문자 변환기 | 무료 한글 이름 변환 | 룬 문자 생성기" />
-    <meta property="og:description" content="무료 룬 문자 생성기로 당신의 한국어 이름을 고대 바이킹 룬 문자로 변환해보세요. 각 룬 문자의 의미와 상징을 알아보고 이미지로 저장할 수 있습니다. 바이킹 이름 생성기, 북유럽 룬 문자 번역기." />
+    <meta property="og:title" content="룬 문자 변환기 | 한글 이름 바이킹 룬 변환" />
+    <meta property="og:description" content="한글 이름을 바이킹 룬 문자로 무료 변환하는 사이트입니다. 엘더 푸타르크 룬 문자의 의미를 확인하세요." />
     <meta property="og:image" content="https://viking-rune-converter.netlify.app/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -33,8 +56,8 @@
     <!-- Twitter - These will be dynamically updated by SEOManager -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://viking-rune-converter.netlify.app/" />
-    <meta name="twitter:title" content="바이킹(룬) 문자 변환기 | 무료 한글 이름 변환 | 룬 문자 생성기" />
-    <meta name="twitter:description" content="무료 룬 문자 생성기로 당신의 한국어 이름을 고대 바이킹 룬 문자로 변환해보세요. 각 룬 문자의 의미와 상징을 알아보고 이미지로 저장할 수 있습니다. 바이킹 이름 생성기, 북유럽 룬 문자 번역기." />
+    <meta name="twitter:title" content="룬 문자 변환기 | 한글 이름 바이킹 룬 변환" />
+    <meta name="twitter:description" content="한글 이름을 바이킹 룬 문자로 무료 변환하는 사이트입니다. 엘더 푸타르크 룬 문자의 의미를 확인하세요." />
     <meta name="twitter:image" content="https://viking-rune-converter.netlify.app/og-image.jpg" />
     <meta name="twitter:creator" content="@runeconverter" />
     
@@ -43,19 +66,19 @@
       {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "바이킹(룬) 문자 변환기 | 무료 룬 문자 생성기",
-        "alternateName": ["Viking Rune Converter", "바이킹 이름 생성기", "룬 문자 변환기", "룬 문자 생성기"],
+        "name": "룬 문자 변환기",
+        "alternateName": ["바이킹 룬 변환기", "엘더 푸타르크 변환기", "Viking Rune Converter"],
         "url": "https://viking-rune-converter.netlify.app/",
-        "description": "한글 이름을 바이킹 룬 문자(엘더 푸타르크)로 무료 변환해 드립니다. 무료 룬 문자 생성기로 당신의 이름을 고대 북유럽 문자로 변환하고, 각 룬의 의미와 상징을 확인하세요.",
+        "description": "한글 이름을 바이킹 룬 문자로 무료 변환하는 사이트입니다. 엘더 푸타르크 룬 문자의 의미를 확인하세요.",
         "applicationCategory": "UtilityApplication",
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "USD"
+          "priceCurrency": "KRW"
         },
         "operatingSystem": "웹 브라우저",
-        "inLanguage": ["ko", "en", "ja", "zh", "es", "fr"],
-        "keywords": "바이킹 룬, 룬 문자, 엘더 푸타르크, 한글 이름 변환, 북유럽 문자, 룬 변환기, 고대 문자, 바이킹 이름 생성기, 룬 문자 생성기, 바이킹 이름 변환기, 무료 룬 변환, 이름 의미, 룬 의미, 북유럽 신화, 바이킹 문화"
+        "inLanguage": ["ko", "en"],
+        "keywords": "룬 문자 변환기, 바이킹 룬, 룬 문자, 한글 이름 변환, 엘더 푸타르크, 북유럽 문자, 바이킹 문자, 고대 문자, 룬 생성기"
       }
     </script>
     
@@ -86,7 +109,8 @@
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "바이킹(룬) 문자 변환기",
+        "name": "룬 문자 변환",
+        "alternateName": "룬 문자 변환기",
         "url": "https://viking-rune-converter.netlify.app/",
         "potentialAction": {
           "@type": "SearchAction",
@@ -112,7 +136,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
-    <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
   </body>
 </html>

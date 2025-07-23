@@ -1,16 +1,48 @@
 [build]
   command = "npm run build"
   publish = "dist/public"
+  functions = "netlify/functions"
 
-[functions]
-  directory = "dist/functions"
+[build.environment]
+  NODE_VERSION = "18"
 
+# 정적 파일 처리
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+# SPA 리다이렉트 설정 (API 먼저)
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  to = "/.netlify/functions/api/:splat"
   status = 200
 
+# 모든 요청을 index.html로 리다이렉트 (SPA 처리)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+# 기본 문서 설정
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+
+# index.html에 대한 캐시 설정
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"

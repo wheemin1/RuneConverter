@@ -4,11 +4,11 @@ import { useLanguage } from '@/contexts/LanguageContext';
 // SEO translations for all supported languages
 const seoTranslations = {
   ko: {
-    title: '바이킹(룬) 문자 변환기 | 무료 한글 이름 변환 | 룬 문자 생성기',
-    description: '한글 이름을 바이킹 룬 문자(엘더 푸타르크)로 무료 변환해 드립니다. 무료 룬 문자 생성기로 당신의 이름을 고대 북유럽 문자로 변환하고, 각 룬의 의미와 상징을 확인하세요. 바이킹 이름 생성기, 북유럽 룬 알파벳 번역기.',
-    ogTitle: '바이킹(룬) 문자 변환기 | 무료 한글 이름 변환 | 룬 문자 생성기',
-    ogDescription: '무료 룬 문자 생성기로 당신의 한국어 이름을 고대 바이킹 룬 문자로 변환해보세요. 각 룬 문자의 의미와 상징을 알아보고 이미지로 저장할 수 있습니다. 바이킹 이름 생성기, 북유럽 룬 문자 번역기.',
-    keywords: '바이킹 룬, 룬 문자, 엘더 푸타르크, 한글 이름 변환, 북유럽 문자, 룬 변환기, 고대 문자, 바이킹 이름 생성기, 룬 문자 생성기, 바이킹 이름 변환기, 룬 글자, 룬 알파벳, 무료 룬 변환, 이름 의미, 룬 의미, 북유럽 신화, 바이킹 문화, 고대 문자 번역기, 고대 문자 생성기, 한국어 이름 번역기, Viking Rune, Elder Futhark, Korean Name, Rune Converter, Rune Generator, Free Rune Converter, Norse Runes, Viking Alphabet'
+    title: '룬 문자 변환기 | 한글 이름 바이킹 룬 변환',
+    description: '한글 이름을 바이킹 룬 문자로 무료 변환하는 사이트입니다. 엘더 푸타르크 룬 문자의 의미를 확인하세요.',
+    ogTitle: '룬 문자 변환기 | 한글 이름 바이킹 룬 변환',
+    ogDescription: '한글 이름을 바이킹 룬 문자로 무료 변환하는 사이트입니다. 엘더 푸타르크 룬 문자의 의미를 확인하세요.',
+    keywords: '룬 문자 변환기, 바이킹 룬, 룬 문자, 한글 이름 변환, 엘더 푸타르크, 북유럽 문자, 바이킹 문자, 고대 문자, 룬 생성기, 이름 변환, 룬 변환'
   },
   en: {
     title: 'Viking Rune Converter & Generator | Transform Your Name into Ancient Norse Runes',

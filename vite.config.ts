@@ -34,4 +34,8 @@ export default defineConfig({
       deny: ["**/.*"],
     },
   },
+  preview: {
+    port: 5000,
+    host: true,
+  },
 });

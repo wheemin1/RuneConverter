@@ -37,9 +37,9 @@ export default function RuneConverter() {
     
     // Scroll to result after a brief delay
     setTimeout(() => {
-      const resultElement = document.querySelector('[data-scroll-target="result"]');
+      const resultElement = document.getElementById('rune-result');
       if (resultElement) {
-        resultElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        resultElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 500);
   };
@@ -119,7 +119,7 @@ export default function RuneConverter() {
         />
 
         {isConverted && (
-          <div data-scroll-target="result">
+          <div id="rune-result" data-scroll-target="result">
             <RuneResult
               runeText={runeText}
               englishName={englishName}
@@ -148,7 +148,7 @@ export default function RuneConverter() {
               ᚱᚢᚾᛖ ᚲᚮᚾᚡᛖᚱᛏᛖᚱ
             </div>
             <h3 className="text-xl text-viking-tan mb-2">{t('footerTitle')}</h3>
-            <p className="text-viking-tan/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-viking-tan max-w-2xl mx-auto leading-relaxed">
               {t('footerDesc')}
             </p>
           </div>
@@ -158,19 +158,19 @@ export default function RuneConverter() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
             <div>
               <h4 className="font-semibold text-viking-tan mb-2">룬 문자 정보</h4>
-              <p className="text-sm text-viking-tan/70">
+              <p className="text-sm text-viking-tan">
                 엘더 푸타르크 24개 룬 문자의 정확한 의미와 상징을 바탕으로 변환합니다.
               </p>
             </div>
             <div>
               <h4 className="font-semibold text-viking-tan mb-2">한국어 지원</h4>
-              <p className="text-sm text-viking-tan/70">
+              <p className="text-sm text-viking-tan">
                 한국어 이름의 정확한 로마자 표기법을 지원하며, 사용자가 직접 수정할 수 있습니다.
               </p>
             </div>
             <div>
               <h4 className="font-semibold text-viking-tan mb-2">무료 서비스</h4>
-              <p className="text-sm text-viking-tan/70">
+              <p className="text-sm text-viking-tan">
                 모든 변환 및 공유 기능을 완전 무료로 제공합니다. 광고도 없습니다.
               </p>
             </div>
@@ -179,10 +179,13 @@ export default function RuneConverter() {
           <div className="ornamental-divider opacity-50"></div>
           
           <div className="mt-6">
-            <p className="text-sm text-viking-tan/80">
+            <p className="text-sm text-viking-tan">
               {t('copyright')}
             </p>
-            <p className="text-xs text-viking-tan/60 mt-2">
+            <p className="text-sm text-viking-tan mt-2 font-medium">
+              {t('bugReport')}
+            </p>
+            <p className="text-xs text-viking-tan mt-2">
               참고 자료:{" "}
               <a
                 href="https://namu.wiki/w/룬%20문자"

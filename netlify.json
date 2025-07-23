@@ -1,0 +1,5 @@
+{
+  "name": "viking-rune-converter",
+  "description": "바이킹(룬) 문자 변환기",
+  "publish": "dist/public"
+}
