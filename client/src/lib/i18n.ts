@@ -23,12 +23,12 @@ export const translations = {
     subtitle: '실제로 사용했던 북유럽 고대 노르드의 엘더 푸타르크 룬 문자로 당신의 이름을 변환해보세요',
     
     // Features
-    feature1Title: '정확한 변환',
-    feature1Desc: '한국어-영문-룬문자 3단계 변환',
-    feature2Title: '의미 해석',
-    feature2Desc: '각 룬의 상징과 의미 제공',
-    feature3Title: '쉬운 공유',
-    feature3Desc: '이미지 저장 및 SNS 공유',
+    feature1Title: '정확한 룬 변환',
+    feature1Desc: '한국어→영어→룬 문자 3단계 정밀 변환',
+    feature2Title: '룬 의미 해석',
+    feature2Desc: '각 룬 문자의 상세한 상징과 의미 분석',
+    feature3Title: '간편한 공유',
+    feature3Desc: '이미지 저장 & 소셜미디어 공유',
     
     // Input
     inputTitle: '이름 입력',
