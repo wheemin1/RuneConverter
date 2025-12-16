@@ -98,6 +98,33 @@
         rgba(120, 119, 109, 0.03) 100px
       );
     background-size: 100% 100%, 300px 300px, 250px 250px, 350px 350px, 100px 100px;
+    position: relative;
+  }
+  
+  .parchment-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(120, 119, 109, 0.015) 2px,
+        rgba(120, 119, 109, 0.015) 4px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(120, 119, 109, 0.015) 2px,
+        rgba(120, 119, 109, 0.015) 4px
+      );
+    pointer-events: none;
+    opacity: 0.3;
   }
 
   .manuscript-page {
@@ -114,6 +141,27 @@
       0 5px 15px rgba(0, 0, 0, 0.1),
       0 2px 5px rgba(0, 0, 0, 0.05);
     border: 1px solid rgba(120, 119, 109, 0.2);
+    position: relative;
+  }
+  
+  .manuscript-page::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 3px,
+        rgba(120, 119, 109, 0.01) 3px,
+        rgba(120, 119, 109, 0.01) 6px
+      );
+    pointer-events: none;
+    border-radius: inherit;
+    z-index: 1;
   }
   
   .ancient-border {
@@ -414,5 +462,23 @@
   
   .hover\:border-viking-gold:hover {
     border-color: hsl(45, 100%, 35%);
+  }
+
+  /* Viking Vignette Overlay - 웅장한 느낌 */
+  .vignette-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      transparent 60%,
+      rgba(40, 30, 20, 0.12) 90%,
+      rgba(40, 30, 20, 0.18) 100%
+    );
+    pointer-events: none;
+    z-index: 9999;
   }
 }

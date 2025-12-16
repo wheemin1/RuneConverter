@@ -13,9 +13,9 @@ export default function RuneExplanation({ runeDetails }: RuneExplanationProps) {
   if (runeDetails.length === 0) return null;
 
   return (
-    <section className="mb-8 scroll-reveal" data-scroll-target="detailed-explanation">
-      <Card className="ancient-border manuscript-page rounded-lg pulse-glow">
-        <CardContent className="p-8">
+    <section className="mb-8 scroll-reveal relative" data-scroll-target="detailed-explanation">
+      <Card className="ancient-border manuscript-page rounded-lg pulse-glow bg-parchment-dark">
+        <CardContent className="p-8 relative">
           <div className="text-center mb-8">
             <h3 className="font-cinzel-decorative text-3xl font-bold text-viking-brown mb-3 floating-animation">
               ᛁᛁᛁ. {t('detailTitle')}

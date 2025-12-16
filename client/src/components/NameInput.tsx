@@ -24,9 +24,9 @@ export default function NameInput({
 }: NameInputProps) {
   const { t } = useLanguage();
   return (
-    <section className="mb-8 scroll-reveal">
-      <Card className="ancient-border manuscript-page rounded-lg pulse-glow">
-        <CardContent className="p-8">
+    <section className="mb-8 scroll-reveal relative">
+      <Card className="ancient-border manuscript-page rounded-lg pulse-glow bg-parchment-dark">
+        <CardContent className="p-8 relative">
           <div className="text-center mb-6">
             <h3 className="font-cinzel-decorative text-3xl font-bold text-viking-brown mb-3 floating-animation">
               ᛁ. {t('inputTitle')}

@@ -3,7 +3,7 @@ import { elderFutharkRunes } from "@/lib/runeDatabase";
 
 export default function RuneReference() {
   return (
-    <section className="mb-8">
+    <section className="mb-8 relative">
       <Card className="ancient-border bg-parchment-dark rounded-lg glow-effect">
         <CardContent className="p-6">
           <h3 className="font-cinzel-decorative text-2xl font-bold text-viking-brown mb-6 text-center">

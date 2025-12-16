@@ -56,7 +56,11 @@ export default function RuneConverter() {
   }
 
   return (
-    <div className="parchment-bg min-h-screen font-cinzel">
+    <div className="min-h-screen relative">
+      {/* Vignette Overlay - sits above all content */}
+      <div className="vignette-overlay" />
+      
+      <div className="parchment-bg min-h-screen font-cinzel relative z-10">
       {/* Enhanced Header */}
       <header className="text-center py-12 px-4 relative overflow-hidden">
         {/* Language Selector */}
@@ -208,6 +212,7 @@ export default function RuneConverter() {
           </div>
         </div>
       </footer>
+      </div>
     </div>
   );
 }
