@@ -8,23 +8,33 @@ declare global {
 }
 
 export const initKakao = () => {
+  // 브라우저 환경이 아니면 실행하지 않음 (빌드 타임 체크)
   if (typeof window === 'undefined') return;
   
+  // 환경 변수가 없어도 빌드는 성공하도록 처리
   const kakaoKey = import.meta.env.VITE_KAKAO_JS_KEY;
   
   if (!kakaoKey) {
-    console.error('⚠️ 카카오 JavaScript 키가 .env 파일에 설정되지 않았습니다.');
-    console.error('📝 .env 파일에 VITE_KAKAO_JS_KEY=여기에_키_입력 형식으로 추가해주세요.');
+    console.warn('⚠️ 카카오 JavaScript 키가 설정되지 않았습니다. 공유 기능이 비활성화됩니다.');
     return;
   }
 
-  if (window.Kakao && !window.Kakao.isInitialized()) {
-    try {
-      window.Kakao.init(kakaoKey);
-      console.log('✅ 카카오 SDK 초기화 성공:', window.Kakao.isInitialized());
-    } catch (error) {
-      console.error('❌ 카카오 SDK 초기화 실패:', error);
-    }
+  // 카카오 SDK가 로드되지 않았으면 대기
+  if (!window.Kakao) {
+    console.warn('⚠️ 카카오 SDK가 아직 로드되지 않았습니다.');
+    return;
+  }
+
+  // 이미 초기화되었으면 스킵
+  if (window.Kakao.isInitialized()) {
+    return;
+  }
+
+  try {
+    window.Kakao.init(kakaoKey);
+    console.log('✅ 카카오 SDK 초기화 성공');
+  } catch (error) {
+    console.error('❌ 카카오 SDK 초기화 실패:', error);
   }
 };
 
