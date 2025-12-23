@@ -62,9 +62,9 @@ export default function RuneConverter() {
       
       <div className="parchment-bg min-h-screen font-cinzel relative z-10">
       {/* Compact Header */}
-      <header className="relative">
+      <header className="relative h-16 md:h-20">
         {/* Branding Logo */}
-        <div className="absolute top-4 left-4 z-20">
+        <div className="absolute top-4 left-4 md:left-6 z-20 safe-top">
           <div className="flex items-center gap-2 opacity-70">
             <span className="rune-character text-lg text-viking-brown">ᚱ</span>
             <span className="font-cinzel-decorative text-xs text-viking-brown hidden sm:inline">Viking Rune</span>
@@ -77,7 +77,7 @@ export default function RuneConverter() {
       </header>
 
       {/* Hero Section - 2 Column Layout on Desktop */}
-      <section className="max-w-7xl mx-auto px-4 py-6 md:py-12">
+      <section className="max-w-7xl mx-auto px-4 pb-6 md:pb-12 mt-2 md:mt-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           
           {/* Left Column - Title & Description */}

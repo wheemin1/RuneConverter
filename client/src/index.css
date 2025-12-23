@@ -527,4 +527,9 @@
       );
     }
   }
+  
+  /* Safe Area 대응 (iOS 노치, Android 상단바) */
+  .safe-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
 }
