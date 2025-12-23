@@ -1,8 +1,41 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { RuneDetail } from "@/lib/runeDatabase";
-import { BookOpen, Star, Heart } from "lucide-react";
+import { 
+  BookOpen, Star, Heart, Coins, Zap, Shield, MessageSquare, 
+  Rocket, Flame, Gift, Smile, CloudRain, BookText, Snowflake,
+  Wheat, Sprout, Eye, Sun, Sword, TreePine, Users, Droplets,
+  Sparkles, Sunrise, Home
+} from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+
+// Map rune names to icons
+const runeIconMap: Record<string, any> = {
+  'Fehu': Coins,
+  'Uruz': Zap,
+  'Thurisaz': Shield,
+  'Ansuz': MessageSquare,
+  'Raidho': Rocket,
+  'Kaunan': Flame,
+  'Gebo': Gift,
+  'Wunjo': Smile,
+  'Hagalaz': CloudRain,
+  'Nauthiz': BookText,
+  'Isaz': Snowflake,
+  'Jera': Wheat,
+  'Eihwaz': Sprout,
+  'Perthro': Eye,
+  'Algiz': Shield,
+  'Sowilo': Sun,
+  'Tiwaz': Sword,
+  'Berkanan': TreePine,
+  'Ehwaz': Users,
+  'Mannaz': Users,
+  'Laguz': Droplets,
+  'Ingwaz': Sparkles,
+  'Dagaz': Sunrise,
+  'Othalan': Home,
+};
 
 interface RuneExplanationProps {
   runeDetails: RuneDetail[];
@@ -26,7 +59,7 @@ export default function RuneExplanation({ runeDetails }: RuneExplanationProps) {
             <div className="ornamental-divider"></div>
           </div>
           
-          <div className="space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {runeDetails.map((rune, index) => (
               <div 
                 key={index} 
@@ -40,8 +73,18 @@ export default function RuneExplanation({ runeDetails }: RuneExplanationProps) {
                 <div className="relative z-10">
                   {/* Header */}
                   <div className="flex items-start gap-6 mb-6">
-                    <div className="text-6xl rune-character-large floating-animation">
-                      {rune.character}
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="text-6xl rune-character-large floating-animation">
+                        {rune.character}
+                      </div>
+                      {runeIconMap[rune.name] && (
+                        <div className="p-2 bg-viking-gold/10 rounded-full border border-viking-gold/20">
+                          {(() => {
+                            const IconComponent = runeIconMap[rune.name];
+                            return <IconComponent className="w-5 h-5 text-viking-gold" />;
+                          })()}
+                        </div>
+                      )}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">

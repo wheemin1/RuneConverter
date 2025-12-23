@@ -6,3 +6,7 @@ vite.config.ts.*
 *.tar.gz
 # Local Netlify folder
 .netlify
+# Environment variables (보안 키 보호)
+.env
+.env.local
+.env.*.local

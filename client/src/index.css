@@ -226,8 +226,10 @@
     color: hsl(25, 62%, 35%);
     text-shadow: 
       1px 1px 3px rgba(0,0,0,0.4),
-      0 0 8px rgba(184, 134, 11, 0.15);
-    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.25));
+      0 0 8px rgba(184, 134, 11, 0.15),
+      0 0 15px rgba(184, 134, 11, 0.25),
+      0 0 25px rgba(184, 134, 11, 0.15);
+    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.25)) drop-shadow(0 0 8px rgba(184, 134, 11, 0.3));
   }
 
   .rune-character-large {
@@ -237,7 +239,11 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: none;
-    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    filter: 
+      drop-shadow(2px 2px 4px rgba(0,0,0,0.3))
+      drop-shadow(0 0 12px rgba(184, 134, 11, 0.5))
+      drop-shadow(0 0 20px rgba(184, 134, 11, 0.3))
+      drop-shadow(0 0 30px rgba(184, 134, 11, 0.2));
   }
   
   .decorative-divider {

@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Share2, Copy, Download, Facebook, Twitter, Instagram, MessageCircle } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
+import { shareToKakao } from "@/lib/kakaoShare";
 
 interface ShareModalProps {
   isOpen: boolean;
@@ -115,18 +116,13 @@ export default function ShareModal({
         url = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
         break;
       case 'kakao':
-        // KakaoTalk sharing would require Kakao SDK, for now we'll use web sharing
-        if (navigator.share) {
-          navigator.share({
-            title: '바이킹 룬 문자 변환 결과',
-            text: shareText,
-            url: shareUrl,
-          });
-          return;
-        } else {
-          handleCopyText();
-          return;
-        }
+        // 카카오톡 공유 API 사용
+        shareToKakao({
+          koreanName,
+          englishName,
+          runeText,
+        });
+        return;
     }
     
     if (url) {
@@ -136,15 +132,16 @@ export default function ShareModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl manuscript-page ancient-border">
+      <DialogContent className="max-w-2xl bg-parchment border-viking-tan/30 shadow-2xl">
         <DialogHeader>
           <DialogTitle className="font-cinzel-decorative text-2xl text-viking-brown text-center">
             ᚱᚢᚾᛖ ᛊᚺᚨᚱᛁᚾᚷ
           </DialogTitle>
         </DialogHeader>
-        <p className="text-center text-text-brown-light mt-2">
-          룬 문자 변환 결과를 친구들과 공유해보세요
-        </p>
+        <div className="relative z-10">
+          <p className="text-center text-text-brown-light mt-2">
+            룬 문자 변환 결과를 친구들과 공유해보세요
+          </p>
 
         {/* Preview Card */}
         <Card className="ancient-border bg-parchment-dark">
@@ -240,7 +237,7 @@ export default function ShareModal({
               <Copy className="w-4 h-4" />
             </Button>
           </div>
-        </div>
+        
 
         <div className="ornamental-divider mt-6"></div>
         
@@ -251,6 +248,7 @@ export default function ShareModal({
           <p className="text-sm font-medium text-text-brown">
             버그 제보: jowheemin@gmail.com
           </p>
+        </div>
         </div>
       </DialogContent>
     </Dialog>
