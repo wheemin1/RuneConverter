@@ -237,7 +237,7 @@ export default function ShareModal({
               <Copy className="w-4 h-4" />
             </Button>
           </div>
-        
+        </div>
 
         <div className="ornamental-divider mt-6"></div>
         
@@ -248,7 +248,6 @@ export default function ShareModal({
           <p className="text-sm font-medium text-text-brown">
             버그 제보: jowheemin@gmail.com
           </p>
-        </div>
         </div>
       </DialogContent>
     </Dialog>
