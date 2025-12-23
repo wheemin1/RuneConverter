@@ -48,9 +48,9 @@ export default function ConvertingPage({ koreanName, englishName, onComplete }: 
   }, []);
 
   return (
-    <div className="parchment-bg min-h-screen font-cinzel flex items-center justify-center p-4">
+    <div className="parchment-bg min-h-[100dvh] font-cinzel flex items-center justify-center p-4 pb-safe overflow-y-auto">
       <Card className="ancient-border manuscript-page rounded-lg pulse-glow max-w-2xl w-full">
-        <CardContent className="p-8">
+        <CardContent className="p-6 md:p-12">
           {/* Header */}
           <div className="text-center mb-8">
             <div className="font-cinzel-decorative text-3xl font-bold text-viking-brown mb-4">
@@ -67,7 +67,7 @@ export default function ConvertingPage({ koreanName, englishName, onComplete }: 
           {/* Progress Circle */}
           <div className="flex justify-center mb-8">
             <div className="relative">
-              <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 120 120">
+              <svg className="w-28 h-28 md:w-32 md:h-32 transform -rotate-90" viewBox="0 0 120 120">
                 <circle 
                   cx="60" 
                   cy="60" 
@@ -110,7 +110,7 @@ export default function ConvertingPage({ koreanName, englishName, onComplete }: 
           </div>
 
           {/* Steps Progress */}
-          <div className="space-y-3">
+          <div className="space-y-4 md:space-y-3">
             {steps.map((step, index) => (
               <div 
                 key={index} 

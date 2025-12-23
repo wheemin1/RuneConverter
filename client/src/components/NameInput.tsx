@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, Edit3 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useToast } from "@/hooks/use-toast";
 
 interface NameInputProps {
   koreanName: string;
@@ -23,6 +24,39 @@ export default function NameInput({
   isConverting = false
 }: NameInputProps) {
   const { t } = useLanguage();
+  const { toast } = useToast();
+  
+  const handleConvert = () => {
+    // 빈 문자열 검사
+    if (!englishName.trim()) {
+      toast({
+        title: "⚠️ 영문 이름 필요",
+        description: "영문 이름을 입력해주세요.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // 영문자 포함 여부 검사
+    const hasEnglish = /[a-zA-Z]/.test(englishName);
+    if (!hasEnglish) {
+      toast({
+        title: "⚠️ 잘못된 입력",
+        description: "영문 이름은 영어 알파벳만 입력할 수 있습니다.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    onConvert();
+  };
+  
+  const handleEnglishNameChange = (value: string) => {
+    // 영문자와 공백만 허용
+    const filtered = value.replace(/[^a-zA-Z\s]/g, '');
+    onEnglishNameChange(filtered);
+  };
+  
   return (
     <section className="scroll-reveal relative">
       <Card className="toss-card manuscript-page rounded-2xl md:rounded-3xl bg-parchment-dark border-none">
@@ -60,7 +94,7 @@ export default function NameInput({
                   className="w-full h-[56px] md:h-[60px] border-0 border-b-2 border-viking-tan focus:border-viking-gold bg-transparent rounded-none font-cinzel text-lg md:text-xl py-4 px-2 text-left focus:outline-none focus:ring-0 transition-colors"
                   placeholder={t('englishPlaceholder')}
                   value={englishName}
-                  onChange={(e) => onEnglishNameChange(e.target.value)}
+                  onChange={(e) => handleEnglishNameChange(e.target.value)}
                 />
                 <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
                   <Edit3 className="w-5 h-5 text-viking-peru" />
@@ -76,7 +110,7 @@ export default function NameInput({
           
           <div className="mt-8 md:mt-10">
             <Button
-              onClick={onConvert}
+              onClick={handleConvert}
               disabled={!englishName.trim() || isConverting}
               className="w-full btn-viking text-white font-bold h-[56px] md:h-[60px] px-8 rounded-2xl font-cinzel text-lg md:text-xl relative shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.98]"
             >
