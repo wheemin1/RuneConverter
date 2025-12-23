@@ -66,8 +66,8 @@ export default function NameInput({
                   <Edit3 className="w-5 h-5 text-viking-peru" />
                 </div>
               </div>
-              <div className="bg-parchment-darker/50 rounded-xl p-3 md:p-4 mt-4 border-l-4 border-viking-gold">
-                <p className="text-xs md:text-sm text-text-brown-light leading-relaxed">
+              <div className="bg-parchment-darker/30 rounded-xl p-3 md:p-4 mt-4 border-l-4 border-viking-gold/50">
+                <p className="text-[11px] md:text-xs text-text-brown-light leading-relaxed opacity-80">
                   <strong>💡 팁:</strong> {t('tipText')}
                 </p>
               </div>

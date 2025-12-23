@@ -63,6 +63,13 @@ export default function RuneConverter() {
       <div className="parchment-bg min-h-screen font-cinzel relative z-10">
       {/* Compact Header */}
       <header className="relative">
+        {/* Branding Logo */}
+        <div className="absolute top-4 left-4 z-20">
+          <div className="flex items-center gap-2 opacity-70">
+            <span className="rune-character text-lg text-viking-brown">ᚱ</span>
+            <span className="font-cinzel-decorative text-xs text-viking-brown hidden sm:inline">Viking Rune</span>
+          </div>
+        </div>
         {/* Language Selector */}
         <div className="absolute top-4 right-4 z-20">
           <LanguageSelector />
