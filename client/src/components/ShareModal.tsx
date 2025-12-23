@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Share2, Copy, Download, Facebook, Twitter, Instagram, MessageCircle } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
@@ -141,8 +141,10 @@ export default function ShareModal({
           <DialogTitle className="font-cinzel-decorative text-2xl text-viking-brown text-center">
             ᚱᚢᚾᛖ ᛊᚺᚨᚱᛁᚾᚷ
           </DialogTitle>
-          <p className="text-center text-text-brown-light">
+          <DialogDescription className="text-center text-text-brown-light">
             룬 문자 변환 결과를 친구들과 공유해보세요
+          </DialogDescription>
+          <p className="text-center text-text-brown-light" aria-hidden="true">
           </p>
         </DialogHeader>
 
