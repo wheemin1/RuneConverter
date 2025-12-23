@@ -73,9 +73,6 @@ export default function SavedRunesDialog({ onSelectResult }: SavedRunesDialogPro
           <DialogTitle className="text-2xl font-cinzel text-viking-brown">
             {t("savedResults")}
           </DialogTitle>
-          <DialogDescription className="sr-only">
-            저장된 룬 문자 변환 결과 목록을 확인하고 관리할 수 있습니다
-          </DialogDescription>
         </DialogHeader>
 
         {savedResults.length === 0 ? (
