@@ -50,24 +50,24 @@ export default function ConvertingPage({ koreanName, englishName, onComplete }: 
   return (
     <div className="parchment-bg min-h-[100dvh] font-cinzel flex items-center justify-center p-4 pb-safe overflow-y-auto">
       <Card className="ancient-border manuscript-page rounded-lg pulse-glow max-w-2xl w-full">
-        <CardContent className="p-6 md:p-12">
+        <CardContent className="p-4 md:p-12">
           {/* Header */}
-          <div className="text-center mb-8">
-            <div className="font-cinzel-decorative text-3xl font-bold text-viking-brown mb-4">
+          <div className="text-center mb-4 md:mb-8">
+            <div className="font-cinzel-decorative text-xl md:text-3xl font-bold text-viking-brown mb-2 md:mb-4">
               ᚱᚢᚾᛖ ᚲᚮᚾᚡᛖᚱᛏᛁᛜ
             </div>
-            <h2 className="text-2xl font-semibold text-text-brown mb-2">
+            <h2 className="text-lg md:text-2xl font-semibold text-text-brown mb-2">
               룬 문자 변환 중
             </h2>
-            <p className="text-text-brown-light">
+            <p className="text-xs md:text-base text-text-brown-light">
               고대 바이킹의 신비로운 힘이 당신의 이름을 변환하고 있습니다
             </p>
           </div>
 
           {/* Progress Circle */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-4 md:mb-8">
             <div className="relative">
-              <svg className="w-28 h-28 md:w-32 md:h-32 transform -rotate-90" viewBox="0 0 120 120">
+              <svg className="w-24 h-24 md:w-32 md:h-32 transform -rotate-90" viewBox="0 0 120 120">
                 <circle 
                   cx="60" 
                   cy="60" 
@@ -92,25 +92,25 @@ export default function ConvertingPage({ koreanName, englishName, onComplete }: 
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-viking-brown">{Math.round(progress)}%</div>
-                  <div className="text-sm text-text-brown-light">완료</div>
+                  <div className="text-xl md:text-2xl font-bold text-viking-brown">{Math.round(progress)}%</div>
+                  <div className="text-xs md:text-sm text-text-brown-light">완료</div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Current Step */}
-          <div className="text-center mb-6">
+          <div className="text-center mb-4 md:mb-6">
             <div className="text-xl font-semibold text-viking-brown mb-2 converting-animation">
               {steps[currentStep]?.text}
             </div>
-            <div className="text-text-brown-light italic">
+            <div className="text-xs md:text-base text-text-brown-light italic">
               {steps[currentStep]?.detail}
             </div>
           </div>
 
           {/* Steps Progress */}
-          <div className="space-y-4 md:space-y-3">
+          <div className="space-y-2 md:space-y-3">
             {steps.map((step, index) => (
               <div 
                 key={index} 
@@ -118,7 +118,7 @@ export default function ConvertingPage({ koreanName, englishName, onComplete }: 
                   index <= currentStep ? 'opacity-100' : 'opacity-30'
                 }`}
               >
-                <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full border-2 flex items-center justify-center ${
                   index < currentStep 
                     ? 'bg-viking-gold border-viking-gold' 
                     : index === currentStep 
@@ -126,10 +126,10 @@ export default function ConvertingPage({ koreanName, englishName, onComplete }: 
                     : 'border-viking-tan bg-transparent'
                 }`}>
                   {index < currentStep && (
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full"></div>
                   )}
                 </div>
-                <div className={`text-sm ${
+                <div className={`text-xs md:text-sm ${
                   index <= currentStep ? 'text-text-brown' : 'text-text-brown-light'
                 }`}>
                   {step.text}
@@ -139,14 +139,14 @@ export default function ConvertingPage({ koreanName, englishName, onComplete }: 
           </div>
 
           {/* Decorative Elements */}
-          <div className="ornamental-divider mt-8"></div>
+          <div className="ornamental-divider mt-4 md:mt-8"></div>
           
           {/* Mystical Quote */}
-          <div className="text-center mt-6">
-            <p className="text-sm text-text-brown-light italic font-cinzel">
+          <div className="text-center mt-3 md:mt-6">
+            <p className="text-[10px] md:text-sm text-text-brown-light italic font-cinzel">
               "룬은 단순한 문자가 아니라, 우주의 비밀을 담은 신성한 기호이다"
             </p>
-            <p className="text-xs text-viking-tan mt-2">- 고대 노르드 전설</p>
+            <p className="text-[9px] md:text-xs text-viking-tan mt-1 md:mt-2">- 고대 노르드 전설</p>
           </div>
         </CardContent>
       </Card>
