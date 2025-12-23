@@ -61,66 +61,91 @@ export default function RuneConverter() {
       <div className="vignette-overlay" />
       
       <div className="parchment-bg min-h-screen font-cinzel relative z-10">
-      {/* Enhanced Header */}
-      <header className="text-center py-12 px-4 relative overflow-hidden">
+      {/* Compact Header */}
+      <header className="relative">
         {/* Language Selector */}
         <div className="absolute top-4 right-4 z-20">
           <LanguageSelector />
         </div>
-        
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="text-9xl rune-character-large leading-none">
-            ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ
-          </div>
-        </div>
-        
-        <div className="max-w-4xl mx-auto relative z-10">
-          <div className="mb-6">
-            <h1 className="font-cinzel-decorative text-5xl md:text-7xl font-bold text-viking-brown mb-6 floating-animation">
-              ᚱᚢᚾᛖ ᚲᚮᚾᚡᛖᚱᛏᛖᚱ
-            </h1>
-            <h2 className="text-3xl md:text-4xl font-bold text-text-brown mb-4">
-              {t('title')}
-            </h2>
-            <p className="text-xl text-text-brown-light leading-relaxed max-w-2xl mx-auto">
-              {t('subtitle')}
-            </p>
-          </div>
-          
-          <div className="ornamental-divider"></div>
-          
-          {/* Feature Highlights */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div className="text-center">
-              <div className="text-3xl rune-character mb-2">ᚨ</div>
-              <h3 className="font-semibold text-viking-brown">{t('feature1Title')}</h3>
-              <p className="text-sm text-text-brown-light">{t('feature1Desc')}</p>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl rune-character mb-2">ᛗ</div>
-              <h3 className="font-semibold text-viking-brown">{t('feature2Title')}</h3>
-              <p className="text-sm text-text-brown-light">{t('feature2Desc')}</p>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl rune-character mb-2">ᛊ</div>
-              <h3 className="font-semibold text-viking-brown">{t('feature3Title')}</h3>
-              <p className="text-sm text-text-brown-light">{t('feature3Desc')}</p>
-            </div>
-          </div>
-        </div>
       </header>
 
+      {/* Hero Section - 2 Column Layout on Desktop */}
+      <section className="max-w-7xl mx-auto px-4 py-6 md:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          
+          {/* Left Column - Title & Description */}
+          <div className="text-center lg:text-left space-y-4 md:space-y-6 order-2 lg:order-1">
+            {/* Decorative Runes - Desktop Only */}
+            <div className="hidden lg:block">
+              <div className="text-4xl rune-character text-viking-brown/40 mb-4">
+                ᚠᚢᚦᚨᚱᚲ
+              </div>
+            </div>
+            
+            <h1 className="font-cinzel-decorative text-2xl md:text-4xl lg:text-5xl font-bold text-viking-brown">
+              {t('title')}
+            </h1>
+            
+            <p className="text-base md:text-lg lg:text-xl text-text-brown-light leading-relaxed">
+              {t('subtitle')}
+            </p>
+            
+            {/* Feature Highlights - Desktop Only */}
+            <div className="hidden lg:grid grid-cols-3 gap-6 pt-8 opacity-80">
+              <div className="text-center">
+                <div className="text-3xl rune-character mb-2">ᚨ</div>
+                <h3 className="font-semibold text-viking-brown text-sm">{t('feature1Title')}</h3>
+                <p className="text-xs text-text-brown-light mt-1">{t('feature1Desc')}</p>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl rune-character mb-2">ᛗ</div>
+                <h3 className="font-semibold text-viking-brown text-sm">{t('feature2Title')}</h3>
+                <p className="text-xs text-text-brown-light mt-1">{t('feature2Desc')}</p>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl rune-character mb-2">ᛊ</div>
+                <h3 className="font-semibold text-viking-brown text-sm">{t('feature3Title')}</h3>
+                <p className="text-xs text-text-brown-light mt-1">{t('feature3Desc')}</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Right Column - Input Form (Above the Fold) */}
+          <div className="order-1 lg:order-2">
+            <NameInput
+              koreanName={koreanName}
+              englishName={englishName}
+              onKoreanNameChange={setKoreanName}
+              onEnglishNameChange={setEnglishName}
+              onConvert={handleConvert}
+              isConverting={isConverting}
+            />
+          </div>
+          
+        </div>
+      </section>
+
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 pb-12">
-        <NameInput
-          koreanName={koreanName}
-          englishName={englishName}
-          onKoreanNameChange={setKoreanName}
-          onEnglishNameChange={setEnglishName}
-          onConvert={handleConvert}
-          isConverting={isConverting}
-        />
+      <main className="max-w-7xl mx-auto px-4 md:px-6 pb-12 md:pb-16">
+
+        {/* Feature Highlights - Mobile Only */}
+        <div className="lg:hidden grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 md:mb-16">
+          <div className="text-center py-6 bg-parchment-dark/50 rounded-2xl">
+            <div className="text-3xl rune-character mb-2">ᚨ</div>
+            <h3 className="font-semibold text-viking-brown text-base">{t('feature1Title')}</h3>
+            <p className="text-sm text-text-brown-light mt-1 px-4">{t('feature1Desc')}</p>
+          </div>
+          <div className="text-center py-6 bg-parchment-dark/50 rounded-2xl">
+            <div className="text-3xl rune-character mb-2">ᛗ</div>
+            <h3 className="font-semibold text-viking-brown text-base">{t('feature2Title')}</h3>
+            <p className="text-sm text-text-brown-light mt-1 px-4">{t('feature2Desc')}</p>
+          </div>
+          <div className="text-center py-6 bg-parchment-dark/50 rounded-2xl">
+            <div className="text-3xl rune-character mb-2">ᛊ</div>
+            <h3 className="font-semibold text-viking-brown text-base">{t('feature3Title')}</h3>
+            <p className="text-sm text-text-brown-light mt-1 px-4">{t('feature3Desc')}</p>
+          </div>
+        </div>
 
         {isConverted && (
           <div id="rune-result" data-scroll-target="result">

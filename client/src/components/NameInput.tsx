@@ -24,71 +24,61 @@ export default function NameInput({
 }: NameInputProps) {
   const { t } = useLanguage();
   return (
-    <section className="mb-8 scroll-reveal relative">
-      <Card className="ancient-border manuscript-page rounded-lg pulse-glow bg-parchment-dark">
-        <CardContent className="p-8 relative">
-          <div className="text-center mb-6">
-            <h3 className="font-cinzel-decorative text-3xl font-bold text-viking-brown mb-3 floating-animation">
-              ᛁ. {t('inputTitle')}
-            </h3>
-            <p className="text-text-brown-light italic">
-              {t('inputSubtitle')}
-            </p>
-            <div className="ornamental-divider"></div>
-          </div>
+    <section className="scroll-reveal relative">
+      <Card className="toss-card manuscript-page rounded-2xl md:rounded-3xl bg-parchment-dark border-none">
+        <CardContent className="p-6 md:p-10 relative">
+
           
-          <div className="space-y-6">
+          <div className="space-y-6 md:space-y-8">
             <div className="relative">
-              <Label htmlFor="korean-name" className="block text-text-brown font-bold mb-3 text-lg">
-                <span className="flex items-center gap-2">
-                  <span className="rune-character text-xl">ᚴ</span>
-                  {t('koreanName')}
-                </span>
+              <Label htmlFor="korean-name" className="block text-text-brown font-semibold mb-3 text-base md:text-lg">
+                {t('koreanName')}
               </Label>
-              <Input
-                id="korean-name"
-                type="text"
-                className="input-parchment rounded-lg font-cinzel text-xl py-4 px-6 text-center"
-                placeholder={t('koreanPlaceholder')}
-                value={koreanName}
-                onChange={(e) => onKoreanNameChange(e.target.value)}
-              />
-              <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none top-8">
-                <Sparkles className="w-5 h-5 text-viking-gold" />
+              <div className="relative">
+                <Input
+                  id="korean-name"
+                  type="text"
+                  className="w-full h-[56px] md:h-[60px] border-0 border-b-2 border-viking-tan focus:border-viking-gold bg-transparent rounded-none font-cinzel text-lg md:text-xl py-4 px-2 text-left focus:outline-none focus:ring-0 transition-colors"
+                  placeholder={t('koreanPlaceholder')}
+                  value={koreanName}
+                  onChange={(e) => onKoreanNameChange(e.target.value)}
+                />
+                <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <Sparkles className="w-5 h-5 text-viking-gold" />
+                </div>
               </div>
             </div>
             
             <div className="relative">
-              <Label htmlFor="english-name" className="block text-text-brown font-bold mb-3 text-lg">
-                <span className="flex items-center gap-2">
-                  <span className="rune-character text-xl">ᛖ</span>
-                  {t('englishName')}
-                </span>
+              <Label htmlFor="english-name" className="block text-text-brown font-semibold mb-3 text-base md:text-lg">
+                {t('englishName')}
               </Label>
-              <Input
-                id="english-name"
-                type="text"
-                className="input-parchment rounded-lg font-cinzel text-xl py-4 px-6 text-center"
-                placeholder={t('englishPlaceholder')}
-                value={englishName}
-                onChange={(e) => onEnglishNameChange(e.target.value)}
-              />
-              <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none top-8">
-                <Edit3 className="w-5 h-5 text-viking-peru" />
+              <div className="relative">
+                <Input
+                  id="english-name"
+                  type="text"
+                  className="w-full h-[56px] md:h-[60px] border-0 border-b-2 border-viking-tan focus:border-viking-gold bg-transparent rounded-none font-cinzel text-lg md:text-xl py-4 px-2 text-left focus:outline-none focus:ring-0 transition-colors"
+                  placeholder={t('englishPlaceholder')}
+                  value={englishName}
+                  onChange={(e) => onEnglishNameChange(e.target.value)}
+                />
+                <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <Edit3 className="w-5 h-5 text-viking-peru" />
+                </div>
               </div>
-              <div className="bg-parchment-darker rounded-lg p-3 mt-3 border-l-4 border-viking-gold">
-                <p className="text-sm text-text-brown-light">
+              <div className="bg-parchment-darker/50 rounded-xl p-3 md:p-4 mt-4 border-l-4 border-viking-gold">
+                <p className="text-xs md:text-sm text-text-brown-light leading-relaxed">
                   <strong>💡 팁:</strong> {t('tipText')}
                 </p>
               </div>
             </div>
           </div>
           
-          <div className="mt-8">
+          <div className="mt-8 md:mt-10">
             <Button
               onClick={onConvert}
               disabled={!englishName.trim() || isConverting}
-              className="w-full btn-viking text-white font-bold py-4 px-8 rounded-lg font-cinzel text-xl relative"
+              className="w-full btn-viking text-white font-bold h-[56px] md:h-[60px] px-8 rounded-2xl font-cinzel text-lg md:text-xl relative shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.98]"
             >
               {isConverting ? (
                 <span className="flex items-center justify-center gap-3">
