@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://viking-rune-converter.netlify.app/</loc>
-    <lastmod>2023-08-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-12-23</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://viking-rune-converter.netlify.app/?lang=ko" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://viking-rune-converter.netlify.app/?lang=en" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://viking-rune-converter.netlify.app/?lang=ja" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://viking-rune-converter.netlify.app/?lang=zh" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://viking-rune-converter.netlify.app/?lang=es" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://viking-rune-converter.netlify.app/?lang=fr" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://viking-rune-converter.netlify.app/" />
   </url>
 </urlset>
