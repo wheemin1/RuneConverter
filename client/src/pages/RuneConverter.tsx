@@ -32,16 +32,20 @@ export default function RuneConverter() {
 
   const handleConvertingComplete = () => {
     convertToRunes();
-    setShowConvertingPage(false);
-    setIsConverting(false);
     
-    // Scroll to result after a brief delay
+    // 상태 업데이트를 기다린 후 페이지 전환
     setTimeout(() => {
-      const resultElement = document.getElementById('rune-result');
-      if (resultElement) {
-        resultElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 500);
+      setShowConvertingPage(false);
+      setIsConverting(false);
+      
+      // 결과로 스크롤
+      setTimeout(() => {
+        const resultElement = document.getElementById('rune-result');
+        if (resultElement) {
+          resultElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }, 300);
   };
 
   // Show converting page overlay
