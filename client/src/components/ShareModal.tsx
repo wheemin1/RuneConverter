@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Share2, Copy, Download, Facebook, Twitter, Instagram, MessageCircle } from "lucide-react";
+import { Copy, Download } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
-import { shareToKakao } from "@/lib/kakaoShare";
 
 interface ShareModalProps {
   isOpen: boolean;
@@ -32,11 +31,21 @@ export default function ShareModal({
 #바이킹룬문자 #룬변환기 #고대문자`;
 
   const shareUrl = `${window.location.origin}?name=${encodeURIComponent(koreanName)}`;
-  
-  // Create meta image URL for OG image when sharing
-  const getMetaImageUrl = () => {
-    // Create a simple URL that could be used for meta image generation
-    return `${window.location.origin}/api/og?name=${encodeURIComponent(koreanName)}&rune=${encodeURIComponent(runeText)}`;
+
+  const handleCopyUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      toast({
+        title: "링크가 복사되었습니다",
+        description: "친구에게 공유해보세요!",
+      });
+    } catch (error) {
+      toast({
+        title: "복사 실패",
+        description: "링크 복사 중 오류가 발생했습니다.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleCopyText = async () => {
@@ -84,52 +93,6 @@ export default function ShareModal({
     setIsDownloading(false);
   };
 
-  const handleSocialShare = (platform: string) => {
-    const encodedText = encodeURIComponent(shareText);
-    const encodedUrl = encodeURIComponent(shareUrl);
-    
-    // Add meta tags for sharing preview when possible
-    const metaTags = document.querySelectorAll('meta[property^="og:"]');
-    const ogImageTag = document.querySelector('meta[property="og:image"]');
-    
-    // Try to update OG image if possible
-    if (ogImageTag) {
-      const currentUrl = ogImageTag.getAttribute('content');
-      const dynamicUrl = getMetaImageUrl();
-      ogImageTag.setAttribute('content', dynamicUrl);
-      
-      // Restore the original URL after a delay
-      setTimeout(() => {
-        if (currentUrl) {
-          ogImageTag.setAttribute('content', currentUrl);
-        }
-      }, 5000);
-    }
-    
-    let url = '';
-    
-    switch (platform) {
-      case 'facebook':
-        url = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-        break;
-      case 'twitter':
-        url = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
-        break;
-      case 'kakao':
-        // 카카오톡 공유 API 사용
-        shareToKakao({
-          koreanName,
-          englishName,
-          runeText,
-        });
-        return;
-    }
-    
-    if (url) {
-      window.open(url, '_blank', 'width=600,height=400');
-    }
-  };
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl bg-parchment border-viking-tan/30 shadow-2xl">
@@ -138,10 +101,10 @@ export default function ShareModal({
             ᚱᚢᚾᛖ ᛊᚺᚨᚱᛁᚾᚷ
           </DialogTitle>
         </DialogHeader>
-        <div className="relative z-10">
-          <p className="text-center text-text-brown-light mt-2">
-            룬 문자 변환 결과를 친구들과 공유해보세요
-          </p>
+
+        <p className="text-center text-text-brown-light mt-2">
+          룬 문자 변환 결과를 친구들과 공유해보세요
+        </p>
 
         {/* Preview Card */}
         <Card className="ancient-border bg-parchment-dark">
@@ -162,13 +125,13 @@ export default function ShareModal({
 
         {/* Share Options */}
         <div className="grid grid-cols-2 gap-4 mt-6">
-          {/* Text Copy */}
+          {/* URL Copy */}
           <Button
-            onClick={handleCopyText}
+            onClick={handleCopyUrl}
             className="btn-viking text-white font-bold py-3 px-4 rounded-lg font-cinzel flex items-center justify-center gap-2"
           >
             <Copy className="w-4 h-4" />
-            텍스트 복사
+            링크 복사
           </Button>
 
           {/* Image Download */}
@@ -182,60 +145,13 @@ export default function ShareModal({
           </Button>
         </div>
 
-        {/* Social Media Sharing */}
-        <div className="mt-6">
-          <h4 className="text-lg font-semibold text-viking-brown mb-4 text-center">
-            소셜 미디어 공유
-          </h4>
-          <div className="grid grid-cols-3 gap-4">
-            <Button
-              onClick={() => handleSocialShare('facebook')}
-              variant="outline"
-              className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors flex items-center justify-center gap-2 py-3"
-            >
-              <Facebook className="w-4 h-4" />
-              Facebook
-            </Button>
-            
-            <Button
-              onClick={() => handleSocialShare('twitter')}
-              variant="outline"
-              className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors flex items-center justify-center gap-2 py-3"
-            >
-              <Twitter className="w-4 h-4" />
-              Twitter
-            </Button>
-            
-            <Button
-              onClick={() => handleSocialShare('kakao')}
-              variant="outline"
-              className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors flex items-center justify-center gap-2 py-3"
-            >
-              <MessageCircle className="w-4 h-4" />
-              KakaoTalk
-            </Button>
-          </div>
-        </div>
-
-        {/* Share URL */}
+        {/* Share URL Display */}
         <div className="mt-6">
           <h4 className="text-sm font-semibold text-viking-brown mb-2">
             공유 링크
           </h4>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={shareUrl}
-              readOnly
-              className="flex-1 input-parchment rounded-lg px-3 py-2 text-sm font-mono"
-            />
-            <Button
-              onClick={() => navigator.clipboard.writeText(shareUrl)}
-              variant="outline"
-              className="border-viking-tan hover:bg-viking-tan hover:text-white"
-            >
-              <Copy className="w-4 h-4" />
-            </Button>
+          <div className="input-parchment rounded-lg px-3 py-2 text-sm font-mono break-all">
+            {shareUrl}
           </div>
         </div>
 
