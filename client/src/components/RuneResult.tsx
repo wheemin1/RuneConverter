@@ -215,7 +215,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
             {/* Egyptian Hieroglyphics Promotion Banner */}
             <div className="mt-6">
               <a 
-                href="https://egyptiantranslator.netlify.app/" 
+                href="https://egyptiantranslator.netlify.app/?utm_source=rune_converter&utm_medium=banner&utm_campaign=cross_promo" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="block bg-gradient-to-r from-amber-100 to-yellow-100 hover:from-amber-200 hover:to-yellow-200 border-2 border-amber-400 rounded-lg p-5 transition-all duration-300 hover:shadow-md hover:shadow-amber-400/40 group"
