@@ -213,7 +213,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
               
               <Button
                 onClick={() => window.open('https://egyptiantranslator.netlify.app/', '_blank')}
-                className="relative bg-gradient-to-r from-amber-600 to-yellow-700 hover:from-amber-700 hover:to-yellow-800 text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2 transition-all duration-300 border-2 border-yellow-400 shadow-lg shadow-yellow-500/50 hover:shadow-xl hover:shadow-yellow-500/70 animate-pulse hover:animate-none"
+                className="relative bg-gradient-to-r from-amber-600 to-yellow-700 hover:from-amber-700 hover:to-yellow-800 text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2 transition-all duration-300 border border-yellow-500/30 hover:border-yellow-400 hover:shadow-lg"
               >
                 🇪🇬 이집트 상형문자
                 <ArrowRight className="w-5 h-5" />
