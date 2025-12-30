@@ -2,13 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Share2, Download, Copy, Sparkles, Eye, ChevronDown, Save, History } from "lucide-react";
+import { Share2, Download, Copy, Sparkles, Eye, ChevronDown, History, ArrowRight } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
 import { getRuneDetails } from "@/lib/runeDatabase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ShareModal from "./ShareModal";
-import { saveRuneConversion } from "@/lib/localStorageUtils";
 import SavedRunesDialog from "./SavedRunesDialog";
 
 interface RuneResultProps {
@@ -112,22 +111,6 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
     setIsDownloading(false);
   };
 
-  const handleSaveToLocal = () => {
-    try {
-      saveRuneConversion(koreanName, englishName, runeText);
-      toast({
-        title: t('savedSuccessfully'),
-        description: `${koreanName} (${englishName})`,
-      });
-    } catch (error) {
-      toast({
-        title: "Error saving result",
-        description: "Could not save to local storage",
-        variant: "destructive",
-      });
-    }
-  };
-
   // Function to handle loading saved result
   const handleLoadSavedResult = (savedResult: any) => {
     // 로컬 저장에서 불러온 결과를 처리하는 로직은 
@@ -210,7 +193,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
             </div>
             
             {/* Action Buttons */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Button
                 onClick={() => setShowShareModal(true)}
                 className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
@@ -220,20 +203,11 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
               </Button>
               
               <Button
-                onClick={handleDownload}
-                disabled={isDownloading}
-                className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
+                onClick={() => window.open('https://egyptiantranslator.netlify.app/', '_blank')}
+                className="bg-gradient-to-r from-amber-600 to-yellow-700 hover:from-amber-700 hover:to-yellow-800 text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2 transition-all duration-300"
               >
-                <Download className="w-5 h-5" />
-                {isDownloading ? t('downloadingButton') : t('downloadButton')}
-              </Button>
-              
-              <Button
-                onClick={handleSaveToLocal}
-                className="btn-viking-alt text-viking-brown font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
-              >
-                <Save className="w-5 h-5" />
-                {t('saveLocal')}
+                🇪🇬 이집트 상형문자
+                <ArrowRight className="w-5 h-5" />
               </Button>
             </div>
 

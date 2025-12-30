@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Copy, ArrowRight } from "lucide-react";
+import { Copy, Download } from "lucide-react";
+import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
 
 interface ShareModalProps {
@@ -20,6 +21,7 @@ export default function ShareModal({
   englishName, 
   koreanName 
 }: ShareModalProps) {
+  const [isDownloading, setIsDownloading] = useState(false);
   const { toast } = useToast();
 
   const shareText = `${koreanName} (${englishName})의 바이킹 룬 문자: ${runeText}
@@ -62,8 +64,33 @@ export default function ShareModal({
     }
   };
 
-  const handleEgyptianRedirect = () => {
-    window.open('https://egyptiantranslator.netlify.app/', '_blank');
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      const imageData = await generateRuneImage(runeText, englishName, {
+        width: 1200,
+        height: 800,
+        backgroundColor: '#FAF0E6',
+        textColor: '#8B4513',
+        runeColor: '#8B4513'
+      });
+      const link = document.createElement('a');
+      link.download = `${englishName}_rune_conversion.png`;
+      link.href = imageData;
+      link.click();
+      
+      toast({
+        title: "이미지 다운로드 완료",
+        description: "룬 문자 변환 결과가 저장되었습니다.",
+      });
+    } catch (error) {
+      toast({
+        title: "다운로드 실패",
+        description: "이미지 생성 중 오류가 발생했습니다.",
+        variant: "destructive",
+      });
+    }
+    setIsDownloading(false);
   };
 
   return (
@@ -107,13 +134,14 @@ export default function ShareModal({
             링크 복사
           </Button>
 
-          {/* Egyptian Translator Redirect */}
+          {/* Image Download */}
           <Button
-            onClick={handleEgyptianRedirect}
-            className="bg-gradient-to-r from-amber-600 to-yellow-700 hover:from-amber-700 hover:to-yellow-800 text-white font-bold py-3 px-4 rounded-lg font-cinzel flex items-center justify-center gap-2 transition-all duration-300"
+            onClick={handleDownload}
+            disabled={isDownloading}
+            className="btn-viking text-white font-bold py-3 px-4 rounded-lg font-cinzel flex items-center justify-center gap-2"
           >
-            🇪🇬 이집트 상형문자
-            <ArrowRight className="w-4 h-4" />
+            <Download className="w-4 h-4" />
+            {isDownloading ? "저장 중..." : "이미지 저장"}
           </Button>
         </div>
 
