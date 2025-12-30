@@ -193,7 +193,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
             </div>
             
             {/* Action Buttons */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Button
                 onClick={() => setShowShareModal(true)}
                 className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
@@ -203,12 +203,46 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
               </Button>
               
               <Button
+                onClick={handleDownload}
+                disabled={isDownloading}
+                className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
+              >
+                <Download className="w-5 h-5" />
+                {isDownloading ? t('downloadingButton') : t('downloadButton')}
+              </Button>
+              
+              <Button
                 onClick={() => window.open('https://egyptiantranslator.netlify.app/', '_blank')}
-                className="bg-gradient-to-r from-amber-600 to-yellow-700 hover:from-amber-700 hover:to-yellow-800 text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2 transition-all duration-300"
+                className="relative bg-gradient-to-r from-amber-600 to-yellow-700 hover:from-amber-700 hover:to-yellow-800 text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2 transition-all duration-300 border-2 border-yellow-400 shadow-lg shadow-yellow-500/50 hover:shadow-xl hover:shadow-yellow-500/70 animate-pulse hover:animate-none"
               >
                 🇪🇬 이집트 상형문자
                 <ArrowRight className="w-5 h-5" />
               </Button>
+            </div>
+
+            {/* Egyptian Hieroglyphics Promotion Banner */}
+            <div className="mt-6">
+              <a 
+                href="https://egyptiantranslator.netlify.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block bg-gradient-to-r from-amber-50 to-yellow-50 hover:from-amber-100 hover:to-yellow-100 border-2 border-amber-300 rounded-lg p-4 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/30 group"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl">🇪🇬</span>
+                    <div>
+                      <p className="text-lg font-bold text-amber-900 group-hover:text-amber-950">
+                        고대 이집트 상형문자 번역기 보러가기
+                      </p>
+                      <p className="text-sm text-amber-700">
+                        파라오의 신비로운 문자로 당신의 이름을 변환하세요
+                      </p>
+                    </div>
+                  </div>
+                  <ArrowRight className="w-6 h-6 text-amber-600 group-hover:translate-x-1 transition-transform duration-300" />
+                </div>
+              </a>
             </div>
 
             {/* Load From Local Storage */}
