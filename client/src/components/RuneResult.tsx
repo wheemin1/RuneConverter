@@ -218,21 +218,21 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                 href="https://egyptiantranslator.netlify.app/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="block bg-gradient-to-r from-amber-50 to-yellow-50 hover:from-amber-100 hover:to-yellow-100 border-2 border-amber-300 rounded-lg p-4 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/30 group"
+                className="block bg-gradient-to-r from-amber-100 to-yellow-100 hover:from-amber-200 hover:to-yellow-200 border-2 border-amber-400 rounded-lg p-5 transition-all duration-300 hover:shadow-md hover:shadow-amber-400/40 group"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl">🇪🇬</span>
+                    <span className="text-4xl">🇪🇬</span>
                     <div>
                       <p className="text-lg font-bold text-amber-900 group-hover:text-amber-950">
                         고대 이집트 상형문자 번역기 보러가기
                       </p>
-                      <p className="text-sm text-amber-700">
+                      <p className="text-sm text-amber-700 font-medium">
                         파라오의 신비로운 문자로 당신의 이름을 변환하세요
                       </p>
                     </div>
                   </div>
-                  <ArrowRight className="w-6 h-6 text-amber-600 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="w-7 h-7 text-amber-600 group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
               </a>
             </div>
