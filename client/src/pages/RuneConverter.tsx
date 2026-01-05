@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { useRuneConverter } from "@/hooks/useRuneConverter";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getRuneDetails } from "@/lib/runeDatabase";
 import NameInput from "@/components/NameInput";
 import RuneResult from "@/components/RuneResult";
 import RuneExplanation from "@/components/RuneExplanation";
@@ -10,17 +11,21 @@ import LanguageSelector from "@/components/LanguageSelector";
 import ConvertingPage from "./ConvertingPage";
 
 export default function RuneConverter() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const {
     koreanName,
     englishName,
     runeText,
-    runeDetails,
     setKoreanName,
     setEnglishName,
     convertToRunes,
     isConverted
   } = useRuneConverter();
+
+  const runeDetails = useMemo(() => {
+    if (!runeText) return [];
+    return getRuneDetails(runeText, language);
+  }, [runeText, language]);
 
   const [isConverting, setIsConverting] = useState(false);
   const [showConvertingPage, setShowConvertingPage] = useState(false);
@@ -164,6 +169,7 @@ export default function RuneConverter() {
               runeText={runeText}
               englishName={englishName}
               koreanName={koreanName}
+              runeDetails={runeDetails}
             />
             <RuneExplanation runeDetails={runeDetails} />
           </div>
@@ -197,21 +203,21 @@ export default function RuneConverter() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
             <div>
-              <h4 className="font-semibold text-viking-tan mb-2">룬 문자 정보</h4>
+              <h4 className="font-semibold text-viking-tan mb-2">{t('footerInfoRunesTitle')}</h4>
               <p className="text-sm text-viking-tan">
-                엘더 푸타르크 24개 룬 문자의 정확한 의미와 상징을 바탕으로 변환합니다.
+                {t('footerInfoRunesDesc')}
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-viking-tan mb-2">한국어 지원</h4>
+              <h4 className="font-semibold text-viking-tan mb-2">{t('footerInfoKoreanSupportTitle')}</h4>
               <p className="text-sm text-viking-tan">
-                한국어 이름의 정확한 로마자 표기법을 지원하며, 사용자가 직접 수정할 수 있습니다.
+                {t('footerInfoKoreanSupportDesc')}
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-viking-tan mb-2">무료 서비스</h4>
+              <h4 className="font-semibold text-viking-tan mb-2">{t('footerInfoFreeTitle')}</h4>
               <p className="text-sm text-viking-tan">
-                모든 변환 및 공유 기능을 완전 무료로 제공합니다. 광고도 없습니다.
+                {t('footerInfoFreeDesc')}
               </p>
             </div>
           </div>
@@ -226,14 +232,14 @@ export default function RuneConverter() {
               {t('bugReport')}
             </p>
             <p className="text-xs text-viking-tan mt-2">
-              참고 자료:{" "}
+              {t('footerReferenceLabel')}{" "}
               <a
                 href="https://namu.wiki/w/룬%20문자"
                 className="hover:text-white transition-colors underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                나무위키 룬 문자
+                {t('footerReferenceNamu')}
               </a>
               {" · "}
               <a
@@ -242,7 +248,7 @@ export default function RuneConverter() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Elder Futhark Wikipedia
+                {t('footerReferenceWiki')}
               </a>
             </p>
           </div>

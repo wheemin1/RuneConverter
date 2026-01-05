@@ -8,6 +8,26 @@ const API_BASE_URL = process.env.NODE_ENV === 'production'
   : 'http://localhost:5000/api';
 
 /**
+ * 서버 연결 상태 간단 확인
+ */
+export async function testServerConnection(): Promise<{ connected: boolean; message: string }> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/rune-conversions`, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' },
+    });
+
+    if (!response.ok) {
+      return { connected: false, message: `서버 응답 오류: ${response.status}` };
+    }
+
+    return { connected: true, message: '서버 연결 정상' };
+  } catch (error) {
+    return { connected: false, message: `서버 연결 실패: ${String(error)}` };
+  }
+}
+
+/**
  * 룬 변환 결과를 서버에 저장
  */
 export async function saveRuneConversionToServer(

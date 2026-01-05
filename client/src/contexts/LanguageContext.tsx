@@ -1,6 +1,24 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Language, getTranslation } from '@/lib/i18n';
 
+const SUPPORTED_LANGUAGES: Language[] = ['ko', 'en', 'ja', 'zh', 'es', 'fr'];
+
+function getBrowserLanguage(): Language {
+  if (typeof navigator === 'undefined') return 'ko';
+
+  const lang = (navigator.language || '').toLowerCase();
+  if (lang.includes('ko')) return 'ko';
+  if (lang.startsWith('ja')) return 'ja';
+  if (lang.startsWith('zh')) return 'zh';
+  if (lang.startsWith('es')) return 'es';
+  if (lang.startsWith('fr')) return 'fr';
+  return 'en';
+}
+
+function isSupportedLanguage(value: string): value is Language {
+  return (SUPPORTED_LANGUAGES as string[]).includes(value);
+}
+
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
@@ -15,14 +33,26 @@ interface LanguageProviderProps {
 
 export function LanguageProvider({ children }: LanguageProviderProps) {
   const [language, setLanguage] = useState<Language>(() => {
-    // Get saved language from localStorage or default to Korean
-    const saved = localStorage.getItem('rune-converter-language');
-    return (saved as Language) || 'ko';
+    // Get saved language from localStorage; otherwise fall back to browser language
+    if (typeof window === 'undefined') return 'ko';
+
+    // Shared links can force language via query param (e.g., /?lang=en)
+    try {
+      const urlLang = new URLSearchParams(window.location.search).get('lang');
+      if (urlLang && isSupportedLanguage(urlLang)) return urlLang;
+    } catch {
+      // ignore
+    }
+
+    const saved = window.localStorage.getItem('rune-converter-language');
+    if (saved && isSupportedLanguage(saved)) return saved;
+
+    return getBrowserLanguage();
   });
 
   useEffect(() => {
     // Save language preference to localStorage
-    localStorage.setItem('rune-converter-language', language);
+    window.localStorage.setItem('rune-converter-language', language);
     
     // Set document language attribute
     document.documentElement.lang = language;

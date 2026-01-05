@@ -5,8 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { Share2, Download, Copy, Sparkles, Eye, ChevronDown, History, ArrowRight } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
-import { getRuneDetails } from "@/lib/runeDatabase";
 import { useLanguage } from "@/contexts/LanguageContext";
+import type { RuneDetail } from "@/lib/runeDatabase";
+import { PERSONALITY_THEME_IDS, POSITIVE_THEME_IDS, runeThemesByKey, type RuneThemeId } from "@/lib/runeThemes";
 import ShareModal from "./ShareModal";
 import SavedRunesDialog from "./SavedRunesDialog";
 
@@ -14,56 +15,80 @@ interface RuneResultProps {
   runeText: string;
   englishName: string;
   koreanName: string;
+  runeDetails: RuneDetail[];
 }
 
-export default function RuneResult({ runeText, englishName, koreanName }: RuneResultProps) {
-  const { t } = useLanguage();
+function formatConjunctionList(items: string[], language: string): string {
+  if (items.length === 0) return '';
+  try {
+    const locale =
+      language === 'ko'
+        ? 'ko-KR'
+        : language === 'ja'
+          ? 'ja-JP'
+          : language === 'zh'
+            ? 'zh-CN'
+            : language === 'es'
+              ? 'es-ES'
+              : language === 'fr'
+                ? 'fr-FR'
+                : 'en-US';
+
+    // Intl.ListFormat isn't supported in very old browsers; fall back if needed.
+    const IntlAny = Intl as unknown as { ListFormat?: new (locales?: string | string[], options?: any) => { format: (items: string[]) => string } };
+    const ListFormatCtor = typeof IntlAny !== 'undefined' ? IntlAny.ListFormat : undefined;
+    const listFormat = typeof ListFormatCtor === 'function'
+      ? new ListFormatCtor(locale, { style: 'short', type: 'conjunction' })
+      : null;
+
+    if (listFormat) return listFormat.format(items);
+  } catch {
+    // ignore and fall back
+  }
+  return items.join(', ');
+}
+
+export default function RuneResult({ runeText, englishName, koreanName, runeDetails }: RuneResultProps) {
+  const { t, language } = useLanguage();
   const [isDownloading, setIsDownloading] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showSavedRunes, setShowSavedRunes] = useState(false);
   const { toast } = useToast();
 
-  // Get rune details for quick preview
-  const runeDetails = getRuneDetails(runeText);
-
   // Function to generate combined meaning from multiple runes
-  const generateCombinedMeaning = (runeDetails: any[]): string => {
-    if (runeDetails.length === 0) return "신비로운 힘을 담은 이름입니다.";
-    
-    // Extract key themes from all runes
-    const allKeywords = runeDetails.flatMap(rune => rune.keywords);
-    const themes = allKeywords.filter((keyword, index) => allKeywords.indexOf(keyword) === index); // Remove duplicates
-    
-    // Create meaningful combinations based on common themes
-    const positiveThemes = themes.filter(theme => 
-      ['성공', '풍요', '지혜', '용기', '보호', '행운', '힘', '성장', '번영', '조화', '균형', '창조', '발전', '승리', '희망'].includes(theme)
-    );
-    
-    const personalityThemes = themes.filter(theme => 
-      ['리더십', '소통', '여행', '모험', '변화', '직관', '인내', '의지', '열정', '집중', '완성', '통찰'].includes(theme)
-    );
-    
-    // Generate combined meaning
-    let meaning = "";
-    
-    if (positiveThemes.length > 0 && personalityThemes.length > 0) {
-      meaning = `${positiveThemes.slice(0, 2).join('과 ')}을 바탕으로 ${personalityThemes.slice(0, 2).join('과 ')}을 발휘하여 목표를 달성하는 인물`;
-    } else if (positiveThemes.length > 0) {
-      meaning = `${positiveThemes.slice(0, 3).join(', ')}의 기운을 가진 축복받은 이름`;
-    } else if (personalityThemes.length > 0) {
-      meaning = `${personalityThemes.slice(0, 3).join(', ')}의 특성을 지닌 강인한 인물`;
-    } else {
-      // Fallback to general meaning based on rune count
-      if (runeDetails.length <= 3) {
-        meaning = "간결하면서도 강력한 에너지를 지닌 이름";
-      } else if (runeDetails.length <= 6) {
-        meaning = "균형잡힌 힘과 지혜를 겸비한 이름";
-      } else {
-        meaning = "복합적이고 깊은 의미를 담은 풍부한 이름";
-      }
+  const generateCombinedMeaning = (details: RuneDetail[]): string => {
+    if (details.length === 0) return t('combinedMeaningEmpty');
+
+    const themeIds: RuneThemeId[] = [];
+    for (const rune of details) {
+      const ids = runeThemesByKey[rune.key] ?? [];
+      for (const id of ids) themeIds.push(id);
     }
+
+    const uniqueIds = Array.from(new Set(themeIds));
+    const positive = uniqueIds.filter((id) => POSITIVE_THEME_IDS.has(id)).slice(0, 2);
+    const personality = uniqueIds.filter((id) => PERSONALITY_THEME_IDS.has(id)).slice(0, 2);
+
+    const positiveLabels = positive.map((id) => t(`theme.${id}`));
+    const personalityLabels = personality.map((id) => t(`theme.${id}`));
     
-    return meaning + ".";
+    if (positiveLabels.length > 0 && personalityLabels.length > 0) {
+      const positiveText = formatConjunctionList(positiveLabels, language);
+      const personalityText = formatConjunctionList(personalityLabels, language);
+      return `${t('combinedMeaningTemplateBothPrefix')}${positiveText}${t('combinedMeaningTemplateBothMiddle')}${personalityText}${t('combinedMeaningTemplateBothSuffix')}`;
+    }
+
+    if (positiveLabels.length > 0) {
+      return `${formatConjunctionList(positiveLabels.slice(0, 3), language)}${t('combinedMeaningTemplatePositiveSuffix')}`;
+    }
+
+    if (personalityLabels.length > 0) {
+      return `${formatConjunctionList(personalityLabels.slice(0, 3), language)}${t('combinedMeaningTemplatePersonalitySuffix')}`;
+    }
+
+    if (details.length <= 3) return t('combinedMeaningFallbackShort');
+    if (details.length <= 6) return t('combinedMeaningFallbackMedium');
+    return t('combinedMeaningFallbackLong');
   };
 
   const handleQuickCopy = async () => {
@@ -76,7 +101,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
     } catch (error) {
       toast({
         title: t('copyFailed'),
-        description: "Error copying runes.",
+        description: t('copyErrorDesc'),
         variant: "destructive",
       });
     }
@@ -90,7 +115,12 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
         height: 800,
         backgroundColor: '#FAF0E6',
         textColor: '#8B4513',
-        runeColor: '#8B4513'
+        runeColor: '#8B4513',
+        labels: {
+          title: t('shareImageTitle'),
+          description: t('shareImageDesc'),
+          footer: t('shareImageFooter'),
+        },
       });
       const link = document.createElement('a');
       link.download = `${englishName}_rune_conversion.png`;
@@ -104,7 +134,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
     } catch (error) {
       toast({
         title: t('downloadFailed'),
-        description: "Error generating image.",
+        description: t('imageErrorDesc'),
         variant: "destructive",
       });
     }
@@ -165,7 +195,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                   
                   {/* Rune Text - Main Feature */}
                   <div className="mb-6 relative">
-                    <div className="text-lg text-text-brown-light mb-3">Elder Futhark Runes</div>
+                    <div className="text-lg text-text-brown-light mb-3">{t('elderFutharkRunesLabel')}</div>
                     <div className="text-6xl md:text-8xl rune-character-large mb-4 leading-tight">
                       {runeText}
                     </div>
@@ -185,7 +215,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                   {/* Mystical Quote */}
                   <div className="text-center">
                     <p className="text-sm text-text-brown-light italic">
-                      "이 룬들은 당신의 이름에 담긴 고대의 힘을 나타냅니다"
+                      {t('runeResultQuote')}
                     </p>
                   </div>
                 </div>
@@ -225,10 +255,10 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                     <span className="text-4xl">🇪🇬</span>
                     <div>
                       <p className="text-lg font-bold text-amber-900 group-hover:text-amber-950">
-                        고대 이집트 상형문자 번역기 보러가기
+                        {t('egyptPromoTitle')}
                       </p>
                       <p className="text-sm text-amber-700 font-medium">
-                        파라오의 신비로운 문자로 당신의 이름을 변환하세요
+                        {t('egyptPromoSubtitle')}
                       </p>
                     </div>
                   </div>
@@ -264,7 +294,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                     variant="outline"
                     className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors text-sm"
                   >
-                    각 룬의 세부 의미 보기 <ChevronDown className="w-4 h-4 ml-1" />
+                    {t('viewRuneDetailsButton')} <ChevronDown className="w-4 h-4 ml-1" />
                   </Button>
                 </div>
               </div>
@@ -275,7 +305,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
               <div className="inline-flex items-center gap-2 bg-viking-gold/10 border border-viking-gold/20 rounded-lg px-4 py-2">
                 <Sparkles className="w-4 h-4 text-viking-gold" />
                 <span className="text-sm text-viking-brown font-semibold">
-                  변환 완료! 위의 룬들을 클릭하여 자세한 의미를 확인해보세요.
+                  {t('conversionCompleteHint')}
                 </span>
               </div>
             </div>

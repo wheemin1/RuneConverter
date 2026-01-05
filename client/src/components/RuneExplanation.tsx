@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { RuneDetail } from "@/lib/runeDatabase";
+import type { RuneKey } from "@/lib/runes";
 import { 
   BookOpen, Star, Heart, Coins, Zap, Shield, MessageSquare, 
   Rocket, Flame, Gift, Smile, CloudRain, BookText, Snowflake,
@@ -10,31 +11,31 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // Map rune names to icons
-const runeIconMap: Record<string, any> = {
-  'Fehu': Coins,
-  'Uruz': Zap,
-  'Thurisaz': Shield,
-  'Ansuz': MessageSquare,
-  'Raidho': Rocket,
-  'Kaunan': Flame,
-  'Gebo': Gift,
-  'Wunjo': Smile,
-  'Hagalaz': CloudRain,
-  'Nauthiz': BookText,
-  'Isaz': Snowflake,
-  'Jera': Wheat,
-  'Eihwaz': Sprout,
-  'Perthro': Eye,
-  'Algiz': Shield,
-  'Sowilo': Sun,
-  'Tiwaz': Sword,
-  'Berkanan': TreePine,
-  'Ehwaz': Users,
-  'Mannaz': Users,
-  'Laguz': Droplets,
-  'Ingwaz': Sparkles,
-  'Dagaz': Sunrise,
-  'Othalan': Home,
+const runeIconMap: Record<RuneKey, any> = {
+  fehu: Coins,
+  uruz: Zap,
+  thurisaz: Shield,
+  ansuz: MessageSquare,
+  raidho: Rocket,
+  kaunan: Flame,
+  gebo: Gift,
+  wunjo: Smile,
+  hagalaz: CloudRain,
+  nauthiz: BookText,
+  isaz: Snowflake,
+  jera: Wheat,
+  eihwaz: Sprout,
+  perthro: Eye,
+  algiz: Shield,
+  sowilo: Sun,
+  tiwaz: Sword,
+  berkanan: TreePine,
+  ehwaz: Users,
+  mannaz: Users,
+  laguz: Droplets,
+  ingwaz: Sparkles,
+  dagaz: Sunrise,
+  othalan: Home,
 };
 
 interface RuneExplanationProps {
@@ -77,10 +78,10 @@ export default function RuneExplanation({ runeDetails }: RuneExplanationProps) {
                       <div className="text-6xl rune-character-large floating-animation">
                         {rune.character}
                       </div>
-                      {runeIconMap[rune.name] && (
+                      {runeIconMap[rune.key] && (
                         <div className="p-2 bg-viking-gold/10 rounded-full border border-viking-gold/20">
                           {(() => {
-                            const IconComponent = runeIconMap[rune.name];
+                            const IconComponent = runeIconMap[rune.key];
                             return <IconComponent className="w-5 h-5 text-viking-gold" />;
                           })()}
                         </div>
@@ -156,11 +157,10 @@ export default function RuneExplanation({ runeDetails }: RuneExplanationProps) {
             <div className="ornamental-divider"></div>
             <div className="bg-viking-brown/5 rounded-lg p-6 border border-viking-brown/10">
               <h4 className="font-cinzel-decorative text-xl font-bold text-viking-brown mb-3">
-                당신의 이름에 담긴 룬의 힘
+                {t('runePowerTitle')}
               </h4>
               <p className="text-text-brown-light italic leading-relaxed">
-                이 {runeDetails.length}개의 룬 문자들이 조합되어 당신의 이름에 고대 바이킹의 지혜와 힘을 부여합니다. 
-                각 룬은 단순한 글자가 아니라, 우주의 신비로운 에너지를 담고 있는 신성한 기호입니다.
+                {t('runePowerDescPrefix')}{runeDetails.length}{t('runePowerDescSuffix')} {t('runePowerDescSecond')}
               </p>
             </div>
           </div>

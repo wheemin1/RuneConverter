@@ -1,13 +1,11 @@
 import { useState, useCallback } from 'react';
 import { romanizeKorean, commonNameMappings } from '@/lib/koreanRomanizer';
 import { convertToRunes } from '@/lib/runeConverter';
-import { getRuneDetails, RuneDetail } from '@/lib/runeDatabase';
 
 export function useRuneConverter() {
   const [koreanName, setKoreanName] = useState('');
   const [englishName, setEnglishName] = useState('');
   const [runeText, setRuneText] = useState('');
-  const [runeDetails, setRuneDetails] = useState<RuneDetail[]>([]);
   const [isConverted, setIsConverted] = useState(false);
 
   const handleKoreanNameChange = useCallback((name: string) => {
@@ -30,7 +28,6 @@ export function useRuneConverter() {
     // Reset conversion state
     setIsConverted(false);
     setRuneText('');
-    setRuneDetails([]);
   }, []);
 
   const handleEnglishNameChange = useCallback((name: string) => {
@@ -39,17 +36,14 @@ export function useRuneConverter() {
     // Reset conversion state when editing English name
     setIsConverted(false);
     setRuneText('');
-    setRuneDetails([]);
   }, []);
 
   const convertToRunesHandler = useCallback(() => {
     if (!englishName.trim()) return;
 
     const converted = convertToRunes(englishName);
-    const details = getRuneDetails(converted);
     
     setRuneText(converted);
-    setRuneDetails(details);
     setIsConverted(true);
   }, [englishName]);
 
@@ -57,7 +51,6 @@ export function useRuneConverter() {
     koreanName,
     englishName,
     runeText,
-    runeDetails,
     isConverted,
     setKoreanName: handleKoreanNameChange,
     setEnglishName: handleEnglishNameChange,

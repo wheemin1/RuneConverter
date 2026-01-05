@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,15 +24,24 @@ export default function NameInput({
   onConvert,
   isConverting = false
 }: NameInputProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { toast } = useToast();
+
+  const koreanInputRef = useRef<HTMLInputElement | null>(null);
+  const englishInputRef = useRef<HTMLInputElement | null>(null);
+  const isKoreanMode = language === 'ko';
+
+  useEffect(() => {
+    const target = isKoreanMode ? koreanInputRef.current : englishInputRef.current;
+    target?.focus();
+  }, [isKoreanMode]);
   
   const handleConvert = () => {
     // 빈 문자열 검사
     if (!englishName.trim()) {
       toast({
-        title: "⚠️ 영문 이름 필요",
-        description: "영문 이름을 입력해주세요.",
+        title: t('englishRequiredTitle'),
+        description: t('englishRequiredDesc'),
         variant: "destructive"
       });
       return;
@@ -41,8 +51,8 @@ export default function NameInput({
     const hasEnglish = /[a-zA-Z]/.test(englishName);
     if (!hasEnglish) {
       toast({
-        title: "⚠️ 잘못된 입력",
-        description: "영문 이름은 영어 알파벳만 입력할 수 있습니다.",
+        title: t('englishInvalidTitle'),
+        description: t('englishInvalidDesc'),
         variant: "destructive"
       });
       return;
@@ -64,35 +74,39 @@ export default function NameInput({
 
           
           <div className="space-y-6 md:space-y-8">
-            <div className="relative">
-              <Label htmlFor="korean-name" className="block text-text-brown font-semibold mb-3 text-base md:text-lg">
-                {t('koreanName')}
-              </Label>
+            {isKoreanMode && (
               <div className="relative">
-                <Input
-                  id="korean-name"
-                  type="text"
-                  className="w-full h-[56px] md:h-[60px] border-0 border-b-2 border-viking-tan focus:border-viking-gold bg-transparent rounded-none font-cinzel text-lg md:text-xl py-4 px-2 text-left focus:outline-none focus:ring-0 transition-colors"
-                  placeholder={t('koreanPlaceholder')}
-                  value={koreanName}
-                  onChange={(e) => onKoreanNameChange(e.target.value)}
-                />
-                <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <Sparkles className="w-5 h-5 text-viking-gold" />
+                <Label htmlFor="korean-name" className="block text-text-brown font-semibold mb-3 text-base md:text-lg">
+                  {t('koreanName')}
+                </Label>
+                <div className="relative">
+                  <Input
+                    ref={koreanInputRef}
+                    id="korean-name"
+                    type="text"
+                    className="w-full h-[56px] md:h-[60px] border-0 border-b-2 border-viking-tan focus:border-viking-gold bg-transparent rounded-none font-cinzel text-lg md:text-xl py-4 px-2 text-left focus:outline-none focus:ring-0 transition-colors"
+                    placeholder={t('koreanPlaceholder')}
+                    value={koreanName}
+                    onChange={(e) => onKoreanNameChange(e.target.value)}
+                  />
+                  <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <Sparkles className="w-5 h-5 text-viking-gold" />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
             
             <div className="relative">
               <Label htmlFor="english-name" className="block text-text-brown font-semibold mb-3 text-base md:text-lg">
-                {t('englishName')}
+                {isKoreanMode ? t('englishName') : t('alphabetName')}
               </Label>
               <div className="relative">
                 <Input
+                  ref={englishInputRef}
                   id="english-name"
                   type="text"
                   className="w-full h-[56px] md:h-[60px] border-0 border-b-2 border-viking-tan focus:border-viking-gold bg-transparent rounded-none font-cinzel text-lg md:text-xl py-4 px-2 text-left focus:outline-none focus:ring-0 transition-colors"
-                  placeholder={t('englishPlaceholder')}
+                  placeholder={isKoreanMode ? t('englishPlaceholder') : t('alphabetPlaceholder')}
                   value={englishName}
                   onChange={(e) => handleEnglishNameChange(e.target.value)}
                 />
@@ -102,7 +116,7 @@ export default function NameInput({
               </div>
               <div className="bg-parchment-darker/30 rounded-xl p-3 md:p-4 mt-4 border-l-4 border-viking-gold/50">
                 <p className="text-[11px] md:text-xs text-text-brown-light leading-relaxed opacity-80">
-                  <strong>💡 팁:</strong> {t('tipText')}
+                  <strong>{t('tipLabel')}</strong> {isKoreanMode ? t('tipText') : t('alphabetTipText')}
                 </p>
               </div>
             </div>
@@ -130,7 +144,7 @@ export default function NameInput({
             
             {!englishName.trim() && (
               <p className="text-center text-text-brown-light text-sm mt-3">
-                {t('englishName')}을 입력하면 변환 버튼이 활성화됩니다
+                {t('englishEnableHint')}
               </p>
             )}
           </div>

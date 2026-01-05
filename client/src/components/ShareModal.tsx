@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Copy, Download } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ShareModalProps {
   isOpen: boolean;
@@ -23,26 +24,31 @@ export default function ShareModal({
 }: ShareModalProps) {
   const [isDownloading, setIsDownloading] = useState(false);
   const { toast } = useToast();
+  const { t, language } = useLanguage();
 
-  const shareText = `${koreanName} (${englishName})의 바이킹 룬 문자: ${runeText}
+  const shareName = language === 'ko' ? (koreanName || englishName) : (englishName || koreanName);
 
-고대 엘더 푸타르크 룬으로 변환된 나의 이름을 확인해보세요!
+  const shareUrl =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}/og?name=${encodeURIComponent(shareName)}&rune=${encodeURIComponent(runeText)}&lang=${encodeURIComponent(language)}`
+      : '';
 
-#바이킹룬문자 #룬변환기 #고대문자`;
+  const displayName = koreanName ? `${koreanName} (${englishName})` : englishName;
+  const shareText = `${displayName} - ${t('shareImageTitle')}: ${runeText}
 
-  const shareUrl = `${window.location.origin}?name=${encodeURIComponent(koreanName)}`;
+${t('shareCta')}`;
 
   const handleCopyUrl = async () => {
     try {
       await navigator.clipboard.writeText(shareUrl);
       toast({
-        title: "링크가 복사되었습니다",
-        description: "친구에게 공유해보세요!",
+        title: t('shareLinkCopiedTitle'),
+        description: t('shareLinkCopiedDesc'),
       });
     } catch (error) {
       toast({
-        title: "복사 실패",
-        description: "링크 복사 중 오류가 발생했습니다.",
+        title: t('copyFailed'),
+        description: t('shareCopyFailedDesc'),
         variant: "destructive",
       });
     }
@@ -52,13 +58,13 @@ export default function ShareModal({
     try {
       await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
       toast({
-        title: "텍스트가 복사되었습니다",
-        description: "클립보드에 룬 변환 결과가 복사되었습니다.",
+        title: t('shareTextCopiedTitle'),
+        description: t('shareTextCopiedDesc'),
       });
     } catch (error) {
       toast({
-        title: "복사 실패",
-        description: "텍스트 복사 중 오류가 발생했습니다.",
+        title: t('copyFailed'),
+        description: t('shareCopyFailedDesc'),
         variant: "destructive",
       });
     }
@@ -72,7 +78,12 @@ export default function ShareModal({
         height: 800,
         backgroundColor: '#FAF0E6',
         textColor: '#8B4513',
-        runeColor: '#8B4513'
+        runeColor: '#8B4513',
+        labels: {
+          title: t('shareImageTitle'),
+          description: t('shareImageDesc'),
+          footer: t('shareImageFooter'),
+        },
       });
       const link = document.createElement('a');
       link.download = `${englishName}_rune_conversion.png`;
@@ -80,13 +91,13 @@ export default function ShareModal({
       link.click();
       
       toast({
-        title: "이미지 다운로드 완료",
-        description: "룬 문자 변환 결과가 저장되었습니다.",
+        title: t('shareDownloadSuccessTitle'),
+        description: t('shareDownloadSuccessDesc'),
       });
     } catch (error) {
       toast({
-        title: "다운로드 실패",
-        description: "이미지 생성 중 오류가 발생했습니다.",
+        title: t('downloadFailed'),
+        description: t('shareDownloadFailedDesc'),
         variant: "destructive",
       });
     }
@@ -103,7 +114,7 @@ export default function ShareModal({
         </DialogHeader>
 
         <p className="text-center text-text-brown-light mt-2">
-          룬 문자 변환 결과를 친구들과 공유해보세요
+          {t('shareModalSubtitle')}
         </p>
 
         {/* Preview Card */}
@@ -117,7 +128,7 @@ export default function ShareModal({
                 {runeText}
               </div>
               <div className="text-sm text-text-brown-light">
-                고대 바이킹 엘더 푸타르크 룬 문자
+                {t('shareImageDesc')}
               </div>
             </div>
           </CardContent>
@@ -131,7 +142,7 @@ export default function ShareModal({
             className="btn-viking text-white font-bold py-3 px-4 rounded-lg font-cinzel flex items-center justify-center gap-2"
           >
             <Copy className="w-4 h-4" />
-            링크 복사
+            {t('shareCopyLinkButton')}
           </Button>
 
           {/* Image Download */}
@@ -141,14 +152,14 @@ export default function ShareModal({
             className="btn-viking text-white font-bold py-3 px-4 rounded-lg font-cinzel flex items-center justify-center gap-2"
           >
             <Download className="w-4 h-4" />
-            {isDownloading ? "저장 중..." : "이미지 저장"}
+            {isDownloading ? t('downloadingButton') : t('downloadButton')}
           </Button>
         </div>
 
         {/* Share URL Display */}
         <div className="mt-6">
           <h4 className="text-sm font-semibold text-viking-brown mb-2">
-            공유 링크
+            {t('shareLinkLabel')}
           </h4>
           <div className="input-parchment rounded-lg px-3 py-2 text-sm font-mono break-all">
             {shareUrl}
@@ -159,10 +170,10 @@ export default function ShareModal({
         
         <div className="text-center">
           <p className="text-sm text-text-brown-light mb-2">
-            바이킹 룬 문자 변환기로 더 많은 이름을 변환해보세요!
+            {t('shareCta')}
           </p>
           <p className="text-sm font-medium text-text-brown">
-            버그 제보: jowheemin@gmail.com
+            {t('bugReport')}
           </p>
         </div>
       </DialogContent>

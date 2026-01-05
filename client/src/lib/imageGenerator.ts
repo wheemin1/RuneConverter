@@ -8,6 +8,12 @@ interface RuneImageOptions {
   runeColor?: string;
   fontFamily?: string;
   runeFontFamily?: string;
+  labels?: {
+    title?: string;
+    description?: string;
+    footer?: string;
+    cardTitle?: string;
+  };
 }
 
 export async function generateRuneImage(
@@ -22,8 +28,13 @@ export async function generateRuneImage(
     textColor = '#8B4513',
     runeColor = '#8B4513',
     fontFamily = 'Cinzel, serif',
-    runeFontFamily = 'Noto Sans Runic, monospace'
+    runeFontFamily = 'Noto Sans Runic, monospace',
+    labels = {},
   } = options;
+
+  const titleText = labels.title ?? 'Viking Rune Conversion';
+  const descriptionText = labels.description ?? 'Ancient Elder Futhark Runes';
+  const footerText = labels.footer ?? 'Rune Converter';
 
   // Create canvas
   const canvas = document.createElement('canvas');
@@ -67,7 +78,7 @@ export async function generateRuneImage(
   ctx.fillStyle = textColor;
   ctx.font = `bold 32px ${fontFamily}`;
   ctx.textAlign = 'center';
-  ctx.fillText('바이킹 룬 문자 변환', width / 2, 100);
+  ctx.fillText(titleText, width / 2, 100);
 
   // Draw English name
   ctx.font = `bold 24px ${fontFamily}`;
@@ -96,7 +107,7 @@ export async function generateRuneImage(
   ctx.fillStyle = textColor;
   ctx.font = `18px ${fontFamily}`;
   ctx.textAlign = 'center';
-  ctx.fillText('고대 바이킹 엘더 푸타르크 룬 문자', width / 2, 420);
+  ctx.fillText(descriptionText, width / 2, 420);
 
   // Draw decorative elements
   drawDecorative(ctx, width, height, runeColor);
@@ -104,7 +115,7 @@ export async function generateRuneImage(
   // Draw footer
   ctx.font = `14px ${fontFamily}`;
   ctx.fillStyle = '#CD853F';
-  ctx.fillText('Rune Converter - 룬 문자 변환기', width / 2, height - 40);
+  ctx.fillText(footerText, width / 2, height - 40);
 
   return canvas.toDataURL('image/png');
 }
@@ -164,7 +175,8 @@ function drawDecorative(ctx: CanvasRenderingContext2D, width: number, height: nu
 export async function generateRuneCard(
   runeText: string,
   englishName: string,
-  runeDetails: any[]
+  runeDetails: any[],
+  labels: { cardTitle?: string } = {}
 ): Promise<string> {
   const canvas = document.createElement('canvas');
   canvas.width = 400;
@@ -188,7 +200,7 @@ export async function generateRuneCard(
   ctx.fillStyle = '#8B4513';
   ctx.font = 'bold 24px Cinzel, serif';
   ctx.textAlign = 'center';
-  ctx.fillText('룬 문자 변환', 200, 50);
+  ctx.fillText(labels.cardTitle ?? 'Rune Conversion', 200, 50);
 
   // English name
   ctx.font = 'bold 20px Cinzel, serif';

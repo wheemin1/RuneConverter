@@ -1,6 +1,8 @@
 // 카카오 SDK 초기화 유틸리티
 // .env 파일의 VITE_KAKAO_JS_KEY를 사용하여 초기화합니다
 
+import { getSeoData } from "../../../shared/seo";
+
 declare global {
   interface Window {
     Kakao: any;
@@ -43,23 +45,63 @@ interface ShareKakaoParams {
   koreanName: string;
   englishName: string;
   runeText: string;
+  language?: string;
 }
 
-export const shareToKakao = ({ koreanName, englishName, runeText }: ShareKakaoParams) => {
+function getCurrentLanguage(): string {
+  if (typeof window === 'undefined') return 'en';
+
+  try {
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    if (urlLang) return urlLang;
+  } catch {
+    // ignore
+  }
+
+  try {
+    const saved = window.localStorage.getItem('rune-converter-language');
+    if (saved) return saved;
+  } catch {
+    // ignore
+  }
+
+  return (navigator.language || 'en').toLowerCase();
+}
+
+function normalizeSeoLang(lang: string): 'ko' | 'en' {
+  const clean = (lang || '').toLowerCase().split('-')[0];
+  return clean === 'ko' ? 'ko' : 'en';
+}
+
+export const shareToKakao = ({ koreanName, englishName, runeText, language }: ShareKakaoParams) => {
   if (!window.Kakao) {
     alert('카카오톡 공유 기능을 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
     return;
   }
 
-  const shareUrl = `${window.location.origin}?shared=${encodeURIComponent(koreanName)}&rune=${encodeURIComponent(runeText)}`;
+  const resolvedLang = language || getCurrentLanguage();
+  const seoLang = normalizeSeoLang(resolvedLang);
+  const seo = getSeoData(resolvedLang);
+
+  const shareName = seoLang === 'ko' ? (koreanName || englishName) : (englishName || koreanName);
+  const shareUrl = `${window.location.origin}/og?name=${encodeURIComponent(shareName)}&rune=${encodeURIComponent(runeText)}&lang=${encodeURIComponent(resolvedLang)}`;
+  const imageUrl = `${window.location.origin}/og-image.jpg`;
+
+  const title = shareName ? `${shareName} • ${seo.ogTitle}` : seo.ogTitle;
+  const description = seoLang === 'ko'
+    ? `${seo.ogDesc}\n\n${runeText}`
+    : `${seo.ogDesc}\n\n${runeText}`;
+
+  const primaryButtonTitle = seoLang === 'ko' ? '룬 문자 확인하기' : 'View runes';
+  const secondaryButtonTitle = seoLang === 'ko' ? '나도 이름 만들기' : 'Convert your name';
 
   try {
     window.Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: `🛡️ 전사 [${koreanName}]의 룬 문자가 도착했습니다`,
-        description: `${englishName}님의 이름이 고대 바이킹 룬 문자로 변환되었습니다: ${runeText}\n\n고대 북유럽 전사가 기록한 당신의 운명적인 이름을 확인해보세요!`,
-        imageUrl: 'https://viking-rune-converter.netlify.app/og-image.png',
+        title,
+        description,
+        imageUrl,
         link: {
           mobileWebUrl: shareUrl,
           webUrl: shareUrl,
@@ -67,14 +109,14 @@ export const shareToKakao = ({ koreanName, englishName, runeText }: ShareKakaoPa
       },
       buttons: [
         {
-          title: '🔮 룬 문자 확인하기',
+          title: primaryButtonTitle,
           link: {
             mobileWebUrl: shareUrl,
             webUrl: shareUrl,
           },
         },
         {
-          title: '⚔️ 나도 이름 만들기',
+          title: secondaryButtonTitle,
           link: {
             mobileWebUrl: window.location.origin,
             webUrl: window.location.origin,

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ConvertingPageProps {
   koreanName: string;
@@ -8,15 +9,22 @@ interface ConvertingPageProps {
 }
 
 export default function ConvertingPage({ koreanName, englishName, onComplete }: ConvertingPageProps) {
+  const { t } = useLanguage();
   const [progress, setProgress] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
 
   const steps = [
-    { text: "한국어 이름 분석 중...", detail: `"${koreanName}" 음성 구조 해석` },
-    { text: "영문 변환 확인 중...", detail: `"${englishName}" 철자 검증` },
-    { text: "엘더 푸타르크 룬 매핑...", detail: "각 글자를 고대 룬 문자로 변환" },
-    { text: "룬 문자 의미 해석...", detail: "각 룬의 상징과 의미 분석" },
-    { text: "신비로운 변환 완료!", detail: "고대 바이킹의 지혜가 담긴 결과" }
+    {
+      text: t('convertingStepKoreanAnalyze'),
+      detail: `${t('convertingDetailKoreanAnalyzePrefix')}${koreanName}${t('convertingDetailKoreanAnalyzeSuffix')}`,
+    },
+    {
+      text: t('convertingStepEnglishValidate'),
+      detail: `${t('convertingDetailEnglishValidatePrefix')}${englishName}${t('convertingDetailEnglishValidateSuffix')}`,
+    },
+    { text: t('convertingStepRuneMapping'), detail: t('convertingDetailRuneMapping') },
+    { text: t('convertingStepMeaning'), detail: t('convertingDetailMeaning') },
+    { text: t('convertingStepDone'), detail: t('convertingDetailDone') }
   ];
 
   useEffect(() => {
@@ -57,10 +65,10 @@ export default function ConvertingPage({ koreanName, englishName, onComplete }: 
               ᚱᚢᚾᛖ ᚲᚮᚾᚡᛖᚱᛏᛁᛜ
             </div>
             <h2 className="text-lg md:text-2xl font-semibold text-text-brown mb-2">
-              룬 문자 변환 중
+              {t('convertingTitle')}
             </h2>
             <p className="text-xs md:text-base text-text-brown-light">
-              고대 바이킹의 신비로운 힘이 당신의 이름을 변환하고 있습니다
+              {t('convertingSubtitle')}
             </p>
           </div>
 
@@ -93,7 +101,7 @@ export default function ConvertingPage({ koreanName, englishName, onComplete }: 
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
                   <div className="text-xl md:text-2xl font-bold text-viking-brown">{Math.round(progress)}%</div>
-                  <div className="text-xs md:text-sm text-text-brown-light">완료</div>
+                  <div className="text-xs md:text-sm text-text-brown-light">{t('convertingCompleteLabel')}</div>
                 </div>
               </div>
             </div>
@@ -144,9 +152,9 @@ export default function ConvertingPage({ koreanName, englishName, onComplete }: 
           {/* Mystical Quote */}
           <div className="text-center mt-3 md:mt-6">
             <p className="text-[10px] md:text-sm text-text-brown-light italic font-cinzel">
-              "룬은 단순한 문자가 아니라, 우주의 비밀을 담은 신성한 기호이다"
+              {t('convertingQuote')}
             </p>
-            <p className="text-[9px] md:text-xs text-viking-tan mt-1 md:mt-2">- 고대 노르드 전설</p>
+            <p className="text-[9px] md:text-xs text-viking-tan mt-1 md:mt-2">{t('convertingQuoteAuthor')}</p>
           </div>
         </CardContent>
       </Card>
