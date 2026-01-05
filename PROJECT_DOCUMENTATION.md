@@ -11,6 +11,7 @@
 8. [디자인 시스템](#디자인-시스템)
 9. [배포 및 설정](#배포-및-설정)
 10. [개선 가능 영역](#개선-가능-영역)
+11. [Google Search Console 체크리스트](#google-search-console-체크리스트)
 
 ---
 
@@ -170,6 +171,37 @@ VikingRuneConverter/
     ├── start-local.ps1           # PowerShell 스크립트
     └── koreanRomanizerTest.ts    # 테스트 파일
 ```
+
+---
+
+## Google Search Console 체크리스트
+
+배포 후 “전 세계 검색 노출”을 확정짓기 위한 최종 점검 목록입니다.
+
+### 1) 속성(Property) 추가 및 소유권 확인
+- Google Search Console에서 **도메인 속성** 또는 **URL 접두어 속성**으로 사이트를 추가합니다.
+- Netlify를 사용한다면 보통 **URL 접두어 속성**이 가장 빠릅니다.
+- 소유권 확인은 아래 중 하나로 진행합니다.
+  - HTML 파일 업로드 (가능한 경우)
+  - HTML 태그(메타) 추가
+  - DNS TXT 레코드 추가(도메인 속성일 때)
+
+### 2) 사이트맵 제출
+- Search Console → **Sitemaps**에서 사이트맵 URL을 제출합니다.
+- 현재 사이트맵: `https://viking-rune-converter.netlify.app/sitemap.xml`
+- 포함 URL 예시:
+  - `/` (한국어 기본)
+  - `/?lang=en` (영문 글로벌)
+
+### 3) URL 검사로 ‘즉시 색인’ 요청
+- Search Console → **URL 검사**에 아래 URL들을 각각 입력합니다.
+  - `https://viking-rune-converter.netlify.app/`
+  - `https://viking-rune-converter.netlify.app/?lang=en`
+- 결과에서 **색인 생성 요청(Request indexing)** 을 실행합니다.
+
+### 4) hreflang / canonical 최종 확인(권장)
+- 각 언어 버전이 올바른 canonical과 hreflang을 노출하는지 확인합니다.
+- Helmet 기반 메타는 [client/src/components/SEOManager.tsx](client/src/components/SEOManager.tsx)에서 관리합니다.
 
 ---
 
