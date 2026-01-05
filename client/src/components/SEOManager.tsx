@@ -1,23 +1,23 @@
 import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { getSeoData, getSeoLocale } from '@shared/seo';
+import { getSeoData, getSeoLang, getSeoLocale } from '@shared/seo';
 
 export default function SEOManager() {
   const { language } = useLanguage();
   const seo = getSeoData(language);
   const ogLocale = getSeoLocale(language);
 
-  const seoLang = (language || '').toLowerCase().split('-')[0] === 'ko' ? 'ko' : 'en';
+  const seoLang = getSeoLang(language);
   const siteOrigin =
     typeof window !== 'undefined' && window.location?.origin
       ? window.location.origin
       : 'https://viking-rune-converter.netlify.app';
 
-  const canonicalUrl = seoLang === 'ko' ? `${siteOrigin}/` : `${siteOrigin}/?lang=en`;
+  const canonicalUrl = seoLang === 'ko' ? `${siteOrigin}/` : `${siteOrigin}/?lang=${seoLang}`;
   const ogImageUrl = `${siteOrigin}/og-image.jpg`;
 
   return (
-    <Helmet>
+    <Helmet key={seoLang}>
       <html lang={language} />
       <title>{seo.title}</title>
       <meta name="description" content={seo.desc} />
@@ -26,6 +26,10 @@ export default function SEOManager() {
       <link rel="canonical" href={canonicalUrl} />
       <link rel="alternate" hrefLang="ko" href={`${siteOrigin}/`} />
       <link rel="alternate" hrefLang="en" href={`${siteOrigin}/?lang=en`} />
+      <link rel="alternate" hrefLang="ja" href={`${siteOrigin}/?lang=ja`} />
+      <link rel="alternate" hrefLang="zh" href={`${siteOrigin}/?lang=zh`} />
+      <link rel="alternate" hrefLang="es" href={`${siteOrigin}/?lang=es`} />
+      <link rel="alternate" hrefLang="fr" href={`${siteOrigin}/?lang=fr`} />
       <link rel="alternate" hrefLang="x-default" href={`${siteOrigin}/?lang=en`} />
 
       <meta property="og:type" content="website" />

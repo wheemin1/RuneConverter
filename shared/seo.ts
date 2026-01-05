@@ -1,4 +1,4 @@
-export type SupportedSeoLang = 'ko' | 'en';
+export type SupportedSeoLang = 'ko' | 'en' | 'ja' | 'zh' | 'es' | 'fr';
 
 export const DEFAULT_LANG: SupportedSeoLang = 'en';
 
@@ -27,22 +27,67 @@ export const SEO_DATA: Record<SupportedSeoLang, {
     ogDesc: 'See what your name looks like in ancient mystical Rune symbols.',
     siteName: 'Ancient Runes Global',
   },
+  ja: {
+    title: 'ルーン文字変換 - あなたの名前を古代北欧文字に',
+    desc: 'あなたの名前に隠された古代バイキングの力を解き明かしましょう。無料のルーン文字変換ツール。',
+    keywords: 'ルーン文字, 名前変換, バイキング, 古代文字, ルーン占い, エルダー・フサルク',
+    ogTitle: 'あなたの名前をルーン文字で確認する',
+    ogDesc: '古代の神秘的なルーン文字で、あなたの名前を確かめてみましょう。',
+    siteName: 'Ancient Runes Japan',
+  },
+  zh: {
+    title: '卢恩符文转换器 - 将名字转换成古代符文',
+    desc: '发现你名字中隐藏的古代维京力量。免费将名字转换为埃尔德·弗萨克（Elder Futhark）符文。',
+    keywords: '符文, 卢恩符文, 维京, 名字转换, Elder Futhark, 古代文字',
+    ogTitle: '查看你的名字对应的卢恩符文',
+    ogDesc: '看看你的名字在古老神秘的符文中是什么样子。',
+    siteName: 'Ancient Runes Chinese',
+  },
+  es: {
+    title: 'Convertidor de Runas - Traduce tu nombre a runas',
+    desc: 'Descubre el poder vikingo oculto en tu nombre. Convertidor gratuito a runas Elder Futhark.',
+    keywords: 'Runas, Vikingo, Elder Futhark, Convertir nombre a runas, Letras antiguas, Traductor de runas',
+    ogTitle: 'Descubre tu nombre vikingo en runas',
+    ogDesc: 'Mira cómo se ve tu nombre en antiguos símbolos rúnicos.',
+    siteName: 'Ancient Runes Español',
+  },
+  fr: {
+    title: 'Convertisseur de Runes - Traduis ton nom en runes',
+    desc: 'Découvre la puissance viking cachée dans ton nom. Convertisseur gratuit en runes Elder Futhark.',
+    keywords: 'Runes, Vikings, Elder Futhark, Convertir un nom en runes, Écritures anciennes, Traducteur de runes',
+    ogTitle: 'Découvre ton nom viking en runes',
+    ogDesc: 'Vois à quoi ressemble ton nom en anciens symboles runiques.',
+    siteName: 'Ancient Runes Français',
+  },
 };
 
-function normalizeSeoLang(lang: string): SupportedSeoLang {
-  const clean = (lang || '').toLowerCase().split('-')[0];
-  return clean === 'ko' ? 'ko' : 'en';
+export function getSeoLang(lang: string): SupportedSeoLang {
+  const clean = (lang || '').toLowerCase().split('-')[0] as SupportedSeoLang;
+  return Object.prototype.hasOwnProperty.call(SEO_DATA, clean) ? clean : DEFAULT_LANG;
 }
 
 /**
  * Returns SEO data for a given app language.
- * Rule: ko -> Korean, everything else -> global English.
  */
 export function getSeoData(lang: string) {
-  const normalized = normalizeSeoLang(lang);
-  return SEO_DATA[normalized] ?? SEO_DATA[DEFAULT_LANG];
+  const normalized = getSeoLang(lang);
+  return SEO_DATA[normalized];
 }
 
 export function getSeoLocale(lang: string): string {
-  return normalizeSeoLang(lang) === 'ko' ? 'ko_KR' : 'en_US';
+  switch (getSeoLang(lang)) {
+    case 'ko':
+      return 'ko_KR';
+    case 'ja':
+      return 'ja_JP';
+    case 'zh':
+      return 'zh_CN';
+    case 'es':
+      return 'es_ES';
+    case 'fr':
+      return 'fr_FR';
+    case 'en':
+    default:
+      return 'en_US';
+  }
 }
