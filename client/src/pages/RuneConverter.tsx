@@ -9,6 +9,7 @@ import RuneReference from "@/components/RuneReference";
 import HistoricalInfo from "@/components/HistoricalInfo";
 import LanguageSelector from "@/components/LanguageSelector";
 import ConvertingPage from "./ConvertingPage";
+import AdSenseAutoAds from "@/components/AdSenseAutoAds";
 
 export default function RuneConverter() {
   const { t, language } = useLanguage();
@@ -66,6 +67,7 @@ export default function RuneConverter() {
 
   return (
     <div className="min-h-screen relative">
+      <AdSenseAutoAds />
       {/* Vignette Overlay - sits above all content */}
       <div className="vignette-overlay" />
       
