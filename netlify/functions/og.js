@@ -1,4 +1,4 @@
-import { getSeoData, getSeoLocale } from '../../shared/seo';
+import { getSeoData, getSeoLocale } from './seo.js';
 
 export const handler = async (event) => {
   const params = event.queryStringParameters || {};
