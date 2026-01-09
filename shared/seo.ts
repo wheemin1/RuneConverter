@@ -13,16 +13,17 @@ export const SEO_DATA: Record<SupportedSeoLang, {
   ko: {
     title: '내 이름을 고대 룬 문자로 - 룬 문자 변환기',
     desc: '당신의 이름에 숨겨진 고대 바이킹의 힘을 확인해보세요. 무료 룬 문자 이름 변환 및 이집트 상형문자 번역.',
-    keywords: '룬 문자, 룬 문자 해석, 이름 변환, 이집트 상형문자, 바이킹, 타로, 운세, 고대 문자',
+    keywords:
+      '룬 번역기, 룬문자 번역기, 룬어 번역기, 룬어 번역, 룬문자 변환 사이트, 룬 문자, 룬 문자 해석, 이름 변환, 바이킹, 고대 문자',
     ogTitle: '내 이름을 룬 문자로 확인하기',
     ogDesc: '고대 바이킹의 신비로운 힘이 담긴 당신의 이름을 확인하세요.',
     siteName: 'Ancient Runes',
   },
   en: {
     title: 'Rune Name Converter - Translate Name to Runes',
-    desc: 'Discover the ancient Viking power hidden in your name. Free Elder Futhark rune converter and Egyptian Hieroglyph translator.',
+    desc: 'Free online rune converter to translate your name into Viking runes (Elder Futhark). Generate and share your rune name in seconds.',
     keywords:
-      'Rune Converter, Viking Runes, Elder Futhark, Hieroglyph Generator, Name to Runes, Ancient Scripts, Viking Name',
+      'Rune Converter, Runes Converter, Viking Rune Converter, Rune Convertor, Viking Runes, Elder Futhark, Rune Translator, Name to Runes, Ancient Scripts, Viking Name',
     ogTitle: 'Reveal Your Viking Name in Runes',
     ogDesc: 'See what your name looks like in ancient mystical Rune symbols.',
     siteName: 'Ancient Runes Global',
@@ -53,8 +54,9 @@ export const SEO_DATA: Record<SupportedSeoLang, {
   },
   fr: {
     title: 'Convertisseur de Runes - Traduis ton nom en runes',
-    desc: 'Découvre la puissance viking cachée dans ton nom. Convertisseur gratuit en runes Elder Futhark.',
-    keywords: 'Runes, Vikings, Elder Futhark, Convertir un nom en runes, Écritures anciennes, Traducteur de runes',
+    desc: 'Convertisseur rune viking gratuit : transforme ton nom en runes (Elder Futhark) et partage le résultat en un clic.',
+    keywords:
+      'convertisseur rune viking, convertisseur de runes, runes, vikings, Elder Futhark, traduire un nom en runes, écritures anciennes, traducteur de runes',
     ogTitle: 'Découvre ton nom viking en runes',
     ogDesc: 'Vois à quoi ressemble ton nom en anciens symboles runiques.',
     siteName: 'Ancient Runes Français',
