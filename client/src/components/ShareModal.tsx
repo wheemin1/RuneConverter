@@ -13,6 +13,11 @@ interface ShareModalProps {
   runeText: string;
   englishName: string;
   koreanName: string;
+  imageInterpretation?: {
+    keywordsLine?: string;
+    heading?: string;
+    summary?: string;
+  };
 }
 
 export default function ShareModal({ 
@@ -20,7 +25,8 @@ export default function ShareModal({
   onClose, 
   runeText, 
   englishName, 
-  koreanName 
+  koreanName,
+  imageInterpretation,
 }: ShareModalProps) {
   const [isDownloading, setIsDownloading] = useState(false);
   const { toast } = useToast();
@@ -84,6 +90,7 @@ ${t('shareCta')}`;
           description: t('shareImageDesc'),
           footer: t('shareImageFooter'),
         },
+        interpretation: imageInterpretation,
       });
       const link = document.createElement('a');
       link.download = `${englishName}_rune_conversion.png`;

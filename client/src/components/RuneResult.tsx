@@ -91,6 +91,18 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
     return t('combinedMeaningFallbackLong');
   };
 
+  const getImageInterpretation = (details: RuneDetail[]) => {
+    if (details.length === 0) {
+      return {
+        summary: t('combinedMeaningEmpty'),
+      };
+    }
+
+    return {
+      summary: generateCombinedMeaning(details),
+    };
+  };
+
   const handleQuickCopy = async () => {
     try {
       await navigator.clipboard.writeText(runeText);
@@ -110,6 +122,7 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
   const handleDownload = async () => {
     setIsDownloading(true);
     try {
+      const interpretation = getImageInterpretation(runeDetails);
       const imageData = await generateRuneImage(runeText, englishName, {
         width: 1200,
         height: 800,
@@ -121,6 +134,7 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
           description: t('shareImageDesc'),
           footer: t('shareImageFooter'),
         },
+        interpretation,
       });
       const link = document.createElement('a');
       link.download = `${englishName}_rune_conversion.png`;
@@ -320,6 +334,7 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
         runeText={runeText}
         englishName={englishName}
         koreanName={koreanName}
+        imageInterpretation={getImageInterpretation(runeDetails)}
       />
     </>
   );

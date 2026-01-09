@@ -14,6 +14,14 @@ interface RuneImageOptions {
     footer?: string;
     cardTitle?: string;
   };
+  interpretation?: {
+    /** Short keyword list, e.g. "성장 · 성공 · 인내 · 의지" */
+    keywordsLine?: string;
+    /** Heading label, e.g. t('combinedMeaning') */
+    heading?: string;
+    /** One or two short lines of interpretation */
+    summary?: string;
+  };
 }
 
 export async function generateRuneImage(
@@ -30,6 +38,7 @@ export async function generateRuneImage(
     fontFamily = 'Cinzel, serif',
     runeFontFamily = 'Noto Sans Runic, monospace',
     labels = {},
+    interpretation,
   } = options;
 
   const titleText = labels.title ?? 'Viking Rune Conversion';
@@ -112,12 +121,106 @@ export async function generateRuneImage(
   // Draw decorative elements
   drawDecorative(ctx, width, height, runeColor);
 
+  // Draw interpretation into the bottom whitespace area
+  if (interpretation && (interpretation.keywordsLine || interpretation.heading || interpretation.summary)) {
+    const contentLeft = 70;
+    const contentRight = width - 70;
+    const maxWidth = contentRight - contentLeft;
+    const bottomPadding = 70;
+    const yMax = height - bottomPadding;
+    let y = 520;
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = textColor;
+
+    if (interpretation.keywordsLine) {
+      ctx.font = `bold 18px ${fontFamily}`;
+      const keywordLines = wrapText(ctx, interpretation.keywordsLine, maxWidth, 2);
+      for (const line of keywordLines) {
+        if (y > yMax) break;
+        ctx.fillText(line, width / 2, y);
+        y += 26;
+      }
+      y += 8;
+    }
+
+    if (interpretation.heading) {
+      ctx.font = `bold 18px ${fontFamily}`;
+      if (y <= yMax) {
+        ctx.fillText(interpretation.heading, width / 2, y);
+      }
+      y += 28;
+    }
+
+    if (interpretation.summary) {
+      ctx.font = `20px ${fontFamily}`;
+      const summaryLines = wrapText(ctx, interpretation.summary, maxWidth, 3);
+      for (const line of summaryLines) {
+        if (y > yMax) break;
+        ctx.fillText(line, width / 2, y);
+        y += 30;
+      }
+    }
+  }
+
   // Draw footer
   ctx.font = `14px ${fontFamily}`;
   ctx.fillStyle = '#CD853F';
   ctx.fillText(footerText, width / 2, height - 40);
 
   return canvas.toDataURL('image/png');
+}
+
+function wrapText(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  maxWidth: number,
+  maxLines: number
+): string[] {
+  const normalized = String(text).trim().replace(/\s+/g, ' ');
+  if (!normalized) return [];
+
+  const hasWhitespace = /\s/.test(normalized);
+  const tokens = hasWhitespace ? normalized.split(' ') : Array.from(normalized);
+
+  const lines: string[] = [];
+  let current = '';
+
+  for (const token of tokens) {
+    const candidate = current ? (hasWhitespace ? `${current} ${token}` : `${current}${token}`) : token;
+    if (ctx.measureText(candidate).width <= maxWidth) {
+      current = candidate;
+      continue;
+    }
+
+    if (current) {
+      lines.push(current);
+      if (lines.length >= maxLines) return lines;
+    }
+
+    // Token itself might be longer than maxWidth: break it further (character-wise)
+    if (ctx.measureText(token).width > maxWidth) {
+      let chunk = '';
+      for (const ch of Array.from(token)) {
+        const chunkCandidate = chunk ? `${chunk}${ch}` : ch;
+        if (ctx.measureText(chunkCandidate).width <= maxWidth) {
+          chunk = chunkCandidate;
+        } else {
+          if (chunk) {
+            lines.push(chunk);
+            if (lines.length >= maxLines) return lines;
+          }
+          chunk = ch;
+        }
+      }
+      current = chunk;
+    } else {
+      current = token;
+    }
+  }
+
+  if (current && lines.length < maxLines) lines.push(current);
+  return lines;
 }
 
 function drawDecorative(ctx: CanvasRenderingContext2D, width: number, height: number, color: string) {
