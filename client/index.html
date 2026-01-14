@@ -9,7 +9,7 @@
     
     
     <!-- 보안 정책 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://t1.kakaocdn.net https://pagead2.googlesyndication.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://viking-rune-converter.netlify.app https://kapi.kakao.com https://kauth.kakao.com https://pagead2.googlesyndication.com; frame-src https://googleads.g.doubleclick.net;" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://t1.kakaocdn.net https://pagead2.googlesyndication.com https://partner.googleadservices.com https://tpc.googlesyndication.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://viking-rune-converter.netlify.app https://kapi.kakao.com https://kauth.kakao.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com;" />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
     
     <!-- Additional SEO meta tags -->
@@ -86,7 +86,31 @@
       </main>
     </noscript>
 
-    <div id="root"></div>
+    <div id="root">
+      <main>
+        <h1>Viking Rune Converter</h1>
+        <p>
+          Convert your name into authentic Elder Futhark Viking runes and explore rune meanings.
+          This free tool transliterates names into runic symbols and lets you download a shareable image.
+        </p>
+
+        <section>
+          <h2>What you can do</h2>
+          <ul>
+            <li>Translate a name to runes (Elder Futhark)</li>
+            <li>See each rune's meaning and symbolism</li>
+            <li>Download a rune image for sharing</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Examples</h2>
+          <p>Try: John, Sarah, Michael</p>
+        </section>
+
+        <p>Loading…</p>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
