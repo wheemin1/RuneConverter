@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
   <head>
     <base href="/" />
     <meta charset="UTF-8" />
@@ -25,6 +25,9 @@
     <meta name="audience" content="all" />
     <meta name="classification" content="utility" />
     <meta name="reply-to" content="support@viking-rune-converter.netlify.app" />
+
+    <!-- Fallback description for bots / pre-React shell (React Helmet will override in-app) -->
+    <meta name="description" content="Free Viking Rune Name Converter. Translate English names to Elder Futhark runes instantly." />
     
     <!-- SEO 기본은 Helmet(SEOManager)에서 동적으로 관리됩니다. -->
     <meta name="author" content="RuneConverter" />
@@ -74,6 +77,84 @@
     
     <!-- 카카오톡 SDK -->
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js" integrity="sha384-l+xbElFSnPZ2rOaPrU//2FF5B4LB8FiX5q4fXYTlfcG4PGpMkE1vcL7kNXI6Cci0" crossorigin="anonymous"></script>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #fcfbf7;
+      }
+
+      /* Pre-React intro screen (will be replaced when React mounts) */
+      #seo-content {
+        font-family: 'Cinzel', serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        text-align: center;
+        padding: 2rem;
+        color: #5c4d3c;
+        background-color: #fcfbf7;
+        box-sizing: border-box;
+      }
+
+      #seo-content h1 {
+        font-size: 1.8rem;
+        margin: 0 0 1rem;
+        color: #8b5e3c;
+      }
+
+      #seo-content p {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        font-size: 0.95rem;
+        color: #8c7b6c;
+        max-width: 520px;
+        line-height: 1.6;
+        margin: 0.5rem 0;
+      }
+
+      #seo-content strong {
+        color: #5c4d3c;
+      }
+
+      .bot-info {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        font-size: 0.8rem;
+        opacity: 0.6;
+        margin-top: 1.75rem;
+        list-style: none;
+        padding: 0;
+      }
+
+      .bot-info li {
+        margin: 0.25rem 0;
+      }
+
+      .loader::after {
+        content: "...";
+        animation: dots 1.5s steps(4, end) infinite;
+      }
+
+      @keyframes dots {
+        0% {
+          content: "";
+        }
+        25% {
+          content: ".";
+        }
+        50% {
+          content: "..";
+        }
+        75% {
+          content: "...";
+        }
+        100% {
+          content: "";
+        }
+      }
+    </style>
   </head>
   <body>
     <noscript>
@@ -87,29 +168,22 @@
     </noscript>
 
     <div id="root">
-      <main>
+      <div id="seo-content">
         <h1>Viking Rune Converter</h1>
+        <p class="loader">Initializing Ancient Scripts</p>
+
         <p>
-          Convert your name into authentic Elder Futhark Viking runes and explore rune meanings.
-          This free tool transliterates names into runic symbols and lets you download a shareable image.
+          Transform your English name into authentic <strong>Elder Futhark Runes</strong>.
+          <br />
+          Accurate phonetic translation for tattoo designs &amp; history fans.
         </p>
 
-        <section>
-          <h2>What you can do</h2>
-          <ul>
-            <li>Translate a name to runes (Elder Futhark)</li>
-            <li>See each rune's meaning and symbolism</li>
-            <li>Download a rune image for sharing</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Examples</h2>
-          <p>Try: John, Sarah, Michael</p>
-        </section>
-
-        <p>Loading…</p>
-      </main>
+        <ul class="bot-info">
+          <li>Name to Runes Translation</li>
+          <li>Viking &amp; Egyptian Hieroglyphs</li>
+          <li>Free Image Generator</li>
+        </ul>
+      </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
