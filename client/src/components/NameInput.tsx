@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, Edit3 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
+import { normalizeLatinInput } from "@/lib/runeConverter";
 
 interface NameInputProps {
   koreanName: string;
@@ -47,9 +48,9 @@ export default function NameInput({
       return;
     }
     
-    // 영문자 포함 여부 검사
-    const hasEnglish = /[a-zA-Z]/.test(englishName);
-    if (!hasEnglish) {
+    // 로마자(라틴 문자)로 변환 가능한지 검사
+    const normalized = normalizeLatinInput(englishName);
+    if (!normalized) {
       toast({
         title: t('englishInvalidTitle'),
         description: t('englishInvalidDesc'),
@@ -62,8 +63,10 @@ export default function NameInput({
   };
   
   const handleEnglishNameChange = (value: string) => {
-    // 영문자와 공백만 허용
-    const filtered = value.replace(/[^a-zA-Z\s]/g, '');
+    // 라틴 문자(악센트 포함) + 공백/하이픈/어포스트로피만 허용
+    // TS target 제약으로 \p{...} 대신 Latin-extended 범위를 사용
+    // 예: François, José, O'Connor, Anne-Marie, Ōsaka
+    const filtered = value.replace(/[^a-zA-Z\u00C0-\u024F\s'-]/g, '');
     onEnglishNameChange(filtered);
   };
   

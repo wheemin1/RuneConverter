@@ -11,6 +11,7 @@
     "copy-functions": "if not exist dist\\functions mkdir dist\\functions && xcopy /s /y netlify\\functions\\* dist\\functions\\",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "check": "tsc",
+    "verify:names": "tsx scripts/verifyInternationalNames.ts",
     "db:push": "drizzle-kit push"
   },
   "dependencies": {
