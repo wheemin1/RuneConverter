@@ -19,11 +19,12 @@ export const SEO_DATA: Record<SupportedSeoLang, {
     ogDesc: '고대 바이킹의 신비로운 힘이 담긴 당신의 이름을 확인하세요.',
     siteName: 'Ancient Runes',
   },
+  // ⚡ [업그레이드] 영어: 타투, 디자인, 정확도, 무료 강조 (CTR 상승 전략)
   en: {
-    title: 'Rune Name Converter - Translate Name to Runes',
-    desc: 'Free online rune converter to translate your name into Viking runes (Elder Futhark). Generate and share your rune name in seconds.',
+    title: 'Free Rune Name Converter for Tattoo & Design (Elder Futhark)',
+    desc: "Don't get a wrong tattoo. Translate your name to Viking Runes accurately with this free online tool. Download high-quality images for your design.",
     keywords:
-      'Rune Converter, Runes Converter, Viking Rune Converter, Rune Convertor, Viking Runes, Elder Futhark, Rune Translator, Name to Runes, Ancient Scripts, Viking Name',
+      'Rune Converter, Viking Runes, Elder Futhark, Tattoo Design, Name to Runes, Ancient Scripts, Viking Name, Free Rune Translator, Nordic Runes',
     ogTitle: 'Reveal Your Viking Name in Runes',
     ogDesc: 'See what your name looks like in ancient mystical Rune symbols.',
     siteName: 'Ancient Runes Global',
@@ -52,11 +53,12 @@ export const SEO_DATA: Record<SupportedSeoLang, {
     ogDesc: 'Mira cómo se ve tu nombre en antiguos símbolos rúnicos.',
     siteName: 'Ancient Runes Español',
   },
+  // ⚡ [업그레이드] 프랑스어: 유입 키워드(convertisseur rune viking) 전면 배치
   fr: {
-    title: 'Convertisseur de Runes - Traduis ton nom en runes',
-    desc: 'Convertisseur rune viking gratuit : transforme ton nom en runes (Elder Futhark) et partage le résultat en un clic.',
+    title: 'Convertisseur de Runes Viking - Traduction de Prénom (Gratuit)',
+    desc: "Traduisez votre nom en runes vikings (Futhark ancien). Idéal pour les tatouages et le design. Téléchargement d'image gratuit.",
     keywords:
-      'convertisseur rune viking, convertisseur de runes, runes, vikings, Elder Futhark, traduire un nom en runes, écritures anciennes, traducteur de runes',
+      'convertisseur rune viking, convertisseur de runes, runes, vikings, Elder Futhark, traduction prénom, tatouage viking, écritures anciennes',
     ogTitle: 'Découvre ton nom viking en runes',
     ogDesc: 'Vois à quoi ressemble ton nom en anciens symboles runiques.',
     siteName: 'Ancient Runes Français',
