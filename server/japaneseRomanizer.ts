@@ -1,5 +1,6 @@
 import Kuroshiro from "kuroshiro";
 import KuromojiAnalyzer from "kuroshiro-analyzer-kuromoji";
+import path from "node:path";
 
 let instance: Kuroshiro | null = null;
 let initPromise: Promise<Kuroshiro> | null = null;
@@ -12,8 +13,10 @@ async function getKuroshiro(): Promise<Kuroshiro> {
     const kuroshiro = new Kuroshiro();
 
     // Kuromoji dict files are shipped with the `kuromoji` package.
-    // The analyzer will resolve the default dictionary path from node_modules.
-    await kuroshiro.init(new KuromojiAnalyzer());
+    // In bundled / serverless environments, relying on __dirname can break.
+    // Provide an explicit path relative to the working directory.
+    const dictPath = path.join(process.cwd(), "node_modules", "kuromoji", "dict");
+    await kuroshiro.init(new KuromojiAnalyzer({ dictPath }));
 
     instance = kuroshiro;
     return kuroshiro;
