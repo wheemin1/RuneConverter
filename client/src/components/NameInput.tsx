@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, Edit3 } from "lucide-react";
+import { ArrowRight, Edit3, Sparkles } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
 import { normalizeLatinInput } from "@/lib/runeConverter";
@@ -30,12 +30,31 @@ export default function NameInput({
 
   const koreanInputRef = useRef<HTMLInputElement | null>(null);
   const englishInputRef = useRef<HTMLInputElement | null>(null);
+  const isSourceScriptMode =
+    language === 'ko' ||
+    language === 'zh' ||
+    language === 'ja' ||
+    language === 'es' ||
+    language === 'fr';
   const isKoreanMode = language === 'ko';
+  const shouldShowAutoUnavailableNotice =
+    isSourceScriptMode &&
+    !isKoreanMode &&
+    Boolean(koreanName.trim()) &&
+    !Boolean(englishName.trim());
 
   useEffect(() => {
-    const target = isKoreanMode ? koreanInputRef.current : englishInputRef.current;
+    // Avoid focusing an element inside a subtree that may be aria-hidden
+    // (e.g., when a Radix dialog is open), which triggers browser warnings.
+    const root = document.getElementById('root');
+    if (root?.getAttribute('aria-hidden') === 'true') return;
+
+    const active = document.activeElement;
+    if (active && active !== document.body) return;
+
+    const target = isSourceScriptMode ? koreanInputRef.current : englishInputRef.current;
     target?.focus();
-  }, [isKoreanMode]);
+  }, [isSourceScriptMode]);
   
   const handleConvert = () => {
     // 빈 문자열 검사
@@ -63,34 +82,40 @@ export default function NameInput({
   };
   
   const handleEnglishNameChange = (value: string) => {
-    // 라틴 문자(악센트 포함) + 공백/하이픈/어포스트로피만 허용
-    // TS target 제약으로 \p{...} 대신 Latin-extended 범위를 사용
-    // 예: François, José, O'Connor, Anne-Marie, Ōsaka
-    const filtered = value.replace(/[^a-zA-Z\u00C0-\u024F\s'-]/g, '');
+    // Dual-field mode: bottom field is the rune-ready spelling.
+    // Keep it simple (ASCII letters) so users clearly see accent stripping.
+    // Single-field mode: allow Latin-extended for direct input.
+    const filtered = isSourceScriptMode
+      ? value.replace(/[^a-zA-Z\s'-]/g, '')
+      : value.replace(/[^a-zA-Z\u00C0-\u024F\s'-]/g, '');
     onEnglishNameChange(filtered);
+  };
+
+  const handleSourceNameChange = (value: string) => {
+    onKoreanNameChange(value);
   };
   
   return (
     <section className="scroll-reveal relative">
-      <Card className="toss-card manuscript-page rounded-2xl md:rounded-3xl bg-parchment-dark border-none">
+      <Card className="rounded-2xl md:rounded-3xl bg-[rgba(252,251,247,0.84)] border border-[rgba(92,77,60,0.06)] shadow-[0_20px_60px_rgba(62,39,35,0.18)] hover:shadow-[0_26px_80px_rgba(62,39,35,0.22)] hover:translate-y-0 transition-all duration-300">
         <CardContent className="p-6 md:p-10 relative">
 
           
           <div className="space-y-6 md:space-y-8">
-            {isKoreanMode && (
+            {isSourceScriptMode && (
               <div className="relative">
                 <Label htmlFor="korean-name" className="block text-text-brown font-semibold mb-3 text-base md:text-lg">
-                  {t('koreanName')}
+                  {isKoreanMode ? t('koreanName') : t('nativeName')}
                 </Label>
                 <div className="relative">
                   <Input
                     ref={koreanInputRef}
                     id="korean-name"
                     type="text"
-                    className="w-full h-[56px] md:h-[60px] border-0 border-b-2 border-viking-tan focus:border-viking-gold bg-transparent rounded-none font-cinzel text-lg md:text-xl py-4 px-2 text-left focus:outline-none focus:ring-0 transition-colors"
-                    placeholder={t('koreanPlaceholder')}
+                    className="w-full h-[56px] md:h-[60px] border border-[rgba(92,77,60,0.10)] bg-[rgba(92,77,60,0.06)] rounded-2xl font-cinzel text-lg md:text-xl py-4 px-4 text-left shadow-[inset_0_1px_2px_rgba(0,0,0,0.06)] focus:outline-none focus:ring-2 focus:ring-viking-gold/25 focus:border-viking-gold transition-[box-shadow,border-color,background-color]"
+                    placeholder={isKoreanMode ? t('koreanPlaceholder') : t('nativePlaceholder')}
                     value={koreanName}
-                    onChange={(e) => onKoreanNameChange(e.target.value)}
+                    onChange={(e) => handleSourceNameChange(e.target.value)}
                   />
                   <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
                     <Sparkles className="w-5 h-5 text-viking-gold" />
@@ -101,15 +126,15 @@ export default function NameInput({
             
             <div className="relative">
               <Label htmlFor="english-name" className="block text-text-brown font-semibold mb-3 text-base md:text-lg">
-                {isKoreanMode ? t('englishName') : t('alphabetName')}
+                {isSourceScriptMode ? (isKoreanMode ? t('englishName') : t('romanizedName')) : t('alphabetName')}
               </Label>
               <div className="relative">
                 <Input
                   ref={englishInputRef}
                   id="english-name"
                   type="text"
-                  className="w-full h-[56px] md:h-[60px] border-0 border-b-2 border-viking-tan focus:border-viking-gold bg-transparent rounded-none font-cinzel text-lg md:text-xl py-4 px-2 text-left focus:outline-none focus:ring-0 transition-colors"
-                  placeholder={isKoreanMode ? t('englishPlaceholder') : t('alphabetPlaceholder')}
+                  className="w-full h-[56px] md:h-[60px] border border-[rgba(92,77,60,0.10)] bg-[rgba(92,77,60,0.06)] rounded-2xl font-cinzel text-lg md:text-xl py-4 px-4 text-left shadow-[inset_0_1px_2px_rgba(0,0,0,0.06)] focus:outline-none focus:ring-2 focus:ring-viking-gold/25 focus:border-viking-gold transition-[box-shadow,border-color,background-color]"
+                  placeholder={isSourceScriptMode ? (isKoreanMode ? t('englishPlaceholder') : t('romanizedPlaceholder')) : t('alphabetPlaceholder')}
                   value={englishName}
                   onChange={(e) => handleEnglishNameChange(e.target.value)}
                 />
@@ -119,8 +144,13 @@ export default function NameInput({
               </div>
               <div className="bg-parchment-darker/30 rounded-xl p-3 md:p-4 mt-4 border-l-4 border-viking-gold/50">
                 <p className="text-[11px] md:text-xs text-text-brown-light leading-relaxed opacity-80">
-                  <strong>{t('tipLabel')}</strong> {isKoreanMode ? t('tipText') : t('alphabetTipText')}
+                  <strong>{t('tipLabel')}</strong> {isSourceScriptMode ? (isKoreanMode ? t('tipText') : t('romanizedTipText')) : t('alphabetTipText')}
                 </p>
+                {shouldShowAutoUnavailableNotice && (
+                  <p className="text-[11px] md:text-xs text-text-brown-light leading-relaxed opacity-80 mt-2">
+                    {t('romanizedAutoUnavailable')}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -129,18 +159,18 @@ export default function NameInput({
             <Button
               onClick={handleConvert}
               disabled={!englishName.trim() || isConverting}
-              className="w-full btn-viking text-white font-bold h-[56px] md:h-[60px] px-8 rounded-2xl font-cinzel text-lg md:text-xl relative shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.98]"
+              className="w-full h-[56px] md:h-[60px] px-8 rounded-2xl font-semibold text-base md:text-lg tracking-tight text-white relative overflow-hidden bg-gradient-to-b from-viking-brown to-viking-brown-dark shadow-[0_18px_50px_rgba(62,39,35,0.22)] hover:shadow-[0_24px_70px_rgba(62,39,35,0.26)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-[0_14px_40px_rgba(62,39,35,0.22)] transition-all duration-200 focus-visible:ring-2 focus-visible:ring-viking-gold/30 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment disabled:opacity-60 disabled:shadow-none disabled:hover:translate-y-0"
             >
               {isConverting ? (
                 <span className="flex items-center justify-center gap-3">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-5 h-5 border-2 border-white/80 border-t-transparent rounded-full animate-spin"></div>
                   {t('convertingButton')}
                 </span>
               ) : (
-                <span className="flex items-center justify-center gap-3">
-                  <span className="rune-character text-2xl">ᚱᚢᚾᛖ</span>
-                  {t('convertButton')}
-                  <Sparkles className="w-5 h-5" />
+                <span className="flex items-center justify-center gap-2">
+                  <Sparkles className="w-4 h-4 opacity-90" />
+                  <span>{t('convertButton')}</span>
+                  <ArrowRight className="w-4 h-4 opacity-90" />
                 </span>
               )}
             </Button>

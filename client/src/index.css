@@ -140,6 +140,7 @@
     right: 0;
     bottom: 0;
     background-image: 
+      url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A//www.w3.org/2000/svg'%20width%3D'140'%20height%3D'140'%3E%3Cfilter%20id%3D'n'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'.9'%20numOctaves%3D'2'%20stitchTiles%3D'stitch'/%3E%3C/filter%3E%3Crect%20width%3D'140'%20height%3D'140'%20filter%3D'url(%23n)'%20opacity%3D'.10'/%3E%3C/svg%3E"),
       repeating-linear-gradient(
         0deg,
         transparent,
@@ -154,8 +155,10 @@
         rgba(120, 119, 109, 0.015) 2px,
         rgba(120, 119, 109, 0.015) 4px
       );
+    background-size: 180px 180px, auto, auto;
+    background-repeat: repeat;
     pointer-events: none;
-    opacity: 0.3;
+    opacity: 0.25;
   }
 
   .manuscript-page {

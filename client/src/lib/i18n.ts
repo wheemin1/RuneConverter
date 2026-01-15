@@ -35,11 +35,17 @@ export const translations = {
     inputSubtitle: '당신의 이름을 고대 바이킹 룬 문자로 변환해보세요',
     koreanName: '한국어 이름',
     englishName: '영문 이름 (수정 가능)',
+    nativeName: '원문 이름',
+    romanizedName: '로마자 이름 (수정 가능)',
     koreanPlaceholder: '예: 조휘민, 김민수, 박지연...',
     englishPlaceholder: '예: jowheemin, kimminsu, parkjiyeon...',
+    nativePlaceholder: '예: 王伟, たなか, 홍길동...',
+    romanizedPlaceholder: '예: wangwei, tanaka, honggildong...',
     convertButton: '룬 문자로 변환하기',
     convertingButton: '신비로운 변환 중...',
     tipText: '자동 변환된 영문 이름을 원하는 방식으로 수정할 수 있습니다. 발음이나 선호하는 영문 표기법에 맞게 조정해보세요.',
+    romanizedTipText: '자동 변환된 로마자(영문) 표기는 수정할 수 있습니다. 여권 표기나 선호 철자에 맞게 조정해보세요.',
+    romanizedAutoUnavailable: '일부 문자는 자동 로마자 변환이 어려울 수 있어요. 아래 칸에 원하는 영문 표기를 직접 입력해 주세요.',
 
     // Converting page
     convertingTitle: '룬 문자 변환 중',
@@ -169,8 +175,8 @@ export const translations = {
 
     // Input (non-Korean languages)
     alphabetName: '이름 (영문/알파벳)',
-    alphabetPlaceholder: '예: John, Emily, Michael... (영어 알파벳만)',
-    alphabetTipText: '이 입력창은 영어 알파벳(A-Z)만 허용합니다. (숫자/특수문자/한글 불가)',
+    alphabetPlaceholder: '예: José, François, Müller, O\'Connor... (라틴 문자)',
+    alphabetTipText: '이 입력창은 라틴 문자(악센트 포함)와 공백/하이픈/어포스트로피만 허용합니다. (숫자/기호/한글/한자/가나 불가)',
     tipLabel: '팁:',
     englishEnableHint: '영문(알파벳) 이름을 입력하면 변환 버튼이 활성화됩니다',
 
@@ -178,7 +184,7 @@ export const translations = {
     englishRequiredTitle: '영문 이름 필요',
     englishRequiredDesc: '영문(알파벳) 이름을 입력해주세요.',
     englishInvalidTitle: '잘못된 입력',
-    englishInvalidDesc: '영문 이름은 영어 알파벳(A-Z)만 입력할 수 있습니다.',
+    englishInvalidDesc: '영문 이름은 라틴 문자(악센트 포함)와 공백/하이픈/어포스트로피만 입력할 수 있습니다.',
     
     // Results
     resultTitle: '룬 문자 변환 결과',
@@ -240,11 +246,17 @@ export const translations = {
     inputSubtitle: 'Convert your name into ancient Viking runes',
     koreanName: 'Korean Name',
     englishName: 'English Name (Editable)',
+    nativeName: 'Native Name',
+    romanizedName: 'Romanized Name (Editable)',
     koreanPlaceholder: 'e.g., 조휘민, 김민수, 박지연...',
     englishPlaceholder: 'e.g., jowheemin, kimminsu, parkjiyeon...',
+    nativePlaceholder: 'e.g., 王伟, たなか, 홍길동...',
+    romanizedPlaceholder: 'e.g., wangwei, tanaka, honggildong...',
     convertButton: 'Convert to Runes',
     convertingButton: 'Mystical conversion in progress...',
     tipText: 'You can edit the auto-converted English name. Adjust it to match your preferred pronunciation or romanization.',
+    romanizedTipText: 'You can edit the auto-filled romanization to match your passport spelling or preferred usage.',
+    romanizedAutoUnavailable: 'Some characters can’t be romanized automatically. Please type your preferred spelling below.',
 
     // Converting page
     convertingTitle: 'Converting to runes',
@@ -252,7 +264,7 @@ export const translations = {
     convertingCompleteLabel: 'Done',
     convertingQuote: '"Runes are not mere letters, but sacred symbols holding the secrets of the universe."',
     convertingQuoteAuthor: '- Old Norse legend',
-    convertingStepKoreanAnalyze: 'Analyzing Korean name...',
+    convertingStepKoreanAnalyze: 'Analyzing name...',
     convertingStepEnglishValidate: 'Validating alphabet name...',
     convertingStepRuneMapping: 'Mapping to Elder Futhark...',
     convertingStepMeaning: 'Interpreting rune meanings...',
@@ -374,8 +386,8 @@ export const translations = {
 
     // Input (non-Korean languages)
     alphabetName: 'Your name (Alphabet)',
-    alphabetPlaceholder: 'e.g., John, Emily, Michael... (A–Z only)',
-    alphabetTipText: 'This field only allows English letters (A–Z). (No numbers or special characters)',
+    alphabetPlaceholder: "e.g., José, François, Müller, O'Connor... (Latin letters)",
+    alphabetTipText: 'This field allows Latin letters (including accents) plus spaces, hyphens, and apostrophes. (No numbers or CJK characters)',
     tipLabel: 'Tip:',
     englishEnableHint: 'Enter your name to enable conversion.',
 
@@ -383,7 +395,7 @@ export const translations = {
     englishRequiredTitle: 'English name required',
     englishRequiredDesc: 'Please enter your name using the alphabet (A–Z).',
     englishInvalidTitle: 'Invalid input',
-    englishInvalidDesc: 'Only English letters (A–Z) are allowed.',
+    englishInvalidDesc: 'Only Latin letters (including accents) plus spaces, hyphens, and apostrophes are allowed.',
     
     // Results
     resultTitle: 'Rune Conversion Result',
@@ -445,16 +457,22 @@ export const translations = {
     inputSubtitle: 'あなたの名前を古代バイキングのルーン文字に変換',
     koreanName: '韓国語の名前',
     englishName: '英語名（編集可能）',
+    nativeName: '原文の名前',
+    romanizedName: 'ローマ字（編集可能）',
     koreanPlaceholder: '例：조휘민、김민수、박지연...',
     englishPlaceholder: '例：jowheemin、kimminsu、parkjiyeon...',
+    nativePlaceholder: '例：たなか、ゆうき、さとう...',
+    romanizedPlaceholder: '例：tanaka、yuki、sato...',
     convertButton: 'ルーン文字に変換',
     convertingButton: '神秘的な変換中...',
     tipText: '自動変換された英語名を希望に合わせて修正できます。発音や好みの英語表記法に調整してください。',
+    romanizedTipText: '自動変換されたローマ字は編集できます。パスポート表記や好みに合わせて調整してください。',
+    romanizedAutoUnavailable: '一部の文字（漢字など）は自動でローマ字化できない場合があります。下の欄にお好みの表記を入力してください。',
 
     // Input (non-Korean languages)
     alphabetName: '名前（アルファベット）',
-    alphabetPlaceholder: '例：John、Emily、Michael...（A–Zのみ）',
-    alphabetTipText: 'この入力欄は英字（A–Z）のみ対応します。（数字・記号は不可）',
+    alphabetPlaceholder: '例：José、François、Müller...（ラテン文字）',
+    alphabetTipText: 'この入力欄はラテン文字（アクセント含む）と空白/ハイフン/アポストロフィのみ対応します。（数字・CJK文字は不可）',
     tipLabel: 'ヒント：',
     englishEnableHint: 'アルファベットで入力すると変換ボタンが有効になります',
 
@@ -462,7 +480,7 @@ export const translations = {
     englishRequiredTitle: '英字名が必要です',
     englishRequiredDesc: 'アルファベット（A–Z）で名前を入力してください。',
     englishInvalidTitle: '無効な入力',
-    englishInvalidDesc: '英字（A–Z）のみ入力できます。',
+    englishInvalidDesc: 'ラテン文字（アクセント含む）と空白/ハイフン/アポストロフィのみ入力できます。',
     
     // Results
     resultTitle: 'ルーン文字変換結果',
@@ -511,7 +529,7 @@ export const translations = {
     convertingCompleteLabel: '完了',
     convertingQuote: '"ルーンは単なる文字ではなく、宇宙の秘密を宿す神聖な記号である"',
     convertingQuoteAuthor: '- 古代ノルドの伝承',
-    convertingStepKoreanAnalyze: '韓国語名を分析中...',
+    convertingStepKoreanAnalyze: '名前を分析中...',
     convertingStepEnglishValidate: 'アルファベット名を確認中...',
     convertingStepRuneMapping: 'エルダー・フサルクへマッピング...',
     convertingStepMeaning: 'ルーンの意味を解釈中...',
@@ -650,16 +668,22 @@ export const translations = {
     inputSubtitle: '将您的姓名转换为古代维京符文',
     koreanName: '韩语姓名',
     englishName: '英文姓名（可编辑）',
+    nativeName: '原文姓名',
+    romanizedName: '拼音/罗马字（可编辑）',
     koreanPlaceholder: '例如：조휘민、김민수、박지연...',
     englishPlaceholder: '例如：jowheemin、kimminsu、parkjiyeon...',
+    nativePlaceholder: '例如：王伟、张伟、李娜...',
+    romanizedPlaceholder: '例如：wangwei、zhangwei、lina...',
     convertButton: '转换为符文',
     convertingButton: '神秘转换中...',
     tipText: '您可以修改自动转换的英文姓名。根据您的发音或首选的英文拼写法进行调整。',
+    romanizedTipText: '自动生成的拼音/罗马字可编辑，可按护照或习惯拼写进行调整。',
+    romanizedAutoUnavailable: '部分字符可能无法自动生成拼音/罗马字，请在下方输入你希望的拼写。',
 
     // Input (non-Korean languages)
     alphabetName: '姓名（字母）',
-    alphabetPlaceholder: '例如：John、Emily、Michael...（仅 A–Z）',
-    alphabetTipText: '此输入框仅允许英文字符（A–Z），不支持数字或特殊符号。',
+    alphabetPlaceholder: '例如：José、François、Müller...（拉丁字母）',
+    alphabetTipText: '此输入框支持拉丁字母（含重音符）以及空格/连字符/撇号。（不支持数字或中日韩字符）',
     tipLabel: '提示：',
     englishEnableHint: '输入字母姓名后，转换按钮将启用。',
 
@@ -667,7 +691,7 @@ export const translations = {
     englishRequiredTitle: '需要英文姓名',
     englishRequiredDesc: '请使用字母（A–Z）输入您的姓名。',
     englishInvalidTitle: '输入无效',
-    englishInvalidDesc: '仅允许英文字符（A–Z）。',
+    englishInvalidDesc: '仅允许拉丁字母（含重音符）以及空格/连字符/撇号。',
     
     // Results
     resultTitle: '符文转换结果',
@@ -716,7 +740,7 @@ export const translations = {
     convertingCompleteLabel: '完成',
     convertingQuote: '"符文不仅是文字，更是承载宇宙秘密的神圣符号"',
     convertingQuoteAuthor: '- 古诺尔斯传说',
-    convertingStepKoreanAnalyze: '分析韩文姓名中...',
+    convertingStepKoreanAnalyze: '分析姓名中...',
     convertingStepEnglishValidate: '校验字母姓名中...',
     convertingStepRuneMapping: '映射到古老弗萨克中...',
     convertingStepMeaning: '解读符文含义中...',
@@ -855,16 +879,22 @@ export const translations = {
     inputSubtitle: 'Convierte tu nombre en runas vikingas antiguas',
     koreanName: 'Nombre Coreano',
     englishName: 'Nombre en Inglés (Editable)',
+    nativeName: 'Nombre en idioma original',
+    romanizedName: 'Nombre romanizado (editable)',
     koreanPlaceholder: 'ej., 조휘민, 김민수, 박지연...',
     englishPlaceholder: 'ej., jowheemin, kimminsu, parkjiyeon...',
+    nativePlaceholder: 'p. ej., José, Muñoz, García...',
+    romanizedPlaceholder: 'p. ej., jose, munoz, garcia...',
     convertButton: 'Convertir a Runas',
     convertingButton: 'Conversión mística en progreso...',
     tipText: 'Puedes editar el nombre en inglés convertido automáticamente. Ajústalo para que coincida con tu pronunciación o romanización preferida.',
+    romanizedTipText: 'Puedes editar la romanización autocompletada para que coincida con tu pasaporte o preferencia.',
+    romanizedAutoUnavailable: 'Algunos caracteres no se pueden romanizar automáticamente. Escribe abajo tu forma preferida.',
 
     // Input (non-Korean languages)
     alphabetName: 'Tu nombre (Alfabeto)',
-    alphabetPlaceholder: 'p. ej., John, Emily, Michael... (solo A–Z)',
-    alphabetTipText: 'Este campo solo permite letras (A–Z). (Sin números ni caracteres especiales)',
+    alphabetPlaceholder: 'p. ej., José, François, Müller, O\'Connor... (letras latinas)',
+    alphabetTipText: 'Este campo permite letras latinas (con acentos) y espacios/guiones/apóstrofes. (Sin números ni caracteres CJK)',
     tipLabel: 'Consejo:',
     englishEnableHint: 'Ingresa tu nombre para habilitar la conversión.',
 
@@ -872,7 +902,7 @@ export const translations = {
     englishRequiredTitle: 'Se requiere nombre en inglés',
     englishRequiredDesc: 'Ingresa tu nombre usando el alfabeto (A–Z).',
     englishInvalidTitle: 'Entrada inválida',
-    englishInvalidDesc: 'Solo se permiten letras (A–Z).',
+    englishInvalidDesc: 'Solo se permiten letras latinas (con acentos) y espacios/guiones/apóstrofes.',
     
     // Results
     resultTitle: 'Resultado de Conversión de Runas',
@@ -911,7 +941,7 @@ export const translations = {
     convertingCompleteLabel: 'Listo',
     convertingQuote: '"Las runas no son solo letras, sino símbolos sagrados que guardan los secretos del universo."',
     convertingQuoteAuthor: '- Leyenda nórdica antigua',
-    convertingStepKoreanAnalyze: 'Analizando nombre en coreano...',
+    convertingStepKoreanAnalyze: 'Analizando nombre...',
     convertingStepEnglishValidate: 'Validando nombre en alfabeto...',
     convertingStepRuneMapping: 'Mapeando a Elder Futhark...',
     convertingStepMeaning: 'Interpretando significados...',
@@ -1050,16 +1080,22 @@ export const translations = {
     inputSubtitle: 'Convertissez votre nom en runes vikings anciennes',
     koreanName: 'Nom Coréen',
     englishName: 'Nom Anglais (Modifiable)',
+    nativeName: 'Nom en langue originale',
+    romanizedName: 'Nom romanisé (modifiable)',
     koreanPlaceholder: 'ex., 조휘민, 김민수, 박지연...',
     englishPlaceholder: 'ex., jowheemin, kimminsu, parkjiyeon...',
+    nativePlaceholder: 'ex. : François, Cœur, Müller...',
+    romanizedPlaceholder: 'ex. : francois, coeur, muller...',
     convertButton: 'Convertir en Runes',
     convertingButton: 'Conversion mystique en cours...',
     tipText: 'Vous pouvez modifier le nom anglais converti automatiquement. Ajustez-le pour correspondre à votre prononciation ou romanisation préférée.',
+    romanizedTipText: 'Vous pouvez modifier la romanisation auto-remplie pour correspondre à votre passeport ou à vos préférences.',
+    romanizedAutoUnavailable: 'Certains caractères ne peuvent pas être romanisés automatiquement. Saisissez ci-dessous l’orthographe souhaitée.',
 
     // Input (non-Korean languages)
     alphabetName: 'Votre nom (Alphabet)',
-    alphabetPlaceholder: 'ex., John, Emily, Michael... (A–Z uniquement)',
-    alphabetTipText: 'Ce champ n’accepte que des lettres (A–Z). (Pas de chiffres ni de caractères spéciaux)',
+    alphabetPlaceholder: "ex. : José, François, Müller, O'Connor... (lettres latines)",
+    alphabetTipText: 'Ce champ accepte les lettres latines (avec accents) ainsi que les espaces/tirets/apostrophes. (Pas de chiffres ni de caractères CJK)',
     tipLabel: 'Astuce :',
     englishEnableHint: 'Saisissez votre nom pour activer la conversion.',
 
@@ -1067,7 +1103,7 @@ export const translations = {
     englishRequiredTitle: 'Nom requis',
     englishRequiredDesc: 'Veuillez saisir votre nom avec l’alphabet (A–Z).',
     englishInvalidTitle: 'Saisie invalide',
-    englishInvalidDesc: 'Seules les lettres (A–Z) sont autorisées.',
+    englishInvalidDesc: 'Seules les lettres latines (avec accents) ainsi que les espaces/tirets/apostrophes sont autorisées.',
     
     // Results
     resultTitle: 'Résultat de Conversion des Runes',
@@ -1106,7 +1142,7 @@ export const translations = {
     convertingCompleteLabel: 'Terminé',
     convertingQuote: '"Les runes ne sont pas de simples lettres, mais des symboles sacrés portant les secrets de l’univers."',
     convertingQuoteAuthor: '- Légende nordique ancienne',
-    convertingStepKoreanAnalyze: 'Analyse du nom coréen...',
+    convertingStepKoreanAnalyze: 'Analyse du nom...',
     convertingStepEnglishValidate: 'Validation du nom en alphabet...',
     convertingStepRuneMapping: 'Correspondance avec l’Elder Futhark...',
     convertingStepMeaning: 'Interprétation des significations...',

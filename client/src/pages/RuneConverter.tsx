@@ -21,7 +21,7 @@ export default function RuneConverter() {
     setEnglishName,
     convertToRunes,
     isConverted
-  } = useRuneConverter();
+  } = useRuneConverter(language);
 
   const runeDetails = useMemo(() => {
     if (!runeText) return [];
@@ -73,63 +73,32 @@ export default function RuneConverter() {
       
       <div className="parchment-bg min-h-screen font-cinzel relative z-10">
       {/* Compact Header */}
-      <header className="relative h-16 md:h-20">
-        {/* Branding Logo */}
-        <div className="absolute top-4 left-4 md:left-6 z-20 safe-top">
-          <div className="flex items-center gap-2 opacity-70">
-            <span className="rune-character text-lg text-viking-brown">ᚱ</span>
-            <span className="font-cinzel-decorative text-xs text-viking-brown hidden sm:inline">Viking Rune</span>
-          </div>
-        </div>
-        {/* Language Selector */}
-        <div className="absolute top-4 right-4 z-20">
+      <header className="absolute top-0 left-0 right-0 z-20 pointer-events-none safe-top">
+        <div className="absolute top-4 right-4 md:right-6 pointer-events-auto">
           <LanguageSelector />
         </div>
       </header>
 
-      {/* Hero Section - 2 Column Layout on Desktop */}
-      <section className="max-w-7xl mx-auto px-4 pb-6 md:pb-12 mt-2 md:mt-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          
-          {/* Left Column - Title & Description */}
-          <div className="text-center lg:text-left space-y-4 md:space-y-6 order-2 lg:order-1">
-            {/* Decorative Runes - Desktop Only */}
-            <div className="hidden lg:block">
-              <div className="text-4xl rune-character text-viking-brown/40 mb-4">
-                ᚠᚢᚦᚨᚱᚲ
-              </div>
-            </div>
-            
-            <h1 className="font-cinzel-decorative text-2xl md:text-4xl lg:text-5xl font-bold text-viking-brown">
-              {t('title')}
-            </h1>
-            
-            <p className="text-base md:text-lg lg:text-xl text-text-brown-light leading-relaxed">
-              {t('subtitle')}
-            </p>
-            
-            {/* Feature Highlights - Desktop Only */}
-            <div className="hidden lg:grid grid-cols-3 gap-6 pt-8 opacity-80">
-              <div className="text-center">
-                <div className="text-3xl rune-character mb-2">ᚨ</div>
-                <h3 className="font-semibold text-viking-brown text-sm">{t('feature1Title')}</h3>
-                <p className="text-xs text-text-brown-light mt-1">{t('feature1Desc')}</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl rune-character mb-2">ᛗ</div>
-                <h3 className="font-semibold text-viking-brown text-sm">{t('feature2Title')}</h3>
-                <p className="text-xs text-text-brown-light mt-1">{t('feature2Desc')}</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl rune-character mb-2">ᛊ</div>
-                <h3 className="font-semibold text-viking-brown text-sm">{t('feature3Title')}</h3>
-                <p className="text-xs text-text-brown-light mt-1">{t('feature3Desc')}</p>
-              </div>
-            </div>
+      {/* Hero Section - Centered Layout */}
+      <section className="max-w-4xl mx-auto px-4 pb-6 md:pb-10 pt-6 md:pt-8">
+        <div className="text-center">
+          <div className="rune-character text-3xl md:text-4xl text-viking-brown/35 mb-3 md:mb-5">
+            ᚠᚢᚦᚨᚱᚲ
           </div>
-          
-          {/* Right Column - Input Form (Above the Fold) */}
-          <div className="order-1 lg:order-2">
+
+          <div className="rune-character-large text-5xl md:text-6xl lg:text-7xl leading-none mb-3 md:mb-5">
+            ᚱ
+          </div>
+
+          <h1 className="font-cinzel-decorative text-3xl md:text-5xl lg:text-6xl font-bold text-viking-brown tracking-tight">
+            {t('title')}
+          </h1>
+
+          <p className="mt-4 md:mt-6 text-base md:text-lg lg:text-xl text-text-brown-light leading-relaxed max-w-2xl mx-auto">
+            {t('subtitle')}
+          </p>
+
+          <div className="mt-7 md:mt-9 max-w-xl mx-auto">
             <NameInput
               koreanName={koreanName}
               englishName={englishName}
@@ -139,7 +108,6 @@ export default function RuneConverter() {
               isConverting={isConverting}
             />
           </div>
-          
         </div>
       </section>
 
@@ -147,7 +115,7 @@ export default function RuneConverter() {
       <main className="max-w-7xl mx-auto px-4 md:px-6 pb-12 md:pb-16">
 
         {/* Feature Highlights - Mobile Only */}
-        <div className="lg:hidden grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 md:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 md:mb-16">
           <div className="text-center py-6 bg-parchment-dark/50 rounded-2xl">
             <div className="text-3xl rune-character mb-2">ᚨ</div>
             <h3 className="font-semibold text-viking-brown text-base">{t('feature1Title')}</h3>

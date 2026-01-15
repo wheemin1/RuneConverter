@@ -3,8 +3,25 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertRuneConversionSchema } from "@shared/schema";
 import { z } from "zod";
+import { romanizeJapaneseToRomaji } from "./japaneseRomanizer";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  app.post("/api/romanize/japanese", async (req, res) => {
+    try {
+      const bodySchema = z.object({ text: z.string().max(200) });
+      const { text } = bodySchema.parse(req.body);
+
+      const romaji = await romanizeJapaneseToRomaji(text);
+      res.json({ romaji });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid data", details: error.errors });
+      } else {
+        res.status(500).json({ error: "Internal server error" });
+      }
+    }
+  });
+
   // API route for saving rune conversions
   app.post("/api/rune-conversions", async (req, res) => {
     try {
