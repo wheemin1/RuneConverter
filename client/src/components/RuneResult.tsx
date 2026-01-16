@@ -10,7 +10,6 @@ import type { RuneDetail } from "@/lib/runeDatabase";
 import { PERSONALITY_THEME_IDS, POSITIVE_THEME_IDS, runeThemesByKey, type RuneThemeId } from "@/lib/runeThemes";
 import { primaryCtaButtonClassName } from "@/lib/buttonStyles";
 import ShareModal from "./ShareModal";
-import SavedRunesDialog from "./SavedRunesDialog";
 
 interface RuneResultProps {
   runeText: string;
@@ -53,7 +52,6 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
   const { t, language } = useLanguage();
   const [isDownloading, setIsDownloading] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
-  const [showSavedRunes, setShowSavedRunes] = useState(false);
   const { toast } = useToast();
 
   // Function to generate combined meaning from multiple runes
@@ -154,16 +152,6 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
       });
     }
     setIsDownloading(false);
-  };
-
-  // Function to handle loading saved result
-  const handleLoadSavedResult = (savedResult: any) => {
-    // 로컬 저장에서 불러온 결과를 처리하는 로직은 
-    // 실제로는 상위 컴포넌트에서 처리해야 할 수 있습니다.
-    toast({
-      title: savedResult.koreanName,
-      description: savedResult.runeText,
-    });
   };
 
   return (
@@ -285,11 +273,6 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
               </a>
             </div>
 
-            {/* Load From Local Storage */}
-            <div className="mt-4 text-center">
-              <SavedRunesDialog onSelectResult={handleLoadSavedResult} />
-            </div>
-            
             {/* Combined Rune Meaning */}
             <div className="mt-6">
               <div className="bg-gradient-to-r from-viking-gold/10 to-viking-peru/10 rounded-lg p-6 border border-viking-gold/20">
