@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { RuneDetail } from "@/lib/runeDatabase";
 import { PERSONALITY_THEME_IDS, POSITIVE_THEME_IDS, runeThemesByKey, type RuneThemeId } from "@/lib/runeThemes";
+import { primaryCtaButtonClassName } from "@/lib/buttonStyles";
 import ShareModal from "./ShareModal";
 import SavedRunesDialog from "./SavedRunesDialog";
 
@@ -240,7 +241,7 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Button
                 onClick={() => setShowShareModal(true)}
-                className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
+                className={primaryCtaButtonClassName}
               >
                 <Share2 className="w-5 h-5" />
                 {t('shareButton')}
@@ -249,7 +250,7 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
               <Button
                 onClick={handleDownload}
                 disabled={isDownloading}
-                className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
+                className={primaryCtaButtonClassName}
               >
                 <Download className="w-5 h-5" />
                 {isDownloading ? t('downloadingButton') : t('downloadButton')}
@@ -262,21 +263,24 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
                 href="https://egyptiantranslator.netlify.app/?utm_source=rune_converter&utm_medium=banner&utm_campaign=cross_promo" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="block bg-gradient-to-r from-amber-100 to-yellow-100 hover:from-amber-200 hover:to-yellow-200 border-2 border-amber-400 rounded-lg p-5 transition-all duration-300 hover:shadow-md hover:shadow-amber-400/40 group"
+                className="group block rounded-2xl p-5 md:p-6 bg-[rgba(252,251,247,0.78)] border border-[rgba(92,77,60,0.10)] shadow-[0_14px_50px_rgba(62,39,35,0.14)] hover:shadow-[0_18px_70px_rgba(62,39,35,0.18)] transition-all duration-200 relative overflow-hidden"
               >
+                <div className="pointer-events-none absolute inset-0 opacity-70 group-hover:opacity-90 transition-opacity bg-[radial-gradient(70%_60%_at_50%_0%,rgba(255,215,128,0.25),transparent_60%)]" />
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="text-4xl">🇪🇬</span>
+                    <div className="w-10 h-10 rounded-xl bg-[rgba(92,77,60,0.08)] border border-[rgba(92,77,60,0.10)] flex items-center justify-center text-viking-brown/80">
+                      <History className="w-5 h-5" />
+                    </div>
                     <div>
-                      <p className="text-lg font-bold text-amber-900 group-hover:text-amber-950">
+                      <p className="text-base md:text-lg font-semibold text-viking-brown">
                         {t('egyptPromoTitle')}
                       </p>
-                      <p className="text-sm text-amber-700 font-medium">
+                      <p className="text-sm text-text-brown-light">
                         {t('egyptPromoSubtitle')}
                       </p>
                     </div>
                   </div>
-                  <ArrowRight className="w-7 h-7 text-amber-600 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="w-6 h-6 text-viking-brown/70 group-hover:translate-x-1 transition-transform duration-200" />
                 </div>
               </a>
             </div>

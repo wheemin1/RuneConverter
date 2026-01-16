@@ -84,7 +84,13 @@ export const shareToKakao = ({ koreanName, englishName, runeText, language }: Sh
   const seo = getSeoData(resolvedLang);
 
   const shareName = seoLang === 'ko' ? (koreanName || englishName) : (englishName || koreanName);
-  const shareUrl = `${window.location.origin}/og?name=${encodeURIComponent(shareName)}&rune=${encodeURIComponent(runeText)}&lang=${encodeURIComponent(resolvedLang)}`;
+  const shareUrl = (() => {
+    const params = new URLSearchParams();
+    params.set('native', koreanName || '');
+    params.set('roman', englishName || '');
+    params.set('lang', resolvedLang);
+    return `${window.location.origin}/result?${params.toString()}`;
+  })();
   const imageUrl = `${window.location.origin}/og-image.jpg`;
 
   const title = shareName ? `${shareName} • ${seo.ogTitle}` : seo.ogTitle;

@@ -6,6 +6,7 @@ import { Copy, Download } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { primaryCtaButtonClassName } from "@/lib/buttonStyles";
 
 interface ShareModalProps {
   isOpen: boolean;
@@ -34,10 +35,15 @@ export default function ShareModal({
 
   const shareName = language === 'ko' ? (koreanName || englishName) : (englishName || koreanName);
 
-  const shareUrl =
-    typeof window !== 'undefined'
-      ? `${window.location.origin}/og?name=${encodeURIComponent(shareName)}&rune=${encodeURIComponent(runeText)}&lang=${encodeURIComponent(language)}`
-      : '';
+  const shareUrl = typeof window !== 'undefined'
+    ? (() => {
+        const params = new URLSearchParams();
+        params.set('native', koreanName || '');
+        params.set('roman', englishName || '');
+        params.set('lang', language);
+        return `${window.location.origin}/result?${params.toString()}`;
+      })()
+    : '';
 
   const displayName = koreanName ? `${koreanName} (${englishName})` : englishName;
   const shareText = `${displayName} - ${t('shareImageTitle')}: ${runeText}
@@ -146,7 +152,7 @@ ${t('shareCta')}`;
           {/* URL Copy */}
           <Button
             onClick={handleCopyUrl}
-            className="btn-viking text-white font-bold py-3 px-4 rounded-lg font-cinzel flex items-center justify-center gap-2"
+            className={primaryCtaButtonClassName}
           >
             <Copy className="w-4 h-4" />
             {t('shareCopyLinkButton')}
@@ -156,7 +162,7 @@ ${t('shareCta')}`;
           <Button
             onClick={handleDownload}
             disabled={isDownloading}
-            className="btn-viking text-white font-bold py-3 px-4 rounded-lg font-cinzel flex items-center justify-center gap-2"
+            className={primaryCtaButtonClassName}
           >
             <Download className="w-4 h-4" />
             {isDownloading ? t('downloadingButton') : t('downloadButton')}

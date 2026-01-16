@@ -7,6 +7,7 @@ import { ArrowRight, Edit3, Sparkles } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
 import { normalizeLatinInput } from "@/lib/runeConverter";
+import { primaryCtaButtonClassName } from "@/lib/buttonStyles";
 
 interface NameInputProps {
   koreanName: string;
@@ -159,7 +160,7 @@ export default function NameInput({
             <Button
               onClick={handleConvert}
               disabled={!englishName.trim() || isConverting}
-              className="w-full h-[56px] md:h-[60px] px-8 rounded-2xl font-semibold text-base md:text-lg tracking-tight text-white relative overflow-hidden bg-gradient-to-b from-viking-brown to-viking-brown-dark shadow-[0_18px_50px_rgba(62,39,35,0.22)] hover:shadow-[0_24px_70px_rgba(62,39,35,0.26)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-[0_14px_40px_rgba(62,39,35,0.22)] transition-all duration-200 focus-visible:ring-2 focus-visible:ring-viking-gold/30 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment disabled:opacity-60 disabled:shadow-none disabled:hover:translate-y-0"
+              className={primaryCtaButtonClassName}
             >
               {isConverting ? (
                 <span className="flex items-center justify-center gap-3">
