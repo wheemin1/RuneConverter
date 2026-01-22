@@ -3,13 +3,13 @@
   <head>
     <base href="/" />
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <meta name="google-site-verification" content="CXwW2ROvezFAamVFZYXX26sxDGQ9YjNOHBPFGM7LA6U" />
     <meta name="naver-site-verification" content="2e4cfcbbf64d6031227eb45c25f609c1dc509561" />
     
     
     <!-- 보안 정책 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://t1.kakaocdn.net https://pagead2.googlesyndication.com https://partner.googleadservices.com https://tpc.googlesyndication.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://viking-rune-converter.netlify.app https://kapi.kakao.com https://kauth.kakao.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com;" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://t1.kakaocdn.net https://pagead2.googlesyndication.com https://partner.googleadservices.com https://tpc.googlesyndication.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://viking-rune-converter.netlify.app https://kapi.kakao.com https://kauth.kakao.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://ep1.adtrafficquality.google https://csi.gstatic.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com;" />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
     
     <!-- Additional SEO meta tags -->
@@ -27,7 +27,8 @@
     <meta name="reply-to" content="support@viking-rune-converter.netlify.app" />
 
     <!-- Fallback description for bots / pre-React shell (React Helmet will override in-app) -->
-    <meta name="description" content="Free Viking Rune Name Converter. Translate English names to Elder Futhark runes instantly." />
+    <title>Viking Rune Converter | Elder Futhark Translator</title>
+    <meta name="description" content="Convert your name into ancient Elder Futhark Runes instantly. Supports English, Korean, Chinese, and Japanese names." />
     
     <!-- SEO 기본은 Helmet(SEOManager)에서 동적으로 관리됩니다. -->
     <meta name="author" content="RuneConverter" />
@@ -47,17 +48,24 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "바이킹 룬 문자 변환기",
-  "alternateName": "Viking Rune Converter",
-  "description": "당신의 이름을 신비로운 고대 바이킹 룬 문자로 변환하고 그 상징적 의미를 확인하세요.",
-  "url": "https://viking-rune-converter.netlify.app",
-  "applicationCategory": "DesignApplication",
-  "operatingSystem": "All",
+  "name": "Viking Rune Converter",
+  "alternateName": "바이킹 룬 문자 변환기",
+  "url": "https://viking-rune-converter.netlify.app/",
+  "description": "Convert your name into ancient Elder Futhark Runes instantly. Supports English, Korean, Chinese, Japanese, Spanish, and French names.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "inLanguage": ["en", "ko", "ja", "zh", "es", "fr"],
   "offers": {
     "@type": "Offer",
     "price": "0",
-    "priceCurrency": "KRW"
-  }
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Elder Futhark Translation",
+    "Multilingual Support",
+    "Rune Meanings",
+    "Result Image Download"
+  ]
 }
     </script>
     
@@ -69,11 +77,11 @@
     <link rel="apple-touch-icon" href="/favicon.svg" />
     
     <link rel="manifest" href="/manifest.json" />
-    <link rel="schema.org" href="/schema.json" />
     
     <!-- 폰트 -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Runic&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=Noto+Sans+Runic&display=swap" rel="stylesheet">
     
     <!-- 카카오톡 SDK -->
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js" integrity="sha384-l+xbElFSnPZ2rOaPrU//2FF5B4LB8FiX5q4fXYTlfcG4PGpMkE1vcL7kNXI6Cci0" crossorigin="anonymous"></script>
