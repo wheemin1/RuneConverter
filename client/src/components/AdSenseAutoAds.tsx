@@ -7,8 +7,14 @@ export default function AdSenseAutoAds() {
     if (typeof document === "undefined") return;
 
     const marker = "data-adsense-auto";
-    const existing = document.querySelector(`script[${marker}="true"]`);
-    if (existing) return;
+    const hasScriptAlready = Array.from(document.scripts).some((script) => {
+      const src = script.getAttribute("src") ?? "";
+      return (
+        script.getAttribute(marker) === "true" ||
+        src.includes("pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+      );
+    });
+    if (hasScriptAlready) return;
 
     const script = document.createElement("script");
     script.async = true;
