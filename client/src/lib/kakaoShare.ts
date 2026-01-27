@@ -17,7 +17,9 @@ export const initKakao = () => {
   const kakaoKey = import.meta.env.VITE_KAKAO_JS_KEY;
   
   if (!kakaoKey) {
-    console.warn('⚠️ 카카오 JavaScript 키가 설정되지 않았습니다. 공유 기능이 비활성화됩니다.');
+    if (import.meta.env.DEV) {
+      console.warn('⚠️ 카카오 JavaScript 키가 설정되지 않았습니다. 공유 기능이 비활성화됩니다.');
+    }
     return;
   }
 
