@@ -92,6 +92,13 @@ export default function Home() {
               {t("subtitle")}
             </p>
 
+            {language === "en" && (
+              <p className="mt-3 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-2xl mx-auto">
+                Easily translate names into the <strong>Nordic Elder Futhark alphabet</strong>. Try our free{' '}
+                <strong>rune name generator</strong> for tattoos and designs.
+              </p>
+            )}
+
             <div className="mt-7 md:mt-9 max-w-xl mx-auto">
               <NameInput
                 koreanName={koreanName}
