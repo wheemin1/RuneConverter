@@ -13,13 +13,16 @@ export type RuneLocalizationTable = Record<RuneKey, RuneLocalizedText>;
 
 // Fallback order: requested → en → ko
 export function getRuneLocalization(language: Language, key: RuneKey): RuneLocalizedText {
-  const table = runeLocalizations[language] ?? runeLocalizations.en;
-  const fallbackEn = runeLocalizations.en[key];
-  const fallbackKo = runeLocalizations.ko[key];
+  const fallbackEnTable = runeLocalizations.en ?? runeLocalizations.ko!;
+  const fallbackKoTable = runeLocalizations.ko ?? runeLocalizations.en!;
+  const table = runeLocalizations[language] ?? fallbackEnTable;
+
+  const fallbackEn = fallbackEnTable[key];
+  const fallbackKo = fallbackKoTable[key];
   return table[key] ?? fallbackEn ?? fallbackKo;
 }
 
-export const runeLocalizations: Record<Language, RuneLocalizationTable> = {
+export const runeLocalizations: Partial<Record<Language, RuneLocalizationTable>> = {
   ko: {
     fehu: {
       name: '페후 (Fehu)',

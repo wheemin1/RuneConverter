@@ -85,18 +85,82 @@ export default function Home() {
             <div className="rune-character-large text-5xl md:text-6xl lg:text-7xl leading-none mb-3 md:mb-5">ᚱ</div>
 
             <h1 className="font-cinzel-decorative text-3xl md:text-5xl lg:text-6xl font-bold text-viking-brown tracking-tight">
-              {t("title")}
+              {language === "de"
+                ? "Runen Konverter & Generator"
+                : language === "fr"
+                ? "Convertisseur Rune Viking"
+                : language === "en"
+                  ? "Elder Futhark Rune Translator"
+                  : language === "ko"
+                    ? `${t("title")} (바이킹 이름 번역)`
+                    : t("title")}
             </h1>
 
+            {language === "de" ? (
+              <h2 className="mt-2 text-lg md:text-xl font-cinzel text-viking-brown/80 font-semibold">
+                Kostenlos Namen Übersetzen (Elder Futhark)
+              </h2>
+            ) : language === "fr" ? (
+              <h2 className="mt-2 text-lg md:text-xl font-cinzel text-viking-brown/80 font-semibold">
+                Traduction de Prénom (Gratuit)
+              </h2>
+            ) : language === "en" ? (
+              <h2 className="mt-2 text-lg md:text-xl font-cinzel text-viking-brown/80 font-semibold">
+                Accurate Viking Name Converter & Generator
+              </h2>
+            ) : language === "ko" ? (
+              <h2 className="mt-2 text-lg md:text-xl font-cinzel text-viking-brown/80 font-semibold">
+                무료 이름 번역 & 뜻 풀이 (Meaning & Translation)
+              </h2>
+            ) : null}
+
             <p className="mt-4 md:mt-6 text-base md:text-lg lg:text-xl text-text-brown-light leading-relaxed max-w-2xl mx-auto">
-              {t("subtitle")}
+              {language === "ko" ? "자신의 이름을 신비로운 고대 룬 문자로 정확하게 변환해보세요." : t("subtitle")}
             </p>
 
             {language === "en" && (
               <p className="mt-3 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-2xl mx-auto">
                 Easily translate names into the <strong>Nordic Elder Futhark alphabet</strong>. Try our free{' '}
-                <strong>rune name generator</strong> for tattoos and designs.
+                <strong>rune name generator</strong> for names and authentic rune writing.
               </p>
+            )}
+
+            {language === "ko" && (
+              <div className="mt-4 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-2xl mx-auto bg-parchment-dark/10 p-4 rounded-lg">
+                <p>
+                  이 <strong>룬 문자 번역기</strong>는 역사적으로 가장 오래된 <em>엘더 푸사르크</em> 방식을 사용하여,
+                  한글/영어 이름을 정확하게 변환해 드립니다.
+                </p>
+              </div>
+            )}
+
+            {language === "en" && (
+              <div className="mt-4 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-2xl mx-auto bg-parchment-dark/10 p-4 rounded-lg">
+                <p>
+                  Looking for a <strong>Viking Rune Generator</strong>? Our tool uses historically accurate{' '}
+                  <em>phonetic conversion</em> to translate names into <strong>Elder Futhark</strong> scripts,
+                  so the result matches how the name is pronounced.
+                </p>
+              </div>
+            )}
+
+            {language === "fr" && (
+              <div className="mt-4 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-2xl mx-auto bg-parchment-dark/10 p-4 rounded-lg">
+                <p>
+                  Vous cherchez une <strong>traduction en runes vikings</strong> ? Notre outil utilise l'alphabet
+                  historique <em>Elder Futhark</em> pour une <strong>transcription phonétique</strong> précise de votre
+                  nom.
+                </p>
+              </div>
+            )}
+
+            {language === "de" && (
+              <div className="mt-4 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-2xl mx-auto bg-parchment-dark/10 p-4 rounded-lg">
+                <p>
+                  Suchen Sie einen <strong>Wikinger Runen Übersetzer</strong>? Unser Tool nutzt das historische{' '}
+                  <em>Elder Futhark</em> für eine <strong>phonetisch genaue</strong> Übersetzung Ihres Namens.
+                </p>
+              </div>
             )}
 
             <div className="mt-7 md:mt-9 max-w-xl mx-auto">

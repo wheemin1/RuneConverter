@@ -1,4 +1,4 @@
-export type Language = 'ko' | 'en' | 'ja' | 'zh' | 'es' | 'fr';
+export type Language = 'ko' | 'en' | 'ja' | 'zh' | 'es' | 'fr' | 'de';
 
 export interface LanguageOption {
   code: Language;
@@ -14,6 +14,7 @@ export const languages: LanguageOption[] = [
   { code: 'zh', name: 'Chinese', nativeName: '中文', flag: '🇨🇳' },
   { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸' },
   { code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷' },
+  { code: 'de', name: 'German', nativeName: 'Deutsch', flag: '🇩🇪' },
 ];
 
 export const translations = {
@@ -1261,6 +1262,27 @@ export const translations = {
     localApiServerLabel: 'Serveur API local :',
     connectionCheckingButton: 'Vérification...',
     connectionRecheckButton: 'Revérifier',
+  }
+  ,
+  de: {
+    // Header
+    title: 'Runen Konverter & Generator',
+    subtitle: 'Übersetze deinen Namen in historisch genaue Elder-Futhark-Runen – kostenlos und sofort.',
+
+    // Features (fallbacks will fill anything missing)
+    feature1Title: 'Akkurate Runen-Konvertierung',
+    feature1Desc: 'Phonetische Umwandlung für eine natürlich klingende Rune-Schreibweise',
+    feature2Title: 'Runen-Bedeutung',
+    feature2Desc: 'Entdecke Symbolik und Bedeutungen der einzelnen Runen',
+    feature3Title: 'Einfach teilen',
+    feature3Desc: 'Bild speichern & in Social Media teilen',
+
+    // Input
+    inputTitle: 'Name eingeben',
+    inputSubtitle: 'Gib deinen Namen ein und erzeuge Wikinger-Runen (Elder Futhark)',
+    alphabetName: 'Name (Lateinisches Alphabet)',
+    alphabetPlaceholder: "z.B. Müller, Franziska, Jörg, O'Connor...",
+    convertButton: 'In Runen umwandeln',
   }
 };
 
