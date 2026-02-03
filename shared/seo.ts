@@ -21,12 +21,12 @@ export const SEO_DATA: Record<SupportedSeoLang, {
   },
   // ⚡ [업그레이드] 영어: 타투, 디자인, 정확도, 무료 강조 (CTR 상승 전략)
   en: {
-    title: 'Free Rune Name Converter for Tattoo & Design (Elder Futhark)',
-    desc: "Don't get a wrong tattoo. Translate your name to Viking Runes accurately with this free online tool. Download high-quality images for your design.",
+    title: 'Elder Futhark Translator & Rune Converter (English to Viking)',
+    desc: 'Best free Viking Rune Generator. Instantly convert English names to authentic Elder Futhark runes with accurate phonetics and meanings. Try it now.',
     keywords:
-      'Rune Converter, Viking Runes, Elder Futhark, Tattoo Design, Name to Runes, Ancient Scripts, Viking Name, Free Rune Translator, Nordic Runes',
-    ogTitle: 'Reveal Your Viking Name in Runes',
-    ogDesc: 'See what your name looks like in ancient mystical Rune symbols.',
+      'Elder Futhark Translator, Rune Converter, Viking Rune Generator, English to Viking, Viking Runes, Elder Futhark, Tattoo Design, Name to Runes, Ancient Scripts, Free Rune Translator, Nordic Runes',
+    ogTitle: 'Elder Futhark Translator & Rune Generator',
+    ogDesc: 'Convert your name from English to Viking runes instantly.',
     siteName: 'Ancient Runes Global',
   },
   ja: {
