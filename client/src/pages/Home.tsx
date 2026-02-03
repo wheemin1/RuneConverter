@@ -84,11 +84,15 @@ export default function Home() {
 
             <div className="rune-character-large text-5xl md:text-6xl lg:text-7xl leading-none mb-3 md:mb-5">ᚱ</div>
 
-            <h1 className="font-cinzel-decorative text-3xl md:text-5xl lg:text-6xl font-bold text-viking-brown tracking-tight">
+            <h1
+              className={`font-cinzel-decorative text-3xl md:text-5xl lg:text-6xl font-bold text-viking-brown tracking-tight text-balance${
+                language === "ko" ? " break-keep" : ""
+              }`}
+            >
               {language === "de"
-                ? "Runen Konverter & Generator"
+                ? "Runen Konverter &\u00A0Generator"
                 : language === "fr"
-                ? "Convertisseur Rune Viking"
+                ? "Convertisseur Rune\u00A0Viking"
                 : language === "en"
                   ? "Elder Futhark Rune Translator"
                   : language === "ko"
@@ -114,7 +118,11 @@ export default function Home() {
               </h2>
             ) : null}
 
-            <p className="mt-4 md:mt-6 text-base md:text-lg lg:text-xl text-text-brown-light leading-relaxed max-w-2xl mx-auto">
+            <p
+              className={`mt-4 md:mt-6 text-base md:text-lg lg:text-xl text-text-brown-light leading-relaxed mx-auto text-pretty${
+                language === "de" || language === "fr" ? " max-w-3xl" : " max-w-2xl"
+              }${language === "ko" ? " break-keep" : ""}`}
+            >
               {language === "ko" ? "자신의 이름을 신비로운 고대 룬 문자로 정확하게 변환해보세요." : t("subtitle")}
             </p>
 
@@ -145,7 +153,7 @@ export default function Home() {
             )}
 
             {language === "fr" && (
-              <div className="mt-4 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-2xl mx-auto bg-parchment-dark/10 p-4 rounded-lg">
+              <div className="mt-4 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-3xl mx-auto bg-parchment-dark/10 p-4 rounded-lg text-pretty">
                 <p>
                   Vous cherchez une <strong>traduction en runes vikings</strong> ? Notre outil utilise l'alphabet
                   historique <em>Elder Futhark</em> pour une <strong>transcription phonétique</strong> précise de votre
@@ -155,10 +163,10 @@ export default function Home() {
             )}
 
             {language === "de" && (
-              <div className="mt-4 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-2xl mx-auto bg-parchment-dark/10 p-4 rounded-lg">
+              <div className="mt-4 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-3xl mx-auto bg-parchment-dark/10 p-4 rounded-lg text-pretty">
                 <p>
                   Suchen Sie einen <strong>Wikinger Runen Übersetzer</strong>? Unser Tool nutzt das historische{' '}
-                  <em>Elder Futhark</em> für eine <strong>phonetisch genaue</strong> Übersetzung Ihres Namens.
+                  <em>Elder Futhark</em> für eine <strong>phonetisch genaue</strong> Übersetzung Ihres\u00A0Namens.
                 </p>
               </div>
             )}
