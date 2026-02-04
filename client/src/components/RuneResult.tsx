@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -53,6 +54,8 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
   const [isDownloading, setIsDownloading] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const { toast } = useToast();
+
+  const homeUrl = language === 'ko' ? '/' : `/?lang=${language}`;
 
   // Function to generate combined meaning from multiple runes
   const generateCombinedMeaning = (details: RuneDetail[]): string => {
@@ -226,6 +229,12 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
             </div>
             
             {/* Action Buttons */}
+            <div className="flex justify-center mb-4">
+              <Button asChild className={primaryCtaButtonClassName}>
+                <Link to={homeUrl}>{t('convertAnotherName')}</Link>
+              </Button>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Button
                 onClick={() => setShowShareModal(true)}
