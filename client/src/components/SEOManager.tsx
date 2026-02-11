@@ -35,6 +35,7 @@ export default function SEOManager() {
       <link rel="alternate" hrefLang="es" href={`${siteOrigin}/?lang=es`} />
       <link rel="alternate" hrefLang="fr" href={`${siteOrigin}/?lang=fr`} />
       <link rel="alternate" hrefLang="de" href={`${siteOrigin}/?lang=de`} />
+      <link rel="alternate" hrefLang="pt-BR" href={`${siteOrigin}/?lang=pt-BR`} />
       <link rel="alternate" hrefLang="x-default" href={`${siteOrigin}/?lang=en`} />
 
       <meta property="og:type" content="website" />

@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import NameInput from "@/components/NameInput";
 import RuneReference from "@/components/RuneReference";
 import HistoricalInfo from "@/components/HistoricalInfo";
+import FAQ from "@/components/FAQ";
 import LanguageSelector from "@/components/LanguageSelector";
 import ConvertingPage from "./ConvertingPage";
 import AdSenseAutoAds from "@/components/AdSenseAutoAds";
@@ -24,7 +25,7 @@ export default function Home() {
   const [showConvertingPage, setShowConvertingPage] = useState(false);
 
   const isDualInputMode =
-    language === "ko" || language === "zh" || language === "zh-TW" || language === "ja" || language === "es" || language === "fr";
+    language === "ko" || language === "zh" || language === "zh-TW" || language === "ja" || language === "es" || language === "fr" || language === "pt-BR";
 
   const nativeValue = useMemo(() => {
     return isDualInputMode ? koreanName : englishName;
@@ -205,6 +206,7 @@ export default function Home() {
 
           <RuneReference />
           <HistoricalInfo />
+          <FAQ />
         </main>
       </div>
     </div>

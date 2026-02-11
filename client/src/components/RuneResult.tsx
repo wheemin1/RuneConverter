@@ -35,7 +35,9 @@ function formatConjunctionList(items: string[], language: string): string {
                 ? 'es-ES'
                 : language === 'fr'
                   ? 'fr-FR'
-                  : 'en-US';
+                  : language === 'pt-BR'
+                    ? 'pt-BR'
+                    : 'en-US';
 
     // Intl.ListFormat isn't supported in very old browsers; fall back if needed.
     const IntlAny = Intl as unknown as { ListFormat?: new (locales?: string | string[], options?: any) => { format: (items: string[]) => string } };

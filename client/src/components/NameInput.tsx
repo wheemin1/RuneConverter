@@ -37,7 +37,8 @@ export default function NameInput({
     language === 'zh-TW' ||
     language === 'ja' ||
     language === 'es' ||
-    language === 'fr';
+    language === 'fr' ||
+    language === 'pt-BR';
   const isKoreanMode = language === 'ko';
   const shouldShowAutoUnavailableNotice =
     isSourceScriptMode &&

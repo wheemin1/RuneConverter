@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Language, getTranslation } from '@/lib/i18n';
 
-const SUPPORTED_LANGUAGES: Language[] = ['ko', 'en', 'ja', 'zh', 'zh-TW', 'es', 'fr', 'de'];
+const SUPPORTED_LANGUAGES: Language[] = ['ko', 'en', 'ja', 'zh', 'zh-TW', 'es', 'fr', 'de', 'pt-BR'];
 
 function getBrowserLanguage(): Language {
   if (typeof navigator === 'undefined') return 'ko';
@@ -13,6 +13,8 @@ function getBrowserLanguage(): Language {
   if (lang === 'zh-tw' || lang === 'zh-hk' || lang.includes('hant')) return 'zh-TW';
   // Simplified Chinese: Everything else starting with zh
   if (lang.startsWith('zh')) return 'zh';
+  // Portuguese: Brazilian Portuguese
+  if (lang === 'pt-br' || lang.startsWith('pt-br')) return 'pt-BR';
   if (lang.startsWith('es')) return 'es';
   if (lang.startsWith('fr')) return 'fr';
   if (lang.startsWith('de')) return 'de';

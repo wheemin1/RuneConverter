@@ -20,7 +20,8 @@ export function useRuneConverter(language: Language) {
     language === 'zh-TW' ||
     language === 'ja' ||
     language === 'es' ||
-    language === 'fr';
+    language === 'fr' ||
+    language === 'pt-BR';
 
   useEffect(() => {
     // Switching languages should re-enable auto-fill behavior.

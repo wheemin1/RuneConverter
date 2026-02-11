@@ -51,29 +51,40 @@ export const SEO_DATA = {
     ogDesc: 'Mira cómo se ve tu nombre en antiguos símbolos rúnicos.',
     siteName: 'Ancient Runes Español',
   },
-  // ⚡ [업그레이드] 프랑스어: 유입 키워드(convertisseur rune viking) 전면 배치
+  // ⚡ [업그레이드] 프랑스어: CTR 최적화 (0.78% → 2.5%+ 목표, 257회 노출 키워드)
   fr: {
-    title: 'Convertisseur Rune Viking - Traduction de Prénom (Elder Futhark)',
-    desc: 'Traduisez votre prénom en runes vikings anciennes (Elder Futhark). Convertisseur gratuit avec transcription phonétique précise, sans inscription.',
+    title: 'Convertisseur Rune Viking ⚡ Gratuit & Instantané (Elder Futhark)',
+    desc: 'Transformez votre nom en runes vikings authentiques en 1 clic. Alphabet Elder Futhark historiquement exact. Sans inscription, 100% gratuit. Essayez !',
     keywords: 'convertisseur rune viking, traduction rune prénom, alphabet elder futhark, écriture viking, traducteur rune',
-    ogTitle: 'Convertisseur Rune Viking - Traduction de Prénom (Elder Futhark)',
-    ogDesc: 'Traduisez votre prénom en runes vikings anciennes (Elder Futhark). Convertisseur gratuit avec transcription phonétique précise, sans inscription.',
+    ogTitle: 'Convertisseur Rune Viking ⚡ Gratuit & Instantané (Elder Futhark)',
+    ogDesc: 'Transformez votre nom en runes vikings authentiques en 1 clic. Alphabet Elder Futhark historiquement exact. Sans inscription, 100% gratuit.',
     siteName: 'Ancient Runes Français',
   },
+  // ⚡ [업그레이드] 독일어: 유입 키워드(runen converter) 전면 배치
   de: {
-    title: 'Runen Konverter & Generator - Kostenlos Namen Übersetzen (Elder Futhark)',
-    desc: 'Verwandeln Sie Ihren Namen in echte Wikinger-Runen. Der historisch genaue Runen-Generator für Namen und Bedeutung. Kostenlos & ohne Anmeldung.',
-    keywords: 'runen konverter, runen namen generator, wikinger runen übersetzer, elder futhark, runen übersetzung',
-    ogTitle: 'Runen Konverter & Generator - Kostenlos Namen Übersetzen (Elder Futhark)',
-    ogDesc: 'Verwandeln Sie Ihren Namen in echte Wikinger-Runen. Der historisch genaue Runen-Generator für Namen und Bedeutung. Kostenlos & ohne Anmeldung.',
+    title: 'Runen Converter & Übersetzer - Namen in Wikinger Runen (Elder Futhark)',
+    desc: 'Kostenloser Runen Converter: Übersetzen Sie Ihren Namen in Elder Futhark Wikinger Runen. Historisch genau, mit Bedeutung. Runen Generator & Übersetzer in einem.',
+    keywords: 'runen converter, runen übersetzer, runen konverter, wikinger runen, futhark übersetzer, elder futhark, runen übersetzung, nordische runen',
+    ogTitle: 'Runen Converter & Übersetzer - Namen in Wikinger Runen (Elder Futhark)',
+    ogDesc: 'Kostenloser Runen Converter: Übersetzen Sie Ihren Namen in Elder Futhark Wikinger Runen. Historisch genau, mit Bedeutung.',
     siteName: 'Ancient Runes Deutsch',
+  },
+  // ⚡ [업그레이드] 브라질 포르투갈어: Position #3 'runas nordicas tradutor' 키워드 타겟
+  'pt-BR': {
+    title: 'Tradutor de Runas Vikings - Conversor Futhark Grátis',
+    desc: 'Traduza seu nome para runas vikings autênticas. Conversor Elder Futhark gratuito com significado histórico. Alfabeto rúnico nórdico.',
+    keywords: 'tradutor de runas vikings, conversor de runas, runas nordicas tradutor, gerador de runas, elder futhark, alfabeto runico, runas vikings significado, tradutor de runas gratis',
+    ogTitle: 'Tradutor de Runas Vikings - Conversor Futhark Grátis',
+    ogDesc: 'Traduza seu nome para runas vikings autênticas com nosso conversor Elder Futhark gratuito.',
+    siteName: 'Ancient Runes Brasil',
   },
 };
 
 export function getSeoLang(lang) {
   const normalized = String(lang || '').toLowerCase();
-  // Handle zh-TW before splitting to preserve hyphenated language code
+  // Handle hyphenated language codes before splitting
   if (normalized === 'zh-tw') return 'zh-TW';
+  if (normalized === 'pt-br') return 'pt-BR';
   const clean = normalized.split('-')[0];
   return Object.prototype.hasOwnProperty.call(SEO_DATA, clean) ? clean : DEFAULT_LANG;
 }
@@ -98,6 +109,8 @@ export function getSeoLocale(lang) {
       return 'fr_FR';
     case 'de':
       return 'de_DE';
+    case 'pt-BR':
+      return 'pt_BR';
     case 'en':
     default:
       return 'en_US';

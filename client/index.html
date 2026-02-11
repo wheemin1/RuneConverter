@@ -1,36 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <base href="/" />
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <meta name="google-site-verification" content="CXwW2ROvezFAamVFZYXX26sxDGQ9YjNOHBPFGM7LA6U" />
-    <meta name="naver-site-verification" content="2e4cfcbbf64d6031227eb45c25f609c1dc509561" />
-    
     
     <!-- 보안 정책 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://t1.kakaocdn.net https://pagead2.googlesyndication.com https://partner.googleadservices.com https://tpc.googlesyndication.com https://*.adtrafficquality.google; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://viking-rune-converter.netlify.app https://kapi.kakao.com https://kauth.kakao.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://*.adtrafficquality.google https://csi.gstatic.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://*.adtrafficquality.google;" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://viking-rune-converter.netlify.app;" />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
     
     <!-- Additional SEO meta tags -->
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
     <meta name="bingbot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+    <meta name="language" content="ko" />
+    <meta name="geo.region" content="KR" />
+    <meta name="geo.country" content="KR" />
     <meta name="distribution" content="global" />
     <meta name="rating" content="general" />
     <meta name="revisit-after" content="1 days" />
     <meta name="category" content="utility, tools, converter" />
+    <meta name="subject" content="바이킹 문자 변환기, 룬 문자 변환기, 룬 문자 번역기, 룬 문자 사이트" />
     <meta name="coverage" content="worldwide" />
     <meta name="target" content="all" />
     <meta name="audience" content="all" />
     <meta name="classification" content="utility" />
     <meta name="reply-to" content="support@viking-rune-converter.netlify.app" />
-
-    <!-- Fallback description for bots / pre-React shell (React Helmet will override in-app) -->
-    <title>Elder Futhark Rune Translator - Accurate Viking Name Converter &amp; Generator</title>
-    <meta name="description" content="Instantly translate English names into authentic Elder Futhark runes. Accurate phonetic rune generator for Viking names and history fans." />
     
-    <!-- SEO 기본은 Helmet(SEOManager)에서 동적으로 관리됩니다. -->
+    <!-- SEO 기본 - These will be dynamically updated by SEOManager -->
+    <title>룬 문자 변환기 | 한글 이름 바이킹 룬 변환 - 무료 룬 문자 번역기</title>
+    <meta name="description" content="한글 이름을 바이킹 룬 문자로 무료 변환하는 사이트입니다. 룬 문자 번역기, 룬 문자 변환기, 바이킹 문자 만들기, 엘더 푸타르크 룬 문자의 의미와 상징을 확인하세요." />
+    <meta name="keywords" content="룬 문자 변환기, 룬 문자 번역기, 바이킹 룬, 룬 문자, 한글 이름 변환, 엘더 푸타르크, 북유럽 문자, 바이킹 문자, 고대 문자, 룬 생성기, 이름 변환, 룬 변환, 룸 문자 변환, 룬 문자 번역, 룬 문자 사이트, 룬 문자 만들기, 바이킹 문자 변환기, 바이킹 이름 생성기, 룬 변환 사이트, 무료 룬 변환기" />
     <meta name="author" content="RuneConverter" />
     
     <!-- Mobile App tags -->
@@ -41,160 +42,201 @@
     <meta name="application-name" content="룬 문자 변환기" />
     <meta name="theme-color" content="#1a202c" />
     
-    <!-- Open Graph/Twitter 메타는 Helmet(SEOManager)에서 동적으로 관리됩니다. -->
+    <!-- Open Graph / 소셜 미디어 - These will be dynamically updated by SEOManager -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://viking-rune-converter.netlify.app/" />
+    <meta property="og:title" content="룬 문자 변환기 | 한글 이름 바이킹 룬 변환 - 무료 룬 문자 번역기" />
+    <meta property="og:description" content="한글 이름을 바이킹 룬 문자로 무료 변환하는 사이트입니다. 룬 문자 번역기, 룬 문자 변환기, 바이킹 문자 만들기 기능을 제공합니다." />
+    <meta property="og:image" content="https://viking-rune-converter.netlify.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:site_name" content="Viking Rune Converter" />
     
-    <!-- 구조화된 데이터 (Google 검증 완료) -->
+    <!-- Twitter - These will be dynamically updated by SEOManager -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://viking-rune-converter.netlify.app/" />
+    <meta name="twitter:title" content="룬 문자 변환기 | 한글 이름 바이킹 룬 변환" />
+    <meta name="twitter:description" content="한글 이름을 바이킹 룬 문자로 무료 변환하는 사이트입니다. 엘더 푸타르크 룬 문자의 의미를 확인하세요." />
+    <meta name="twitter:image" content="https://viking-rune-converter.netlify.app/og-image.jpg" />
+    <meta name="twitter:creator" content="@runeconverter" />
+    
+    <!-- 구조화된 데이터 -->
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Viking Rune Converter",
-  "alternateName": "바이킹 룬 문자 변환기",
-  "url": "https://viking-rune-converter.netlify.app/",
-  "description": "Convert your name into ancient Elder Futhark Runes instantly. Supports English, Korean, Chinese, Japanese, Spanish, French, and German names.",
-  "applicationCategory": "UtilityApplication",
-  "operatingSystem": "Any",
-  "inLanguage": ["en", "ko", "ja", "zh", "zh-TW", "es", "fr", "de"],
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "featureList": [
-    "Elder Futhark Translation",
-    "Multilingual Support",
-    "Rune Meanings",
-    "Result Image Download"
-  ]
-}
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "룬 문자 변환기",
+        "alternateName": ["바이킹 룬 변환기", "룬 문자 번역기", "룬 문자 사이트", "룬 문자 만들기", "바이킹 문자 변환기", "엘더 푸타르크 변환기", "Viking Rune Converter"],
+        "url": "https://viking-rune-converter.netlify.app/",
+        "description": "한글 이름을 바이킹 룬 문자로 무료 변환하는 사이트입니다. 룬 문자 번역기, 룬 문자 변환기, 바이킹 문자 만들기 기능을 제공합니다.",
+        "keywords": "룬 문자 변환기, 룬 문자 번역기, 바이킹 룬, 룬 문자, 바이킹 문자, 룬 문자 사이트, 룬 문자 만들기, 바이킹 문자 변환기, 엘더 푸타르크, 룬 변환 사이트",
+        "applicationCategory": "UtilityApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "KRW"
+        },
+        "operatingSystem": "웹 브라우저",
+        "inLanguage": ["ko", "en", "ja", "zh", "zh-TW", "es", "fr", "de", "pt-BR"],
+        "keywords": "룬 문자 변환기, 바이킹 룬, 룬 문자, 한글 이름 변환, 엘더 푸타르크, 북유럽 문자, 바이킹 문자, 고대 문자, 룬 생성기"
+      }
     </script>
     
-    <!-- canonical/hreflang은 Helmet(SEOManager)에서 관리됩니다. -->
+    <!-- Additional structured data for SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://viking-rune-converter.netlify.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Viking Rune Converter",
+            "item": "https://viking-rune-converter.netlify.app/"
+          }
+        ]
+      }
+    </script>
     
-    <!-- 파비콘 -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <!-- 웹사이트 구조화 데이터 -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "룬 문자 변환",
+        "alternateName": "룬 문자 변환기",
+        "url": "https://viking-rune-converter.netlify.app/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://viking-rune-converter.netlify.app/?search={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
     
+    <!-- FAQ structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Elder Futhark?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Elder Futhark is the oldest runic alphabet system used by Vikings and Germanic peoples from the 1st to 8th centuries. It consists of 24 characters, each with unique sounds and symbolic meanings."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this converter historically accurate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, our converter is based on the actual phonetic values and usage of Elder Futhark runes. Since we're converting modern names to ancient script, we match pronunciation as closely as possible."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this for tattoos?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely! Many people use our rune conversions for tattoo designs. However, we recommend double-checking the meaning and spelling before getting permanent ink."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What do the runes mean?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "After conversion, click 'View Detailed Meanings' to see the meaning, symbolism, and divinatory interpretation of each rune in your name."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is this different from other converters?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We provide pronunciation-based conversion rather than simple character substitution, with detailed historical meanings and symbolism. We also support multiple languages including Korean, Chinese, and Japanese."
+            }
+          }
+        ]
+      }
+    </script>
+    
+    <!-- HowTo structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Convert Your Name to Viking Runes",
+        "description": "Step-by-step guide to converting your name into authentic Elder Futhark runes",
+        "totalTime": "PT2M",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Enter your name",
+            "text": "Type your name in your native language (Korean, English, Japanese, Chinese, Spanish, French, German, or Portuguese)",
+            "url": "https://viking-rune-converter.netlify.app/#step1"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Review romanization",
+            "text": "Check the automatic romanization and edit if needed to match your preferred pronunciation",
+            "url": "https://viking-rune-converter.netlify.app/#step2"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Convert to runes",
+            "text": "Click the 'Convert to Runes' button to transform your name into Elder Futhark runes",
+            "url": "https://viking-rune-converter.netlify.app/#step3"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "View meanings",
+            "text": "Click 'View Detailed Meanings' to explore the symbolism and historical significance of each rune in your name",
+            "url": "https://viking-rune-converter.netlify.app/#step4"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 5,
+            "name": "Save or share",
+            "text": "Download your rune conversion as an image or share it on social media",
+            "url": "https://viking-rune-converter.netlify.app/#step5"
+          }
+        ]
+      }
+    </script>
+    
+    <!-- 기본 링크 -->
+    <link rel="canonical" href="https://viking-rune-converter.netlify.app/" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
+    <link rel="schema.org" href="/schema.json" />
     
     <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=Noto+Sans+Runic&display=swap" rel="stylesheet">
-    
-    <!-- 카카오톡 SDK -->
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js" integrity="sha384-l+xbElFSnPZ2rOaPrU//2FF5B4LB8FiX5q4fXYTlfcG4PGpMkE1vcL7kNXI6Cci0" crossorigin="anonymous"></script>
-
-    <!-- Google AdSense (site verification + ads library) -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9247464363490578" crossorigin="anonymous"></script>
-
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        background-color: #fcfbf7;
-      }
-
-      /* Pre-React intro screen (will be replaced when React mounts) */
-      #seo-content {
-        font-family: 'Cinzel', serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        text-align: center;
-        padding: 2rem;
-        color: #5c4d3c;
-        background-color: #fcfbf7;
-        box-sizing: border-box;
-      }
-
-      #seo-content h1 {
-        font-size: 1.8rem;
-        margin: 0 0 1rem;
-        color: #8b5e3c;
-      }
-
-      #seo-content p {
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        font-size: 0.95rem;
-        color: #8c7b6c;
-        max-width: 520px;
-        line-height: 1.6;
-        margin: 0.5rem 0;
-      }
-
-      #seo-content strong {
-        color: #5c4d3c;
-      }
-
-      .bot-info {
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        font-size: 0.8rem;
-        opacity: 0.6;
-        margin-top: 1.75rem;
-        list-style: none;
-        padding: 0;
-      }
-
-      .bot-info li {
-        margin: 0.25rem 0;
-      }
-
-      .loader::after {
-        content: "...";
-        animation: dots 1.5s steps(4, end) infinite;
-      }
-
-      @keyframes dots {
-        0% {
-          content: "";
-        }
-        25% {
-          content: ".";
-        }
-        50% {
-          content: "..";
-        }
-        75% {
-          content: "...";
-        }
-        100% {
-          content: "";
-        }
-      }
-    </style>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Runic&display=swap" rel="stylesheet">
   </head>
   <body>
-    <noscript>
-      <main>
-        <h1>Viking Rune Converter</h1>
-        <p>
-          Convert your name into authentic Elder Futhark Viking runes and explore rune meanings.
-          Please enable JavaScript to use the converter.
-        </p>
-      </main>
-    </noscript>
-
-    <div id="root">
-      <div id="seo-content">
-        <h1>Viking Rune Converter</h1>
-        <p class="loader">Initializing Ancient Scripts</p>
-
-        <p>
-          Transform your English name into authentic <strong>Elder Futhark Runes</strong>.
-          <br />
-          Accurate phonetic translation for Viking names &amp; history fans.
-        </p>
-
-        <ul class="bot-info">
-          <li>Name to Runes Translation</li>
-          <li>Viking &amp; Egyptian Hieroglyphs</li>
-          <li>Free Image Generator</li>
-        </ul>
-      </div>
-    </div>
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
