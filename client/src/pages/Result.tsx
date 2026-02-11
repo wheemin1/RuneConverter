@@ -1,15 +1,18 @@
-import { useEffect, useMemo } from "react";
-import { Navigate, useSearchParams } from "react-router-dom";
+import { useEffect, useMemo, lazy, Suspense } from "react";
+import { Redirect, useSearch } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { convertToRunes } from "@/lib/runeConverter";
 import { getRuneDetails } from "@/lib/runeDatabase";
 import RuneResult from "@/components/RuneResult";
-import RuneExplanation from "@/components/RuneExplanation";
 import AdSenseAutoAds from "@/components/AdSenseAutoAds";
+
+// Lazy load heavy components
+const RuneExplanation = lazy(() => import("@/components/RuneExplanation"));
 
 export default function Result() {
   const { language, setLanguage } = useLanguage();
-  const [searchParams] = useSearchParams();
+  const search = useSearch();
+  const searchParams = new URLSearchParams(search);
 
   const native = (searchParams.get("native") ?? "").trim();
   const roman = (searchParams.get("roman") ?? "").trim();
@@ -33,7 +36,7 @@ export default function Result() {
   }, [language, runeText]);
 
   if (!roman) {
-    return <Navigate to="/" replace />;
+    return <Redirect to="/" replace />;
   }
 
   return (
@@ -45,7 +48,9 @@ export default function Result() {
         <main className="max-w-7xl mx-auto px-4 md:px-6 pb-12 md:pb-16 pt-6 md:pt-8">
           <div id="rune-result" data-scroll-target="result" className="max-w-4xl mx-auto">
             <RuneResult runeText={runeText} englishName={roman} koreanName={native} runeDetails={runeDetails} />
-            <RuneExplanation runeDetails={runeDetails} />
+            <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="text-amber-900">Loading...</div></div>}>
+              <RuneExplanation runeDetails={runeDetails} />
+            </Suspense>
           </div>
 
           <div className="max-w-4xl mx-auto mt-10">

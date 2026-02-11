@@ -1,18 +1,23 @@
-import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useMemo, useState, lazy, Suspense } from "react";
+import { useLocation } from "wouter";
 import { useRuneConverter } from "@/hooks/useRuneConverter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import NameInput from "@/components/NameInput";
-import RuneReference from "@/components/RuneReference";
-import HistoricalInfo from "@/components/HistoricalInfo";
-import FAQ from "@/components/FAQ";
 import LanguageSelector from "@/components/LanguageSelector";
 import ConvertingPage from "./ConvertingPage";
 import AdSenseAutoAds from "@/components/AdSenseAutoAds";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { BookOpen } from "lucide-react";
+
+// Lazy load heavy components
+const RuneReference = lazy(() => import("@/components/RuneReference"));
+const HistoricalInfo = lazy(() => import("@/components/HistoricalInfo"));
+const FAQ = lazy(() => import("@/components/FAQ"));
 
 export default function Home() {
   const { t, language } = useLanguage();
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
 
   const {
     koreanName,
@@ -54,7 +59,7 @@ export default function Home() {
     setShowConvertingPage(false);
     setIsConverting(false);
 
-    navigate(`/result?${params.toString()}`);
+    setLocation(`/result?${params.toString()}`);
   };
 
   if (showConvertingPage) {
@@ -204,9 +209,32 @@ export default function Home() {
             </div>
           </div>
 
-          <RuneReference />
-          <HistoricalInfo />
-          <FAQ />
+          <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="text-amber-900">Loading...</div></div>}>
+            <RuneReference />
+            <HistoricalInfo />
+            
+            {/* Rune Meanings CTA */}
+            <Card className="w-full max-w-4xl mx-auto my-12 bg-gradient-to-r from-amber-100/80 to-stone-100/80 border-amber-300/50 shadow-lg">
+              <CardContent className="p-8 text-center">
+                <BookOpen className="w-12 h-12 mx-auto mb-4 text-amber-800" />
+                <h2 className="text-2xl md:text-3xl font-bold text-amber-900 mb-3">
+                  {language === 'ko' ? '모든 룬 문자의 의미 알아보기' : 'Explore All Rune Meanings'}
+                </h2>
+                <p className="text-stone-700 mb-6 max-w-2xl mx-auto">
+                  {language === 'ko'
+                    ? '24개 엘더 푸타르크 룬의 의미, 상징, 역사를 상세히 알아보세요.'
+                    : 'Discover the detailed meanings, symbolism, and history of all 24 Elder Futhark runes.'}
+                </p>
+                <a href={`/rune-meanings?lang=${language}`}>
+                  <Button size="lg" className="bg-amber-700 hover:bg-amber-800 text-white font-semibold">
+                    {language === 'ko' ? '룬 의미 보기' : 'View Rune Meanings'}
+                  </Button>
+                </a>
+              </CardContent>
+            </Card>
+            
+            <FAQ />
+          </Suspense>
         </main>
       </div>
     </div>

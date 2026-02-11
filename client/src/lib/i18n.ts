@@ -94,6 +94,14 @@ export const translations = {
     faqA4: '변환 후 "각 룬의 세부 의미 보기" 버튼을 누르면 당신의 이름을 구성하는 각 룬의 의미, 상징, 점술적 해석을 자세히 볼 수 있습니다.',
     faqQ5: '다른 변환기와 어떻게 다른가요?',
     faqA5: '저희는 단순 문자 대체가 아닌 발음 기반 변환을 제공하며, 각 룬의 역사적 의미와 상징을 상세히 설명합니다. 또한 한국어, 중국어, 일본어 등 다양한 언어를 지원합니다.',
+    
+    // Rune Meanings Page
+    runeMeaningsTitle: '엘더 푸타르크 룬 문자 의미',
+    runeMeaningsSubtitle: '24개 고대 바이킹 룬의 의미, 상징, 역사를 알아보세요',
+    runeMeaningsDescription: '각 룬 문자는 단순한 글자가 아니라 깊은 상징적 의미를 담고 있습니다. 고대 북유럽에서는 룬을 문자뿐만 아니라 점술과 마법에도 사용했습니다.',
+    phonetic: '발음',
+    keywords: '키워드',
+    learnMore: '더 알아보기',
   },
   
   en: {
@@ -173,6 +181,14 @@ export const translations = {
     faqA4: 'After conversion, click "View Detailed Meanings" to see the meaning, symbolism, and divinatory interpretation of each rune in your name.',
     faqQ5: 'How is this different from other converters?',
     faqA5: 'We provide pronunciation-based conversion rather than simple character substitution, with detailed historical meanings and symbolism. We also support multiple languages including Korean, Chinese, and Japanese.',
+    
+    // Rune Meanings Page
+    runeMeaningsTitle: 'Elder Futhark Rune Meanings',
+    runeMeaningsSubtitle: 'Discover the meanings, symbolism, and history of all 24 ancient Viking runes',
+    runeMeaningsDescription: 'Each rune is not just a letter but carries deep symbolic meaning. In ancient Norse culture, runes were used not only for writing but also for divination and magic.',
+    phonetic: 'Phonetic',
+    keywords: 'Keywords',
+    learnMore: 'Learn More',
   },
   
   ja: {

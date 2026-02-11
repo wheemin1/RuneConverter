@@ -20,4 +20,25 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://viking-rune-converter.netlify.app/?lang=pt-BR" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://viking-rune-converter.netlify.app/" />
   </url>
+  
+  <!-- Rune Meanings Page -->
+  <url>
+    <loc>https://viking-rune-converter.netlify.app/rune-meanings</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=ko" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=zh" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=zh-TW" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=zh-TW" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=zh-TW" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=de" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=pt-BR" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=en" />
+  </url>
 </urlset>
