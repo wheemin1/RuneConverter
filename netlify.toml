@@ -1,11 +1,10 @@
 [build]
-  command = "npm run build:netlify"
+  command = "npm run build"
   publish = "dist/public"
   functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "18"
-  NODE_OPTIONS = "--max-old-space-size=4096"
 
 # 정적 파일 처리
 [build.processing]
@@ -28,12 +27,23 @@
   to = "/.netlify/functions/api/:splat"
   status = 200
 
+# 정적 파일은 리다이렉트하지 않음 (ads.txt, robots.txt, sitemap.xml 등)
 [[redirects]]
-  from = "/og"
-  to = "/.netlify/functions/og"
+  from = "/ads.txt"
+  to = "/ads.txt"
   status = 200
 
-# 모든 요청을 index.html로 리다이렉트 (SPA 처리)
+[[redirects]]
+  from = "/robots.txt"
+  to = "/robots.txt"
+  status = 200
+
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+
+# 모든 요청을 index.html로 리다이렉트 (SPA 처리) - 단, 위의 정적 파일 제외
 [[redirects]]
   from = "/*"
   to = "/index.html"

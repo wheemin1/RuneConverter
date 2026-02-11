@@ -4,7 +4,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { convertToRunes } from "@/lib/runeConverter";
 import { getRuneDetails } from "@/lib/runeDatabase";
 import RuneResult from "@/components/RuneResult";
-import AdSenseAutoAds from "@/components/AdSenseAutoAds";
 
 // Lazy load heavy components
 const RuneExplanation = lazy(() => import("@/components/RuneExplanation"));
@@ -41,7 +40,6 @@ export default function Result() {
 
   return (
     <div className="min-h-screen relative">
-      <AdSenseAutoAds />
       <div className="vignette-overlay" />
 
       <div className="parchment-bg min-h-screen font-cinzel relative z-10">
