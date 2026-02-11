@@ -80,7 +80,10 @@ export const SEO_DATA: Record<SupportedSeoLang, {
 };
 
 export function getSeoLang(lang: string): SupportedSeoLang {
-  const clean = (lang || '').toLowerCase().split('-')[0] as SupportedSeoLang;
+  const normalized = (lang || '').toLowerCase();
+  // Handle zh-TW before splitting to preserve hyphenated language code
+  if (normalized === 'zh-tw') return 'zh-TW';
+  const clean = normalized.split('-')[0] as SupportedSeoLang;
   return Object.prototype.hasOwnProperty.call(SEO_DATA, clean) ? clean : DEFAULT_LANG;
 }
 
@@ -100,6 +103,8 @@ export function getSeoLocale(lang: string): string {
       return 'ja_JP';
     case 'zh':
       return 'zh_CN';
+    case 'zh-TW':
+      return 'zh_TW';
     case 'es':
       return 'es_ES';
     case 'fr':

@@ -34,6 +34,7 @@ export default function NameInput({
   const isSourceScriptMode =
     language === 'ko' ||
     language === 'zh' ||
+    language === 'zh-TW' ||
     language === 'ja' ||
     language === 'es' ||
     language === 'fr';

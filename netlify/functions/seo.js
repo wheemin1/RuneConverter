@@ -71,7 +71,10 @@ export const SEO_DATA = {
 };
 
 export function getSeoLang(lang) {
-  const clean = String(lang || '').toLowerCase().split('-')[0];
+  const normalized = String(lang || '').toLowerCase();
+  // Handle zh-TW before splitting to preserve hyphenated language code
+  if (normalized === 'zh-tw') return 'zh-TW';
+  const clean = normalized.split('-')[0];
   return Object.prototype.hasOwnProperty.call(SEO_DATA, clean) ? clean : DEFAULT_LANG;
 }
 
@@ -87,6 +90,8 @@ export function getSeoLocale(lang) {
       return 'ja_JP';
     case 'zh':
       return 'zh_CN';
+    case 'zh-TW':
+      return 'zh_TW';
     case 'es':
       return 'es_ES';
     case 'fr':

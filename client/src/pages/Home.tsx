@@ -24,7 +24,7 @@ export default function Home() {
   const [showConvertingPage, setShowConvertingPage] = useState(false);
 
   const isDualInputMode =
-    language === "ko" || language === "zh" || language === "ja" || language === "es" || language === "fr";
+    language === "ko" || language === "zh" || language === "zh-TW" || language === "ja" || language === "es" || language === "fr";
 
   const nativeValue = useMemo(() => {
     return isDualInputMode ? koreanName : englishName;

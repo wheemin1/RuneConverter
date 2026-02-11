@@ -17,6 +17,7 @@ export function useRuneConverter(language: Language) {
   const isSourceScriptMode =
     language === 'ko' ||
     language === 'zh' ||
+    language === 'zh-TW' ||
     language === 'ja' ||
     language === 'es' ||
     language === 'fr';
@@ -46,7 +47,7 @@ export function useRuneConverter(language: Language) {
           const romanized = romanizeKorean(name);
           setEnglishName(romanized);
         }
-      } else if (language === 'zh' || language === 'ja' || language === 'es' || language === 'fr') {
+      } else if (language === 'zh' || language === 'zh-TW' || language === 'ja' || language === 'es' || language === 'fr') {
         const autoRomanized = romanizeNameByLanguage(name, language);
         setEnglishName(autoRomanized);
 

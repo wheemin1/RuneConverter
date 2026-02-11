@@ -22,7 +22,7 @@ export function romanizeNameByLanguage(input: string, language: Language): strin
     return normalizeLatinInput(romaji);
   }
 
-  if (language === "zh") {
+  if (language === "zh" || language === "zh-TW") {
     const romanized = pinyin(cleanInput, {
       toneType: "none",
       type: "string",

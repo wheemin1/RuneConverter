@@ -17,7 +17,7 @@ export default function Result() {
 
   useEffect(() => {
     // If a shared link includes lang, apply it.
-    if (urlLang && (urlLang === "ko" || urlLang === "en" || urlLang === "ja" || urlLang === "zh" || urlLang === "es" || urlLang === "fr" || urlLang === "de")) {
+    if (urlLang && (urlLang === "ko" || urlLang === "en" || urlLang === "ja" || urlLang === "zh" || urlLang === "zh-TW" || urlLang === "es" || urlLang === "fr" || urlLang === "de")) {
       if (urlLang !== language) setLanguage(urlLang);
     }
   }, [language, setLanguage, urlLang]);
