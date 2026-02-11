@@ -1,4 +1,4 @@
-export type Language = 'ko' | 'en' | 'ja' | 'zh' | 'es' | 'fr' | 'de';
+export type Language = 'ko' | 'en' | 'ja' | 'zh' | 'zh-TW' | 'es' | 'fr' | 'de';
 
 export interface LanguageOption {
   code: Language;
@@ -11,7 +11,8 @@ export const languages: LanguageOption[] = [
   { code: 'ko', name: 'Korean', nativeName: '한국어', flag: '🇰🇷' },
   { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
   { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '🇯🇵' },
-  { code: 'zh', name: 'Chinese', nativeName: '中文', flag: '🇨🇳' },
+  { code: 'zh', name: 'Chinese (Simplified)', nativeName: '简体中文', flag: '🇨🇳' },
+  { code: 'zh-TW', name: 'Chinese (Traditional)', nativeName: '繁體中文', flag: '🇹🇼' },
   { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸' },
   { code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷' },
   { code: 'de', name: 'German', nativeName: 'Deutsch', flag: '🇩🇪' },
@@ -874,6 +875,68 @@ export const translations = {
     localApiServerLabel: '本地 API 服务器:',
     connectionCheckingButton: '检查中...',
     connectionRecheckButton: '重新检查',
+  },
+  
+  'zh-TW': {
+    // Header
+    title: '維京符文轉換器',
+    subtitle: '用北歐古代人實際使用的古老弗薩克符文轉換您的姓名',
+    
+    // Features
+    feature1Title: '精確轉換',
+    feature1Desc: '韓語-英語-符文三步轉換',
+    feature2Title: '意義解釋',
+    feature2Desc: '提供每個符文的象徵和含義',
+    feature3Title: '便捷分享',
+    feature3Desc: '圖片保存和社交媒體分享',
+    
+    // Input
+    inputTitle: '姓名輸入',
+    inputSubtitle: '將您的姓名轉換為古代維京符文',
+    nativeName: '原文姓名',
+    romanizedName: '拼音/羅馬字（可編輯）',
+    nativePlaceholder: '例如：王偉、張偉、李娜...',
+    romanizedPlaceholder: '例如：wangwei、zhangwei、lina...',
+    convertButton: '轉換為符文',
+    convertingButton: '神秘轉換中...',
+    romanizedTipText: '自動生成的拼音/羅馬字可編輯，可按護照或習慣拼寫進行調整。',
+    romanizedAutoUnavailable: '部分字符可能無法自動生成拼音/羅馬字，請在下方輸入你希望的拼寫。',
+
+    // Input (non-Korean languages)
+    alphabetName: '姓名（字母）',
+    alphabetPlaceholder: '例如：José、François、Müller...（拉丁字母）',
+    alphabetTipText: '拉丁字母（含重音符）將轉換為符文。空格/連字符/撇號將成為單詞分隔符（·）。',
+    tipLabel: '提示：',
+    englishEnableHint: '輸入字母姓名後，轉換按鈕將啟用。',
+
+    // Validation
+    englishRequiredTitle: '需要英文姓名',
+    englishRequiredDesc: '請使用字母（A–Z）輸入您的姓名。',
+    englishInvalidTitle: '輸入無效',
+    englishInvalidDesc: '僅允許拉丁字母（含重音符）。空格/連字符/撇號將轉換為符文中的單詞分隔符（·）。',
+    
+    // Results
+    resultTitle: '符文轉換結果',
+    resultSubtitle: '蘊含古代維京神秘力量的您的姓名',
+    combinedMeaning: '綜合含義',
+    convertAnotherName: '轉換另一個名字',
+    separatorExplanation: '· 符號用於分隔單詞，正如古代符文銘文中的使用',
+    shareButton: '詳細分享',
+    downloadButton: '保存圖片',
+    downloadingButton: '保存中...',
+    copyRune: '複製符文',
+    detailButton: '查看各符文詳細含義',
+    
+    // Historical info
+    historyTitle: '符文的歷史',
+    historyWhatTitle: '什麼是符文？',
+    historyWhatBody: '符文（Runes）是日耳曼民族使用的古代文字體系。"rune"一詞源於古諾爾斯語"rún"，意為"秘密"或"低語"。維京人把符文刻在石頭、木材和金屬上，用於記錄和儀式。',
+    historyElderTitle: '古老弗薩克（Elder Futhark）',
+    historyElderBody: '最古老的符文字母表，由24個字符組成，大約在2世紀至8世紀間使用，並成為後續符文體系的基礎。"Futhark"這個名字來自其前六個字母（ᚠᚢᚦᚨᚱᚲ）。',
+    historyMeaningTitle: '符文的含義',
+    historyMeaningBody: '每個符文不僅代表發音，也承載象徵意義。維京人相信符文具有魔法力量，並將其用於占卜與護符。符文常象徵自然之力、諸神以及人類經驗。',
+    historySeparatorTitle: '單詞分隔符',
+    historySeparatorBody: '古代符文銘文使用中間點(·)或間隔符來分隔單詞。此轉換器遵循這種歷史傳統，對多單詞名字如"John Doe"使用中間點(·)。',
   },
   
   es: {

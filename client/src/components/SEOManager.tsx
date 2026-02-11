@@ -27,7 +27,11 @@ export default function SEOManager() {
       <link rel="alternate" hrefLang="ko" href={`${siteOrigin}/`} />
       <link rel="alternate" hrefLang="en" href={`${siteOrigin}/?lang=en`} />
       <link rel="alternate" hrefLang="ja" href={`${siteOrigin}/?lang=ja`} />
-      <link rel="alternate" hrefLang="zh" href={`${siteOrigin}/?lang=zh`} />
+      <link rel="alternate" hrefLang="zh-Hans" href={`${siteOrigin}/?lang=zh`} />
+      <link rel="alternate" hrefLang="zh-CN" href={`${siteOrigin}/?lang=zh`} />
+      <link rel="alternate" hrefLang="zh-Hant" href={`${siteOrigin}/?lang=zh-TW`} />
+      <link rel="alternate" hrefLang="zh-TW" href={`${siteOrigin}/?lang=zh-TW`} />
+      <link rel="alternate" hrefLang="zh-HK" href={`${siteOrigin}/?lang=zh-TW`} />
       <link rel="alternate" hrefLang="es" href={`${siteOrigin}/?lang=es`} />
       <link rel="alternate" hrefLang="fr" href={`${siteOrigin}/?lang=fr`} />
       <link rel="alternate" hrefLang="de" href={`${siteOrigin}/?lang=de`} />

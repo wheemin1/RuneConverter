@@ -1,4 +1,4 @@
-export type SupportedSeoLang = 'ko' | 'en' | 'ja' | 'zh' | 'es' | 'fr' | 'de';
+export type SupportedSeoLang = 'ko' | 'en' | 'ja' | 'zh' | 'zh-TW' | 'es' | 'fr' | 'de';
 
 export const DEFAULT_LANG: SupportedSeoLang = 'en';
 
@@ -11,21 +11,21 @@ export const SEO_DATA: Record<SupportedSeoLang, {
   siteName: string;
 }> = {
   ko: {
-    title: '룬 문자 변환기 - 무료 이름 번역 & 뜻 풀이 (Elder Futhark)',
-    desc: '내 이름을 고대 바이킹 룬 문자로 정확하게 변환하고 번역해보세요. 엘더 푸사르크 표기법 기반의 정확한 뜻 풀이를 무료로 확인하세요.',
-    keywords: '룬 문자 변환기, 룬 문자 번역, 이름 변환, 엘더 푸사르크',
-    ogTitle: '룬 문자 변환기 - 무료 이름 번역 & 뜻 풀이 (Elder Futhark)',
-    ogDesc: '내 이름을 고대 바이킹 룬 문자로 정확하게 변환하고 번역해보세요. 엘더 푸사르크 표기법 기반의 정확한 뜻 풀이를 무료로 확인하세요.',
+    title: '룬문자 번역기 & 변환기 - 룬어 번역, 이름을 룬 문자로 무료 변환',
+    desc: '룬문자 번역기로 이름을 고대 바이킹 룬 문자로 정확하게 변환하세요. 룬어 번역, 룬문자 변환, 룬 문자 번역을 무료로 제공! 엘더 푸사르크 표기법 기반의 정확한 뜻 풀이까지 확인하세요.',
+    keywords: '룬문자 번역기, 룬 문자 변환기, 룬어 번역기, 룬어 번역, 룬문자 변환, 룬 문자 번역, 엘더 푸사르크',
+    ogTitle: '룬문자 번역기 & 변환기 - 룬어 번역, 이름을 룬 문자로 무료 변환',
+    ogDesc: '룬문자 번역기로 이름을 고대 바이킹 룬 문자로 정확하게 변환하세요. 룬어 번역, 룬문자 변환을 무료로 제공합니다.',
     siteName: 'Ancient Runes',
   },
-  // ⚡ [업그레이드] 영어: converter 방어 + translator/generator 강화 (CTR 상승 전략)
+  // ⚡ [업그레이드] 영어: rune translator (192노출) + norse/nordic/runic 변형 포착 전략
   en: {
-    title: 'Elder Futhark Rune Translator - Accurate Viking Name Converter & Generator',
-    desc: 'Instantly translate English names into authentic Elder Futhark runes. Accurate phonetic rune generator for Viking names and history fans.',
+    title: 'Viking Rune Translator - Elder Futhark, Norse & Runic Alphabet Converter',
+    desc: 'Translate names into Viking runes instantly. Accurate Elder Futhark translator, Norse rune generator, and runic alphabet converter. Free phonetic rune translation for Nordic runes.',
     keywords:
-      'viking rune converter, elder futhark translator, rune generator, rune name generator, phonetic rune translation',
-    ogTitle: 'Elder Futhark Rune Translator - Accurate Viking Name Converter & Generator',
-    ogDesc: 'Instantly translate English names into authentic Elder Futhark runes. Accurate phonetic rune generator for Viking names and history fans.',
+      'rune translator, viking rune translator, elder futhark translator, norse rune translator, runic translator, rune converter, runic alphabet translator, nordic rune translator, rune generator, norse rune generator',
+    ogTitle: 'Viking Rune Translator - Elder Futhark, Norse & Runic Alphabet Converter',
+    ogDesc: 'Translate names into Viking runes instantly. Accurate Elder Futhark translator, Norse rune generator, and runic alphabet converter for Nordic runes.',
     siteName: 'Ancient Runes Global',
   },
   ja: {
@@ -43,6 +43,14 @@ export const SEO_DATA: Record<SupportedSeoLang, {
     ogTitle: '查看你的名字对应的卢恩符文',
     ogDesc: '看看你的名字在古老神秘的符文中是什么样子。',
     siteName: 'Ancient Runes Chinese',
+  },
+  'zh-TW': {
+    title: '盧恩文字轉換器 - 免費名字翻譯（Elder Futhark）',
+    desc: '將你的名字轉換成古代維京盧恩符文。正確的音標轉換，免費使用。探索你名字中隱藏的神秘力量。',
+    keywords: '盧恩文字轉換器, 符文轉換, 維京符文, Elder Futhark, 古代文字, 名字翻譯',
+    ogTitle: '盧恩文字轉換器 - 免費名字翻譯',
+    ogDesc: '將你的名字轉換成古代維京盧恩符文。正確的音標轉換，免費使用。',
+    siteName: 'Ancient Runes Taiwan',
   },
   es: {
     title: 'Convertidor de Runas - Traduce tu nombre a runas',

@@ -110,7 +110,7 @@ export default function Home() {
               </h2>
             ) : language === "en" ? (
               <h2 className="mt-2 text-lg md:text-xl font-cinzel text-viking-brown/80 font-semibold">
-                Accurate Viking Name Converter & Generator
+                Elder Futhark, Norse & Runic Alphabet Converter
               </h2>
             ) : language === "ko" ? (
               <h2 className="mt-2 text-lg md:text-xl font-cinzel text-viking-brown/80 font-semibold">
@@ -128,16 +128,16 @@ export default function Home() {
 
             {language === "en" && (
               <p className="mt-3 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-2xl mx-auto">
-                Easily translate names into the <strong>Nordic Elder Futhark alphabet</strong>. Try our free{' '}
-                <strong>rune name generator</strong> for names and authentic rune writing.
+                Easily translate names into the <strong>Nordic Elder Futhark alphabet</strong>. Our <strong>Norse rune translator</strong> and{' '}
+                <strong>runic alphabet converter</strong> provide authentic Viking rune translations instantly.
               </p>
             )}
 
             {language === "ko" && (
               <div className="mt-4 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-2xl mx-auto bg-parchment-dark/10 p-4 rounded-lg">
                 <p>
-                  이 <strong>룬 문자 번역기</strong>는 역사적으로 가장 오래된 <em>엘더 푸사르크</em> 방식을 사용하여,
-                  한글/영어 이름을 정확하게 변환해 드립니다.
+                  이 <strong>룬문자 번역기 & 변환기</strong>는 역사적으로 가장 오래된 <em>엘더 푸사르크</em> 방식을 사용하여,
+                  한글/영어 이름을 정확한 <strong>룬어</strong>로 번역 및 변환해 드립니다.
                 </p>
               </div>
             )}
@@ -145,9 +145,9 @@ export default function Home() {
             {language === "en" && (
               <div className="mt-4 text-sm md:text-base text-text-brown-light/90 leading-relaxed max-w-2xl mx-auto bg-parchment-dark/10 p-4 rounded-lg">
                 <p>
-                  Looking for a <strong>Viking Rune Generator</strong>? Our tool uses historically accurate{' '}
-                  <em>phonetic conversion</em> to translate names into <strong>Elder Futhark</strong> scripts,
-                  so the result matches how the name is pronounced.
+                  Looking for a <strong>Viking Rune Translator</strong>? Our <strong>runic translator</strong> uses historically accurate{' '}
+                  <em>phonetic conversion</em> to translate names into <strong>Norse runes</strong> and <strong>Elder Futhark</strong> scripts,
+                  so the result matches how the name is pronounced in the ancient runic alphabet.
                 </p>
               </div>
             )}
