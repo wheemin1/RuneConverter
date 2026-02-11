@@ -26,7 +26,7 @@ export function romanizeNameByLanguage(input: string, language: Language): strin
     const romanized = pinyin(cleanInput, {
       toneType: "none",
       type: "string",
-      separator: "",
+      separator: " ", // Preserve word boundaries for multi-syllable names
     });
     return normalizeLatinInput(romanized);
   }

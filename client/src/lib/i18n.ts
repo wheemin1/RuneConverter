@@ -134,6 +134,8 @@ export const translations = {
     historyElderBody: '가장 오래된 룬 문자 체계로, 24개의 문자로 구성되어 있습니다. 2세기부터 8세기까지 사용되었으며, 바이킹 시대의 주요 문자 체계였습니다. “Futhark”라는 이름은 처음 여섯 글자(ᚠᚢᚦᚨᚱᚲ)에서 따온 것입니다.',
     historyMeaningTitle: '룬 문자의 의미',
     historyMeaningBody: '각 룬 문자는 단순한 글자가 아니라 깊은 의미와 상징을 담고 있습니다. 바이킹들은 이 문자들이 마법적 힘을 가지고 있다고 믿었으며, 점술이나 부적으로도 사용했습니다. 각 룬은 자연의 힘, 신들, 그리고 인간의 경험을 나타냅니다.',
+    historySeparatorTitle: '단어 구분자',
+    historySeparatorBody: '고대 룬 문자 비문에서는 가운덻점(·) 또는 콜론(:)을 사용하여 단어를 구분했습니다. 이 변환기는 역사적 관행을 따라 "John Doe"와 같은 여러 단어로 된 이름에 가운덻점(·)을 사용합니다.',
 
     // Share modal
     shareModalSubtitle: '룬 문자 변환 결과를 친구들과 공유해보세요',
@@ -177,7 +179,7 @@ export const translations = {
     // Input (non-Korean languages)
     alphabetName: '이름 (영문/알파벳)',
     alphabetPlaceholder: '예: José, François, Müller, O\'Connor... (라틴 문자)',
-    alphabetTipText: '이 입력창은 라틴 문자(악센트 포함)와 공백/하이픈/어포스트로피만 허용합니다. (숫자/기호/한글/한자/가나 불가)',
+    alphabetTipText: '라틴 문자(악센트 포함)는 룬 문자로 변환됩니다. 공백/하이픈/어포스트로피는 룬 문자 단어 구분자(·)로 표시됩니다.',
     tipLabel: '팁:',
     englishEnableHint: '영문(알파벳) 이름을 입력하면 변환 버튼이 활성화됩니다',
 
@@ -185,13 +187,14 @@ export const translations = {
     englishRequiredTitle: '영문 이름 필요',
     englishRequiredDesc: '영문(알파벳) 이름을 입력해주세요.',
     englishInvalidTitle: '잘못된 입력',
-    englishInvalidDesc: '영문 이름은 라틴 문자(악센트 포함)와 공백/하이픈/어포스트로피만 입력할 수 있습니다.',
+    englishInvalidDesc: '라틴 문자(악센트 포함)만 입력 가능합니다. 공백/하이픈/어포스트로피는 룬에서 단어 구분자(·)로 변환됩니다.',
     
     // Results
     resultTitle: '룬 문자 변환 결과',
     resultSubtitle: '고대 바이킹의 신비로운 힘이 담긴 당신의 이름',
     combinedMeaning: '종합적인 의미',
     convertAnotherName: '다른 이름 변환하기',
+    separatorExplanation: '· 기호는 고대 룬 문자 비문에서 사용된 단어 구분자입니다',
     shareButton: '상세 공유',
     downloadButton: '이미지 저장',
     downloadingButton: '저장 중...',
@@ -389,7 +392,7 @@ export const translations = {
     // Input (non-Korean languages)
     alphabetName: 'Your name (Alphabet)',
     alphabetPlaceholder: "e.g., José, François, Müller, O'Connor... (Latin letters)",
-    alphabetTipText: 'This field allows Latin letters (including accents) plus spaces, hyphens, and apostrophes. (No numbers or CJK characters)',
+    alphabetTipText: 'Latin letters (with accents) are converted to runes. Spaces, hyphens, and apostrophes become word separators (·) in the runic output.',
     tipLabel: 'Tip:',
     englishEnableHint: 'Enter your name to enable conversion.',
 
@@ -397,13 +400,14 @@ export const translations = {
     englishRequiredTitle: 'English name required',
     englishRequiredDesc: 'Please enter your name using the alphabet (A–Z).',
     englishInvalidTitle: 'Invalid input',
-    englishInvalidDesc: 'Only Latin letters (including accents) plus spaces, hyphens, and apostrophes are allowed.',
+    englishInvalidDesc: 'Only Latin letters (with accents) are allowed. Spaces, hyphens, and apostrophes will become word separators (·) in runes.',
     
     // Results
     resultTitle: 'Rune Conversion Result',
     resultSubtitle: 'Your name imbued with ancient Viking mystical power',
     combinedMeaning: 'Combined Meaning',
     convertAnotherName: 'Convert another name',
+    separatorExplanation: 'The · character separates words, as used in historical runic inscriptions',
     shareButton: 'Share Details',
     downloadButton: 'Save Image',
     downloadingButton: 'Saving...',
@@ -475,7 +479,7 @@ export const translations = {
     // Input (non-Korean languages)
     alphabetName: '名前（アルファベット）',
     alphabetPlaceholder: '例：José、François、Müller...（ラテン文字）',
-    alphabetTipText: 'この入力欄はラテン文字（アクセント含む）と空白/ハイフン/アポストロフィのみ対応します。（数字・CJK文字は不可）',
+    alphabetTipText: 'ラテン文字（アクセント含む）はルーン文字に変換されます。空白/ハイフン/アポストロフィは単語区切り記号（·）として表示されます。',
     tipLabel: 'ヒント：',
     englishEnableHint: 'アルファベットで入力すると変換ボタンが有効になります',
 
@@ -483,13 +487,14 @@ export const translations = {
     englishRequiredTitle: '英字名が必要です',
     englishRequiredDesc: 'アルファベット（A–Z）で名前を入力してください。',
     englishInvalidTitle: '無効な入力',
-    englishInvalidDesc: 'ラテン文字（アクセント含む）と空白/ハイフン/アポストロフィのみ入力できます。',
+    englishInvalidDesc: 'ラテン文字（アクセント含む）のみ入力できます。空白/ハイフン/アポストロフィはルーン文字内で単語区切り記号（·）に変換されます。',
     
     // Results
     resultTitle: 'ルーン文字変換結果',
     resultSubtitle: '古代バイキングの神秘的な力が宿ったあなたの名前',
     combinedMeaning: '総合的な意味',
     convertAnotherName: '別の名前を変換する',
+    separatorExplanation: '·記号は、古代ルーン文字の碑文で使われた単語区切り記号です',
     shareButton: '詳細共有',
     downloadButton: '画像保存',
     downloadingButton: '保存中...',
@@ -613,6 +618,8 @@ export const translations = {
     historyElderBody: '最古のルーン文字体系で、24文字から成ります。おおよそ2世紀から8世紀にかけて使用され、後のルーン体系の基礎となりました。「Futhark」は最初の6文字（ᚠᚢᚦᚨᚱᚲ）に由来します。',
     historyMeaningTitle: 'ルーンの意味',
     historyMeaningBody: '各ルーンは音だけでなく象徴性も持ちます。バイキングはルーンに魔力が宿ると信じ、占いや護符にも用いました。ルーンは自然の力、神々、人間の経験などを表します。',
+    historySeparatorTitle: '単語区切り記号',
+    historySeparatorBody: '古代のルーン文字の碑文では、中黒(·)またはインターパンクトを使用して単語を区切っていました。このコンバーターは歴史的な慣例に従い、"John Doe"のような複数単語の名前に中黒(·)を使用します。',
 
     // Share modal
     shareModalSubtitle: '変換結果を友達と共有しましょう',
@@ -687,7 +694,7 @@ export const translations = {
     // Input (non-Korean languages)
     alphabetName: '姓名（字母）',
     alphabetPlaceholder: '例如：José、François、Müller...（拉丁字母）',
-    alphabetTipText: '此输入框支持拉丁字母（含重音符）以及空格/连字符/撇号。（不支持数字或中日韩字符）',
+    alphabetTipText: '拉丁字母（含重音符）将转换为符文。空格/连字符/撇号将成为单词分隔符（·）。',
     tipLabel: '提示：',
     englishEnableHint: '输入字母姓名后，转换按钮将启用。',
 
@@ -695,13 +702,14 @@ export const translations = {
     englishRequiredTitle: '需要英文姓名',
     englishRequiredDesc: '请使用字母（A–Z）输入您的姓名。',
     englishInvalidTitle: '输入无效',
-    englishInvalidDesc: '仅允许拉丁字母（含重音符）以及空格/连字符/撇号。',
+    englishInvalidDesc: '仅允许拉丁字母（含重音符）。空格/连字符/撇号将转换为符文中的单词分隔符（·）。',
     
     // Results
     resultTitle: '符文转换结果',
     resultSubtitle: '蕴含古代维京神秘力量的您的姓名',
     combinedMeaning: '综合含义',
     convertAnotherName: '转换另一个名字',
+    separatorExplanation: '· 符号用于分隔单词，正如古代符文铭文中的使用',
     shareButton: '详细分享',
     downloadButton: '保存图片',
     downloadingButton: '保存中...',
@@ -825,6 +833,8 @@ export const translations = {
     historyElderBody: '最古老的符文字母表，由24个字符组成，大约在2世纪至8世纪间使用，并成为后续符文体系的基础。“Futhark”这个名字来自其前六个字母（ᚠᚢᚦᚨᚱᚲ）。',
     historyMeaningTitle: '符文的含义',
     historyMeaningBody: '每个符文不仅代表发音，也承载象征意义。维京人相信符文具有魔法力量，并将其用于占卜与护符。符文常象征自然之力、诸神以及人类经验。',
+    historySeparatorTitle: '单词分隔符',
+    historySeparatorBody: '古代符文铭文使用中间点(·)或间隔符来分隔单词。此转换器遵循这种历史传统，对多单词名字如"John Doe"使用中间点(·)。',
 
     // Share modal
     shareModalSubtitle: '把符文转换结果分享给朋友',
@@ -899,7 +909,7 @@ export const translations = {
     // Input (non-Korean languages)
     alphabetName: 'Tu nombre (Alfabeto)',
     alphabetPlaceholder: 'p. ej., José, François, Müller, O\'Connor... (letras latinas)',
-    alphabetTipText: 'Este campo permite letras latinas (con acentos) y espacios/guiones/apóstrofes. (Sin números ni caracteres CJK)',
+    alphabetTipText: 'Las letras latinas (con acentos) se convierten en runas. Los espacios, guiones y apóstrofes se convierten en separadores de palabras (·) en las runas.',
     tipLabel: 'Consejo:',
     englishEnableHint: 'Ingresa tu nombre para habilitar la conversión.',
 
@@ -907,13 +917,14 @@ export const translations = {
     englishRequiredTitle: 'Se requiere nombre en inglés',
     englishRequiredDesc: 'Ingresa tu nombre usando el alfabeto (A–Z).',
     englishInvalidTitle: 'Entrada inválida',
-    englishInvalidDesc: 'Solo se permiten letras latinas (con acentos) y espacios/guiones/apóstrofes.',
+    englishInvalidDesc: 'Solo se permiten letras latinas (con acentos). Los espacios, guiones y apóstrofes se convertirán en separadores (·) en las runas.',
     
     // Results
     resultTitle: 'Resultado de Conversión de Runas',
     resultSubtitle: 'Tu nombre imbuido con el poder místico vikingo ancestral',
     combinedMeaning: 'Significado Combinado',
     convertAnotherName: 'Convertir otro nombre',
+    separatorExplanation: 'El carácter · separa palabras, tal como se usaba en inscripciones rúnicas históricas',
     shareButton: 'Compartir Detalles',
     downloadButton: 'Guardar Imagen',
     downloadingButton: 'Guardando...',
@@ -1027,6 +1038,8 @@ export const translations = {
     historyElderBody: 'El alfabeto rúnico más antiguo, compuesto por 24 caracteres. Se utilizó aproximadamente entre los siglos II y VIII y sirvió como base para sistemas posteriores. El nombre “Futhark” proviene de sus primeras seis letras (ᚠᚢᚦᚨᚱᚲ).',
     historyMeaningTitle: 'Significados de las runas',
     historyMeaningBody: 'Cada runa tiene simbolismo además de sonido. Los vikingos creían que las runas tenían poder mágico y las usaban para adivinación y amuletos. A menudo representan fuerzas de la naturaleza, dioses y experiencias humanas.',
+    historySeparatorTitle: 'Separadores de Palabras',
+    historySeparatorBody: 'Las inscripciones rúnicas antiguas usaban el punto medio (·) o interpunto para separar palabras. Este convertidor preserva esa práctica histórica para nombres multi-palabra como "John Doe" → "ᛃᛟᚺᚾ·ᛞᛟᛖ".',
 
     // Share modal
     shareModalSubtitle: 'Comparte tu conversión de runas con amigos',
@@ -1101,7 +1114,7 @@ export const translations = {
     // Input (non-Korean languages)
     alphabetName: 'Votre nom (Alphabet)',
     alphabetPlaceholder: "ex. : José, François, Müller, O'Connor... (lettres latines)",
-    alphabetTipText: 'Ce champ accepte les lettres latines (avec accents) ainsi que les espaces/tirets/apostrophes. (Pas de chiffres ni de caractères CJK)',
+    alphabetTipText: 'Les lettres latines (avec accents) sont converties en runes. Les espaces, tirets et apostrophes deviennent des séparateurs de mots (·) dans les runes.',
     tipLabel: 'Astuce :',
     englishEnableHint: 'Saisissez votre nom pour activer la conversion.',
 
@@ -1109,13 +1122,14 @@ export const translations = {
     englishRequiredTitle: 'Nom requis',
     englishRequiredDesc: 'Veuillez saisir votre nom avec l’alphabet (A–Z).',
     englishInvalidTitle: 'Saisie invalide',
-    englishInvalidDesc: 'Seules les lettres latines (avec accents) ainsi que les espaces/tirets/apostrophes sont autorisées.',
+    englishInvalidDesc: 'Seules les lettres latines (avec accents) sont autorisées. Les espaces, tirets et apostrophes deviendront des séparateurs (·) dans les runes.',
     
     // Results
     resultTitle: 'Résultat de Conversion des Runes',
     resultSubtitle: 'Votre nom imprégné du pouvoir mystique viking ancestral',
     combinedMeaning: 'Signification Combinée',
     convertAnotherName: 'Convertir un autre prénom',
+    separatorExplanation: 'Le caractère · sépare les mots, comme dans les inscriptions runiques historiques',
     shareButton: 'Partager les Détails',
     downloadButton: 'Sauvegarder Image',
     downloadingButton: 'Sauvegarde...',
@@ -1277,6 +1291,7 @@ export const translations = {
 
     // Results
     convertAnotherName: 'Anderen Namen umwandeln',
+    separatorExplanation: 'Das ·-Zeichen trennt Wörter, wie in historischen Runeninschriften verwendet',
 
     // Features (fallbacks will fill anything missing)
     feature1Title: 'Akkurate Runen-Konvertierung',
@@ -1291,6 +1306,16 @@ export const translations = {
     inputSubtitle: 'Gib deinen Namen ein und erzeuge Wikinger-Runen (Elder Futhark)',
     alphabetName: 'Name (Lateinisches Alphabet)',
     alphabetPlaceholder: "z.B. Müller, Franziska, Jörg, O'Connor...",
+    alphabetTipText: 'Lateinische Buchstaben (mit Akzenten) werden in Runen umgewandelt. Leerzeichen, Bindestriche und Apostrophe werden zu Worttrennern (·) in den Runen.',
+    tipLabel: 'Tipp:',
+    englishEnableHint: 'Geben Sie Ihren Namen ein, um die Umwandlung zu aktivieren.',
+
+    // Validation
+    englishRequiredTitle: 'Name erforderlich',
+    englishRequiredDesc: 'Bitte geben Sie Ihren Namen mit dem Alphabet (A–Z) ein.',
+    englishInvalidTitle: 'Ungültige Eingabe',
+    englishInvalidDesc: 'Nur lateinische Buchstaben (mit Akzenten) sind erlaubt. Leerzeichen, Bindestriche und Apostrophe werden in Runen zu Worttrennern (·) umgewandelt.',
+
     convertButton: 'In Runen umwandeln',
   }
 };

@@ -1,5 +1,12 @@
 // Elder Futhark rune conversion utility
 
+/**
+ * Historical rune word separator (Middle Dot / Interpunct)
+ * Ancient runic inscriptions used this character to separate words.
+ * Example: "ᛃᛟᚺᚾ·ᛞᛟᛖ" represents "John Doe"
+ */
+export const RUNE_WORD_SEPARATOR = '·'; // U+00B7 Middle Dot
+
 export const runeMap: { [key: string]: string } = {
   'a': 'ᚨ', // Ansuz
   'b': 'ᛒ', // Berkanan
@@ -40,19 +47,31 @@ export const runeMap: { [key: string]: string } = {
 
 /**
  * Normalizes user input into lowercase ASCII a-z for rune mapping.
+ * Preserves word boundaries (spaces, hyphens, apostrophes) as placeholders.
  *
  * Why: many international names contain diacritics or Latin letters outside A-Z
- * (e.g. José, François, Søren, Łukasz, Ōsaka). The previous implementation
- * removed these characters entirely, producing incorrect/shortened results.
+ * (e.g. José, François, Søren, Łukasz, Ōsaka). Multi-word names like "John Doe"
+ * or compound names like "Jean-Luc" need word boundaries preserved for proper
+ * rune separator insertion.
+ *
+ * Word boundary markers (space, hyphen, apostrophe) are replaced with __SPACE__
+ * placeholder during normalization and converted to rune separator (·) later.
  */
 export function normalizeLatinInput(text: string): string {
   const raw = String(text ?? '');
   if (!raw.trim()) return '';
 
-  // 1) Decompose accents, then remove combining marks.
-  let s = raw.normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+  // 0) Normalize consecutive spaces to single space and trim
+  let s = raw.replace(/\s+/g, ' ').trim();
 
-  // 2) Map common Latin letters/ligatures that don't reliably decompose.
+  // 1) Preserve word boundaries as placeholder before other processing
+  // Space, hyphen, and apostrophe become temporary markers
+  s = s.replace(/[\s\-']/g, '__space__');
+
+  // 2) Decompose accents, then remove combining marks.
+  s = s.normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+
+  // 3) Map common Latin letters/ligatures that don't reliably decompose.
   // Keep it conservative: this is transliteration for rune mapping, not full i18n.
   s = s
     .replace(/ß/g, 'ss')
@@ -69,8 +88,10 @@ export function normalizeLatinInput(text: string): string {
     .replace(/Ł/g, 'L')
     .replace(/ł/g, 'l');
 
-  // 3) Lowercase and keep only a-z.
-  return s.toLowerCase().replace(/[^a-z]/g, '');
+  // 4) Lowercase and remove non-letter characters (except our placeholder)
+  s = s.toLowerCase().replace(/[^a-z_]/g, '');
+
+  return s;
 }
 
 export function convertToRunes(text: string): string {
@@ -81,9 +102,19 @@ export function convertToRunes(text: string): string {
   
   const normalizedText = normalizeLatinInput(text);
   
-  while (i < normalizedText.length) {
+  // Replace word boundary placeholders with rune separator before conversion
+  const textWithSeparators = normalizedText.replace(/__space__/g, RUNE_WORD_SEPARATOR);
+  
+  while (i < textWithSeparators.length) {
+    // Pass through rune separator as-is
+    if (textWithSeparators[i] === RUNE_WORD_SEPARATOR) {
+      result += RUNE_WORD_SEPARATOR;
+      i++;
+      continue;
+    }
+    
     // Check for two-character combinations first
-    const twoChar = normalizedText.slice(i, i + 2);
+    const twoChar = textWithSeparators.slice(i, i + 2);
     if (runeMap[twoChar]) {
       result += runeMap[twoChar];
       i += 2;
@@ -91,7 +122,7 @@ export function convertToRunes(text: string): string {
     }
     
     // Single character conversion
-    const oneChar = normalizedText[i];
+    const oneChar = textWithSeparators[i];
     if (runeMap[oneChar]) {
       result += runeMap[oneChar];
     } else {

@@ -32,6 +32,13 @@ export default function HistoricalInfo() {
                 {t('historyMeaningBody')}
               </p>
             </div>
+            
+            <div className="bg-gradient-to-r from-parchment/50 to-transparent rounded-2xl p-5 md:p-6 border-l-4 border-viking-gold">
+              <h4 className="font-bold text-lg md:text-xl text-viking-brown mb-3">{t('historySeparatorTitle')}</h4>
+              <p className="text-sm md:text-base text-text-brown-light leading-relaxed md:leading-loose">
+                {t('historySeparatorBody')}
+              </p>
+            </div>
           </div>
         </CardContent>
       </Card>

@@ -206,6 +206,13 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
                       {runeText}
                     </div>
                     
+                    {/* Word Separator Explanation */}
+                    {runeText.includes('·') && (
+                      <p className="text-xs text-text-brown-light italic mb-3">
+                        {t('separatorExplanation')}
+                      </p>
+                    )}
+                    
                     {/* Quick Copy Button */}
                     <Button
                       onClick={handleQuickCopy}

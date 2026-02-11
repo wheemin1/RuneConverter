@@ -180,8 +180,9 @@ function wrapText(
   const normalized = String(text).trim().replace(/\s+/g, ' ');
   if (!normalized) return [];
 
-  const hasWhitespace = /\s/.test(normalized);
-  const tokens = hasWhitespace ? normalized.split(' ') : Array.from(normalized);
+  // Detect whitespace OR word separator (·) for wrapping
+  const hasWhitespace = /[\s·]/.test(normalized);
+  const tokens = hasWhitespace ? normalized.split(/[\s·]/) : Array.from(normalized);
 
   const lines: string[] = [];
   let current = '';
