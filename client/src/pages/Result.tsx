@@ -11,7 +11,7 @@ import { Home, ArrowLeft } from "lucide-react";
 const RuneExplanation = lazy(() => import("@/components/RuneExplanation"));
 
 export default function Result() {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const search = useSearch();
   const searchParams = new URLSearchParams(search);
 

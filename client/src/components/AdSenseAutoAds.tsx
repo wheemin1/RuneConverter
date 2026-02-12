@@ -6,7 +6,7 @@ export default function AdSenseAutoAds() {
   useEffect(() => {
     if (typeof document === "undefined") return;
 
-    const marker = "data-adsense-auto";
+    const marker = "data-adsbygoogle-loaded";
     const hasScriptAlready = Array.from(document.scripts).some((script) => {
       const src = script.getAttribute("src") ?? "";
       return (
