@@ -63,6 +63,7 @@ export const translations = {
     // Results
     resultTitle: '룬 문자 변환 결과',
     resultSubtitle: '고대 바이킹의 신비로운 힘이 담긴 당신의 이름',
+    backToHome: '홈으로 돌아가기',
     combinedMeaning: '종합적인 의미',
     shareButton: '상세 공유',
     downloadButton: '이미지 저장',
@@ -174,6 +175,7 @@ export const translations = {
     // Results
     resultTitle: 'Rune Conversion Result',
     resultSubtitle: 'Your name imbued with ancient Viking mystical power',
+    backToHome: 'Back to Home',
     combinedMeaning: 'Combined Meaning',
     shareButton: 'Share Details',
     downloadButton: 'Save Image',
@@ -282,8 +284,7 @@ export const translations = {
     convertingQuoteAuthor: '- 古代北欧伝承',    
     // Results
     resultTitle: 'ルーン文字変換結果',
-    resultSubtitle: '古代バイキングの神秘的な力が宿ったあなたの名前',
-    combinedMeaning: '総合的な意味',
+    resultSubtitle: '古代バイキングの神秘的な力が宿ったあなたの名前',    backToHome: 'ホームに戻る',    combinedMeaning: '総合的な意味',
     shareButton: '詳細共有',
     downloadButton: '画像保存',
     downloadingButton: '保存中...',
@@ -373,6 +374,7 @@ export const translations = {
     // Results
     resultTitle: '符文转换结果',
     resultSubtitle: '蕴含古代维京神秘力量的您的姓名',
+    backToHome: '返回首页',
     combinedMeaning: '综合含义',
     shareButton: '详细分享',
     downloadButton: '保存图片',
@@ -463,6 +465,7 @@ export const translations = {
     // Results
     resultTitle: 'Resultado de Conversión de Runas',
     resultSubtitle: 'Tu nombre imbuido con el poder místico vikingo ancestral',
+    backToHome: 'Volver al Inicio',
     combinedMeaning: 'Significado Combinado',
     shareButton: 'Compartir Detalles',
     downloadButton: 'Guardar Imagen',
@@ -543,6 +546,7 @@ export const translations = {
     // Results
     resultTitle: 'Résultat de Conversion des Runes',
     resultSubtitle: 'Votre nom imprégné du pouvoir mystique viking ancestral',
+    backToHome: 'Retour à l’Accueil',
     combinedMeaning: 'Signification Combinée',
     shareButton: 'Partager les Détails',
     downloadButton: 'Sauvegarder Image',

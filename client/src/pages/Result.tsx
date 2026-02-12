@@ -1,9 +1,11 @@
 import { useEffect, useMemo, lazy, Suspense } from "react";
-import { Redirect, useSearch } from "wouter";
+import { Redirect, useSearch, Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { convertToRunes } from "@/lib/runeConverter";
 import { getRuneDetails } from "@/lib/runeDatabase";
 import RuneResult from "@/components/RuneResult";
+import { Button } from "@/components/ui/button";
+import { Home, ArrowLeft } from "lucide-react";
 
 // Lazy load heavy components
 const RuneExplanation = lazy(() => import("@/components/RuneExplanation"));
@@ -43,7 +45,20 @@ export default function Result() {
       <div className="vignette-overlay" />
 
       <div className="parchment-bg min-h-screen font-cinzel relative z-10">
-        <main className="max-w-7xl mx-auto px-4 md:px-6 pb-12 md:pb-16 pt-6 md:pt-8">
+        {/* Home Navigation */}
+        <div className="max-w-7xl mx-auto px-4 md:px-6 pt-4 md:pt-6">
+          <Link href="/">
+            <Button 
+              variant="ghost" 
+              className="text-viking-brown hover:text-viking-gold hover:bg-viking-tan/20 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              {t('backToHome')}
+            </Button>
+          </Link>
+        </div>
+
+        <main className="max-w-7xl mx-auto px-4 md:px-6 pb-12 md:pb-16 pt-2 md:pt-4">
           <div id="rune-result" data-scroll-target="result" className="max-w-4xl mx-auto">
             <RuneResult runeText={runeText} englishName={roman} koreanName={native} runeDetails={runeDetails} />
             <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="text-amber-900">Loading...</div></div>}>
