@@ -1,112 +1,70 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Share2, Download, Copy, Sparkles, Eye, ChevronDown, History, ArrowRight } from "lucide-react";
+import { Share2, Download, Copy, Sparkles, Eye, ChevronDown, Save, History } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
+import { getRuneDetails } from "@/lib/runeDatabase";
 import { useLanguage } from "@/contexts/LanguageContext";
-import type { RuneDetail } from "@/lib/runeDatabase";
-import { PERSONALITY_THEME_IDS, POSITIVE_THEME_IDS, runeThemesByKey, type RuneThemeId } from "@/lib/runeThemes";
-import { primaryCtaButtonClassName } from "@/lib/buttonStyles";
 import ShareModal from "./ShareModal";
+import { saveRuneConversion } from "@/lib/localStorageUtils";
+import SavedRunesDialog from "./SavedRunesDialog";
 
 interface RuneResultProps {
   runeText: string;
   englishName: string;
   koreanName: string;
-  runeDetails: RuneDetail[];
 }
 
-function formatConjunctionList(items: string[], language: string): string {
-  if (items.length === 0) return '';
-  try {
-    const locale =
-      language === 'ko'
-        ? 'ko-KR'
-        : language === 'ja'
-          ? 'ja-JP'
-          : language === 'zh'
-            ? 'zh-CN'
-            : language === 'zh-TW'
-              ? 'zh-TW'
-              : language === 'es'
-                ? 'es-ES'
-                : language === 'fr'
-                  ? 'fr-FR'
-                  : language === 'pt-BR'
-                    ? 'pt-BR'
-                    : 'en-US';
-
-    // Intl.ListFormat isn't supported in very old browsers; fall back if needed.
-    const IntlAny = Intl as unknown as { ListFormat?: new (locales?: string | string[], options?: any) => { format: (items: string[]) => string } };
-    const ListFormatCtor = typeof IntlAny !== 'undefined' ? IntlAny.ListFormat : undefined;
-    const listFormat = typeof ListFormatCtor === 'function'
-      ? new ListFormatCtor(locale, { style: 'short', type: 'conjunction' })
-      : null;
-
-    if (listFormat) return listFormat.format(items);
-  } catch {
-    // ignore and fall back
-  }
-  return items.join(', ');
-}
-
-export default function RuneResult({ runeText, englishName, koreanName, runeDetails }: RuneResultProps) {
-  const { t, language } = useLanguage();
+export default function RuneResult({ runeText, englishName, koreanName }: RuneResultProps) {
+  const { t } = useLanguage();
   const [isDownloading, setIsDownloading] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [showSavedRunes, setShowSavedRunes] = useState(false);
   const { toast } = useToast();
 
-  const homeUrl = language === 'ko' ? '/' : `/?lang=${language}`;
+  // Get rune details for quick preview
+  const runeDetails = getRuneDetails(runeText);
 
   // Function to generate combined meaning from multiple runes
-  const generateCombinedMeaning = (details: RuneDetail[]): string => {
-    if (details.length === 0) return t('combinedMeaningEmpty');
-
-    const themeIds: RuneThemeId[] = [];
-    for (const rune of details) {
-      const ids = runeThemesByKey[rune.key] ?? [];
-      for (const id of ids) themeIds.push(id);
-    }
-
-    const uniqueIds = Array.from(new Set(themeIds));
-    const positive = uniqueIds.filter((id) => POSITIVE_THEME_IDS.has(id)).slice(0, 2);
-    const personality = uniqueIds.filter((id) => PERSONALITY_THEME_IDS.has(id)).slice(0, 2);
-
-    const positiveLabels = positive.map((id) => t(`theme.${id}`));
-    const personalityLabels = personality.map((id) => t(`theme.${id}`));
+  const generateCombinedMeaning = (runeDetails: any[]): string => {
+    if (runeDetails.length === 0) return "신비로운 힘을 담은 이름입니다.";
     
-    if (positiveLabels.length > 0 && personalityLabels.length > 0) {
-      const positiveText = formatConjunctionList(positiveLabels, language);
-      const personalityText = formatConjunctionList(personalityLabels, language);
-      return `${t('combinedMeaningTemplateBothPrefix')}${positiveText}${t('combinedMeaningTemplateBothMiddle')}${personalityText}${t('combinedMeaningTemplateBothSuffix')}`;
+    // Extract key themes from all runes
+    const allKeywords = runeDetails.flatMap(rune => rune.keywords);
+    const themes = allKeywords.filter((keyword, index) => allKeywords.indexOf(keyword) === index); // Remove duplicates
+    
+    // Create meaningful combinations based on common themes
+    const positiveThemes = themes.filter(theme => 
+      ['성공', '풍요', '지혜', '용기', '보호', '행운', '힘', '성장', '번영', '조화', '균형', '창조', '발전', '승리', '희망'].includes(theme)
+    );
+    
+    const personalityThemes = themes.filter(theme => 
+      ['리더십', '소통', '여행', '모험', '변화', '직관', '인내', '의지', '열정', '집중', '완성', '통찰'].includes(theme)
+    );
+    
+    // Generate combined meaning
+    let meaning = "";
+    
+    if (positiveThemes.length > 0 && personalityThemes.length > 0) {
+      meaning = `${positiveThemes.slice(0, 2).join('과 ')}을 바탕으로 ${personalityThemes.slice(0, 2).join('과 ')}을 발휘하여 목표를 달성하는 인물`;
+    } else if (positiveThemes.length > 0) {
+      meaning = `${positiveThemes.slice(0, 3).join(', ')}의 기운을 가진 축복받은 이름`;
+    } else if (personalityThemes.length > 0) {
+      meaning = `${personalityThemes.slice(0, 3).join(', ')}의 특성을 지닌 강인한 인물`;
+    } else {
+      // Fallback to general meaning based on rune count
+      if (runeDetails.length <= 3) {
+        meaning = "간결하면서도 강력한 에너지를 지닌 이름";
+      } else if (runeDetails.length <= 6) {
+        meaning = "균형잡힌 힘과 지혜를 겸비한 이름";
+      } else {
+        meaning = "복합적이고 깊은 의미를 담은 풍부한 이름";
+      }
     }
-
-    if (positiveLabels.length > 0) {
-      return `${formatConjunctionList(positiveLabels.slice(0, 3), language)}${t('combinedMeaningTemplatePositiveSuffix')}`;
-    }
-
-    if (personalityLabels.length > 0) {
-      return `${formatConjunctionList(personalityLabels.slice(0, 3), language)}${t('combinedMeaningTemplatePersonalitySuffix')}`;
-    }
-
-    if (details.length <= 3) return t('combinedMeaningFallbackShort');
-    if (details.length <= 6) return t('combinedMeaningFallbackMedium');
-    return t('combinedMeaningFallbackLong');
-  };
-
-  const getImageInterpretation = (details: RuneDetail[]) => {
-    if (details.length === 0) {
-      return {
-        summary: t('combinedMeaningEmpty'),
-      };
-    }
-
-    return {
-      summary: generateCombinedMeaning(details),
-    };
+    
+    return meaning + ".";
   };
 
   const handleQuickCopy = async () => {
@@ -119,7 +77,7 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
     } catch (error) {
       toast({
         title: t('copyFailed'),
-        description: t('copyErrorDesc'),
+        description: "Error copying runes.",
         variant: "destructive",
       });
     }
@@ -128,19 +86,12 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
   const handleDownload = async () => {
     setIsDownloading(true);
     try {
-      const interpretation = getImageInterpretation(runeDetails);
       const imageData = await generateRuneImage(runeText, englishName, {
         width: 1200,
         height: 800,
         backgroundColor: '#FAF0E6',
         textColor: '#8B4513',
-        runeColor: '#8B4513',
-        labels: {
-          title: t('shareImageTitle'),
-          description: t('shareImageDesc'),
-          footer: t('shareImageFooter'),
-        },
-        interpretation,
+        runeColor: '#8B4513'
       });
       const link = document.createElement('a');
       link.download = `${englishName}_rune_conversion.png`;
@@ -154,17 +105,43 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
     } catch (error) {
       toast({
         title: t('downloadFailed'),
-        description: t('imageErrorDesc'),
+        description: "Error generating image.",
         variant: "destructive",
       });
     }
     setIsDownloading(false);
   };
 
+  const handleSaveToLocal = () => {
+    try {
+      saveRuneConversion(koreanName, englishName, runeText);
+      toast({
+        title: t('savedSuccessfully'),
+        description: `${koreanName} (${englishName})`,
+      });
+    } catch (error) {
+      toast({
+        title: "Error saving result",
+        description: "Could not save to local storage",
+        variant: "destructive",
+      });
+    }
+  };
+
+  // Function to handle loading saved result
+  const handleLoadSavedResult = (savedResult: any) => {
+    // 로컬 저장에서 불러온 결과를 처리하는 로직은 
+    // 실제로는 상위 컴포넌트에서 처리해야 할 수 있습니다.
+    toast({
+      title: savedResult.koreanName,
+      description: savedResult.runeText,
+    });
+  };
+
   return (
     <>
-      <section className="mb-8 scroll-reveal relative">
-        <Card className="ancient-border manuscript-page rounded-lg pulse-glow bg-parchment-dark">
+      <section className="mb-8 scroll-reveal">
+        <Card className="ancient-border manuscript-page rounded-lg pulse-glow">
           <CardContent className="p-8">
             <div className="text-center mb-6">
               <h3 className="font-cinzel-decorative text-3xl font-bold text-viking-brown mb-3 floating-animation">
@@ -205,17 +182,10 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
                   
                   {/* Rune Text - Main Feature */}
                   <div className="mb-6 relative">
-                    <div className="text-lg text-text-brown-light mb-3">{t('elderFutharkRunesLabel')}</div>
+                    <div className="text-lg text-text-brown-light mb-3">Elder Futhark Runes</div>
                     <div className="text-6xl md:text-8xl rune-character-large mb-4 leading-tight">
                       {runeText}
                     </div>
-                    
-                    {/* Word Separator Explanation */}
-                    {runeText.includes('·') && (
-                      <p className="text-xs text-text-brown-light italic mb-3">
-                        {t('separatorExplanation')}
-                      </p>
-                    )}
                     
                     {/* Quick Copy Button */}
                     <Button
@@ -232,7 +202,7 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
                   {/* Mystical Quote */}
                   <div className="text-center">
                     <p className="text-sm text-text-brown-light italic">
-                      {t('runeResultQuote')}
+                      "이 룬들은 당신의 이름에 담긴 고대의 힘을 나타냅니다"
                     </p>
                   </div>
                 </div>
@@ -240,16 +210,10 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
             </div>
             
             {/* Action Buttons */}
-            <div className="flex justify-center mb-4">
-              <Button asChild className={primaryCtaButtonClassName}>
-                <Link to={homeUrl}>{t('convertAnotherName')}</Link>
-              </Button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Button
                 onClick={() => setShowShareModal(true)}
-                className={primaryCtaButtonClassName}
+                className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
               >
                 <Share2 className="w-5 h-5" />
                 {t('shareButton')}
@@ -258,41 +222,26 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
               <Button
                 onClick={handleDownload}
                 disabled={isDownloading}
-                className={primaryCtaButtonClassName}
+                className="btn-viking text-white font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
               >
                 <Download className="w-5 h-5" />
                 {isDownloading ? t('downloadingButton') : t('downloadButton')}
               </Button>
-            </div>
-
-            {/* Egyptian Hieroglyphics Promotion Banner */}
-            <div className="mt-6">
-              <a 
-                href="https://egyptiantranslator.netlify.app/?utm_source=rune_converter&utm_medium=banner&utm_campaign=cross_promo" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group block rounded-2xl p-5 md:p-6 bg-[rgba(252,251,247,0.78)] border border-[rgba(92,77,60,0.10)] shadow-[0_14px_50px_rgba(62,39,35,0.14)] hover:shadow-[0_18px_70px_rgba(62,39,35,0.18)] transition-all duration-200 relative overflow-hidden"
+              
+              <Button
+                onClick={handleSaveToLocal}
+                className="btn-viking-alt text-viking-brown font-bold py-3 px-6 rounded-lg font-cinzel flex items-center justify-center gap-2"
               >
-                <div className="pointer-events-none absolute inset-0 opacity-70 group-hover:opacity-90 transition-opacity bg-[radial-gradient(70%_60%_at_50%_0%,rgba(255,215,128,0.25),transparent_60%)]" />
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[rgba(92,77,60,0.08)] border border-[rgba(92,77,60,0.10)] flex items-center justify-center text-viking-brown/80">
-                      <History className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-base md:text-lg font-semibold text-viking-brown">
-                        {t('egyptPromoTitle')}
-                      </p>
-                      <p className="text-sm text-text-brown-light">
-                        {t('egyptPromoSubtitle')}
-                      </p>
-                    </div>
-                  </div>
-                  <ArrowRight className="w-6 h-6 text-viking-brown/70 group-hover:translate-x-1 transition-transform duration-200" />
-                </div>
-              </a>
+                <Save className="w-5 h-5" />
+                {t('saveLocal')}
+              </Button>
             </div>
 
+            {/* Load From Local Storage */}
+            <div className="mt-4 text-center">
+              <SavedRunesDialog onSelectResult={handleLoadSavedResult} />
+            </div>
+            
             {/* Combined Rune Meaning */}
             <div className="mt-6">
               <div className="bg-gradient-to-r from-viking-gold/10 to-viking-peru/10 rounded-lg p-6 border border-viking-gold/20">
@@ -315,7 +264,7 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
                     variant="outline"
                     className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors text-sm"
                   >
-                    {t('viewRuneDetailsButton')} <ChevronDown className="w-4 h-4 ml-1" />
+                    각 룬의 세부 의미 보기 <ChevronDown className="w-4 h-4 ml-1" />
                   </Button>
                 </div>
               </div>
@@ -326,7 +275,7 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
               <div className="inline-flex items-center gap-2 bg-viking-gold/10 border border-viking-gold/20 rounded-lg px-4 py-2">
                 <Sparkles className="w-4 h-4 text-viking-gold" />
                 <span className="text-sm text-viking-brown font-semibold">
-                  {t('conversionCompleteHint')}
+                  변환 완료! 위의 룬들을 클릭하여 자세한 의미를 확인해보세요.
                 </span>
               </div>
             </div>
@@ -341,7 +290,6 @@ export default function RuneResult({ runeText, englishName, koreanName, runeDeta
         runeText={runeText}
         englishName={englishName}
         koreanName={koreanName}
-        imageInterpretation={getImageInterpretation(runeDetails)}
       />
     </>
   );
