@@ -41,6 +41,25 @@ export const translations = {
     convertingButton: '신비로운 변환 중...',
     tipText: '자동 변환된 영문 이름을 원하는 방식으로 수정할 수 있습니다. 발음이나 선호하는 영문 표기법에 맞게 조정해보세요.',
     
+    // Converting Page
+    convertingTitle: '룬 문자 변환 중',
+    convertingSubtitle: '고대 바이킹의 신비로운 힘을 불러오고 있습니다...',
+    convertingCompleteLabel: '완료',
+    convertingStepKoreanAnalyze: '한국어 이름 분석',
+    convertingDetailKoreanAnalyzePrefix: '',
+    convertingDetailKoreanAnalyzeSuffix: '의 발음을 분석하고 있습니다',
+    convertingStepEnglishValidate: '영문 표기 검증',
+    convertingDetailEnglishValidatePrefix: '',
+    convertingDetailEnglishValidateSuffix: '의 정확성을 확인하고 있습니다',
+    convertingStepRuneMapping: '룬 문자 매핑',
+    convertingDetailRuneMapping: '각 음소를 적합한 룬 문자로 변환하고 있습니다',
+    convertingStepMeaning: '의미 해석',
+    convertingDetailMeaning: '각 룬의 상징과 의미를 분석하고 있습니다',
+    convertingStepDone: '변환 완료',
+    convertingDetailDone: '당신의 룬 문자가 준비되었습니다!',
+    convertingQuote: '"룬은 단순한 문자가 아니라, 고대의 지혜와 힘을 담은 신성한 상징이다"',
+    convertingQuoteAuthor: '- 고대 북유럽 경전',
+    
     // Results
     resultTitle: '룬 문자 변환 결과',
     resultSubtitle: '고대 바이킹의 신비로운 힘이 담긴 당신의 이름',
@@ -75,6 +94,11 @@ export const translations = {
     downloadSuccess: '이미지 다운로드 완료',
     downloadSuccessDesc: '룬 문자 변환 결과가 저장되었습니다.',
     downloadFailed: '다운로드 실패',
+    
+    // Image Labels
+    imageTitle: '바이킹 룬 문자 변환',
+    imageDescription: '고대 엘더 푸타르크 룬',
+    imageFooter: '룬 문자 변환기',
     
     // Footer
     footerTitle: '바이킹 룬 문자 변환기',
@@ -128,6 +152,25 @@ export const translations = {
     convertingButton: 'Mystical conversion in progress...',
     tipText: 'You can edit the auto-converted English name. Adjust it to match your preferred pronunciation or romanization.',
     
+    // Converting Page
+    convertingTitle: 'Converting to Runes',
+    convertingSubtitle: 'Invoking the mystical power of ancient Vikings...',
+    convertingCompleteLabel: 'Complete',
+    convertingStepKoreanAnalyze: 'Analyzing Korean Name',
+    convertingDetailKoreanAnalyzePrefix: 'Analyzing pronunciation of ',
+    convertingDetailKoreanAnalyzeSuffix: '',
+    convertingStepEnglishValidate: 'Validating English Notation',
+    convertingDetailEnglishValidatePrefix: 'Verifying accuracy of ',
+    convertingDetailEnglishValidateSuffix: '',
+    convertingStepRuneMapping: 'Mapping to Runes',
+    convertingDetailRuneMapping: 'Converting each phoneme to appropriate rune characters',
+    convertingStepMeaning: 'Interpreting Meaning',
+    convertingDetailMeaning: 'Analyzing symbolism and meaning of each rune',
+    convertingStepDone: 'Conversion Complete',
+    convertingDetailDone: 'Your rune characters are ready!',
+    convertingQuote: '"Runes are not mere letters, but sacred symbols containing ancient wisdom and power"',
+    convertingQuoteAuthor: '- Ancient Norse Lore',
+    
     // Results
     resultTitle: 'Rune Conversion Result',
     resultSubtitle: 'Your name imbued with ancient Viking mystical power',
@@ -162,6 +205,11 @@ export const translations = {
     downloadSuccess: 'Image downloaded successfully',
     downloadSuccessDesc: 'Rune conversion result saved.',
     downloadFailed: 'Download failed',
+    
+    // Image Labels
+    imageTitle: 'Viking Rune Conversion',
+    imageDescription: 'Ancient Elder Futhark Runes',
+    imageFooter: 'Rune Converter',
     
     // Footer
     footerTitle: 'Viking Rune Converter',
@@ -213,8 +261,25 @@ export const translations = {
     englishPlaceholder: '例：jowheemin、kimminsu、parkjiyeon...',
     convertButton: 'ルーン文字に変換',
     convertingButton: '神秘的な変換中...',
-    tipText: '自動変換された英語名を希望に合わせて修正できます。発音や好みの英語表記法に調整してください。',
-    
+    tipText: '自動変換された英語名を希望に合わせて修正できます。発音や好みの英語表記法に調整してください。',    
+    // Converting Page
+    convertingTitle: 'ルーン文字変換中',
+    convertingSubtitle: '古代バイキングの神祕的な力を呼び起こしています...',
+    convertingCompleteLabel: '完了',
+    convertingStepKoreanAnalyze: '韓国語名前分析',
+    convertingDetailKoreanAnalyzePrefix: '',
+    convertingDetailKoreanAnalyzeSuffix: 'の発音を分析しています',
+    convertingStepEnglishValidate: '英語表記検証',
+    convertingDetailEnglishValidatePrefix: '',
+    convertingDetailEnglishValidateSuffix: 'の正確性を確認しています',
+    convertingStepRuneMapping: 'ルーン文字マッピング',
+    convertingDetailRuneMapping: '各音素を適切なルーン文字に変換しています',
+    convertingStepMeaning: '意味解釈',
+    convertingDetailMeaning: '各ルーンの象徴と意味を分析しています',
+    convertingStepDone: '変換完了',
+    convertingDetailDone: 'あなたのルーン文字が準備できました！',
+    convertingQuote: '「ルーンは単なる文字ではなく、古代の知恵と力を含む神聖な象徴である」',
+    convertingQuoteAuthor: '- 古代北欧伝承',    
     // Results
     resultTitle: 'ルーン文字変換結果',
     resultSubtitle: '古代バイキングの神秘的な力が宿ったあなたの名前',
@@ -250,6 +315,11 @@ export const translations = {
     downloadSuccessDesc: 'ルーン文字変換結果が保存されました。',
     downloadFailed: 'ダウンロード失敗',
     
+    // Image Labels
+    imageTitle: 'バイキングルーン変換',
+    imageDescription: '古代エルダーフサルクルーン',
+    imageFooter: 'ルーン文字変換',
+    
     // Footer
     footerTitle: 'バイキング ルーン文字変換器',
     footerDesc: '実際の古代バイキング文化とエルダー・フサルクのルーン文字の神秘的な美しさを現代に伝え、あなたの名前に宿る本物の古代の力を発見してください。',
@@ -280,6 +350,25 @@ export const translations = {
     convertButton: '转换为符文',
     convertingButton: '神秘转换中...',
     tipText: '您可以修改自动转换的英文姓名。根据您的发音或首选的英文拼写法进行调整。',
+    
+    // Converting Page
+    convertingTitle: '符文转换中',
+    convertingSubtitle: '正在召唤古代维京人的神秘力量...',
+    convertingCompleteLabel: '完成',
+    convertingStepKoreanAnalyze: '分析韩语姓名',
+    convertingDetailKoreanAnalyzePrefix: '正在分析',
+    convertingDetailKoreanAnalyzeSuffix: '的发音',
+    convertingStepEnglishValidate: '验证英文表达',
+    convertingDetailEnglishValidatePrefix: '正在验证',
+    convertingDetailEnglishValidateSuffix: '的准确性',
+    convertingStepRuneMapping: '符文映射',
+    convertingDetailRuneMapping: '将每个音素转换为适当的符文字符',
+    convertingStepMeaning: '解释含义',
+    convertingDetailMeaning: '分析每个符文的象征和含义',
+    convertingStepDone: '转换完成',
+    convertingDetailDone: '您的符文字符已准备好！',
+    convertingQuote: '「符文不仅是字母，而是包含古代智慧和力量的神圣象征」',
+    convertingQuoteAuthor: '- 古代北欧传承',
     
     // Results
     resultTitle: '符文转换结果',
@@ -316,6 +405,11 @@ export const translations = {
     downloadSuccessDesc: '符文转换结果已保存。',
     downloadFailed: '下载失败',
     
+    // Image Labels
+    imageTitle: '维京符文转换',
+    imageDescription: '古代长老福萨克符文',
+    imageFooter: '符文转换器',
+    
     // Footer
     footerTitle: '维京符文转换器',
     footerDesc: '将古代维京文化和古老弗萨克符文的神秘之美带到现代世界，发现您姓名中蕴含的古代力量。',
@@ -347,6 +441,25 @@ export const translations = {
     convertingButton: 'Conversión mística en progreso...',
     tipText: 'Puedes editar el nombre en inglés convertido automáticamente. Ajústalo para que coincida con tu pronunciación o romanización preferida.',
     
+    // Converting Page
+    convertingTitle: 'Convirtiendo a Runas',
+    convertingSubtitle: 'Invocando el poder místico de los antiguos vikingos...',
+    convertingCompleteLabel: 'Completo',
+    convertingStepKoreanAnalyze: 'Analizando Nombre Coreano',
+    convertingDetailKoreanAnalyzePrefix: 'Analizando la pronunciación de ',
+    convertingDetailKoreanAnalyzeSuffix: '',
+    convertingStepEnglishValidate: 'Validando Notación Inglesa',
+    convertingDetailEnglishValidatePrefix: 'Verificando la exactitud de ',
+    convertingDetailEnglishValidateSuffix: '',
+    convertingStepRuneMapping: 'Mapeando Runas',
+    convertingDetailRuneMapping: 'Convirtiendo cada fonema en caracteres rúnicos apropiados',
+    convertingStepMeaning: 'Interpretando Significado',
+    convertingDetailMeaning: 'Analizando el simbolismo y significado de cada runa',
+    convertingStepDone: 'Conversión Completa',
+    convertingDetailDone: '¡Tus caracteres rúnicos están listos!',
+    convertingQuote: '"Las runas no son meras letras, sino símbolos sagrados que contienen sabiduría y poder antiguos"',
+    convertingQuoteAuthor: '- Tradición Nórdica Antigua',
+    
     // Results
     resultTitle: 'Resultado de Conversión de Runas',
     resultSubtitle: 'Tu nombre imbuido con el poder místico vikingo ancestral',
@@ -371,6 +484,11 @@ export const translations = {
     downloadSuccess: 'Imagen descargada exitosamente',
     downloadSuccessDesc: 'Resultado de conversión de runas guardado.',
     downloadFailed: 'Error en la descarga',
+    
+    // Image Labels
+    imageTitle: 'Conversión de Runas Vikingas',
+    imageDescription: 'Runas Elder Futhark Antiguas',
+    imageFooter: 'Convertidor de Runas',
     
     // Footer
     footerTitle: 'Convertidor de Runas Vikingas',
@@ -403,6 +521,25 @@ export const translations = {
     convertingButton: 'Conversion mystique en cours...',
     tipText: 'Vous pouvez modifier le nom anglais converti automatiquement. Ajustez-le pour correspondre à votre prononciation ou romanisation préférée.',
     
+    // Converting Page
+    convertingTitle: 'Conversion en Runes',
+    convertingSubtitle: 'Invoquant le pouvoir mystique des anciens Vikings...',
+    convertingCompleteLabel: 'Terminé',
+    convertingStepKoreanAnalyze: 'Analyse du Nom Coréen',
+    convertingDetailKoreanAnalyzePrefix: 'Analyse de la prononciation de ',
+    convertingDetailKoreanAnalyzeSuffix: '',
+    convertingStepEnglishValidate: 'Validation de la Notation Anglaise',
+    convertingDetailEnglishValidatePrefix: 'Vérification de l\'exactitude de ',
+    convertingDetailEnglishValidateSuffix: '',
+    convertingStepRuneMapping: 'Mappage des Runes',
+    convertingDetailRuneMapping: 'Conversion de chaque phonème en caractères runiques appropriés',
+    convertingStepMeaning: 'Interprétation du Sens',
+    convertingDetailMeaning: 'Analyse du symbolisme et de la signification de chaque rune',
+    convertingStepDone: 'Conversion Terminée',
+    convertingDetailDone: 'Vos caractères runiques sont prêts !',
+    convertingQuote: '"Les runes ne sont pas de simples lettres, mais des symboles sacrés contenant sagesse et pouvoir anciens"',
+    convertingQuoteAuthor: '- Tradition Nordique Ancienne',
+    
     // Results
     resultTitle: 'Résultat de Conversion des Runes',
     resultSubtitle: 'Votre nom imprégné du pouvoir mystique viking ancestral',
@@ -427,6 +564,11 @@ export const translations = {
     downloadSuccess: 'Image téléchargée avec succès',
     downloadSuccessDesc: 'Résultat de conversion des runes sauvegardé.',
     downloadFailed: 'Erreur de téléchargement',
+    
+    // Image Labels
+    imageTitle: 'Conversion de Runes Vikings',
+    imageDescription: 'Runes Elder Futhark Anciennes',
+    imageFooter: 'Convertisseur de Runes',
     
     // Footer
     footerTitle: 'Convertisseur de Runes Vikings',

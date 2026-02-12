@@ -91,7 +91,12 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
         height: 800,
         backgroundColor: '#FAF0E6',
         textColor: '#8B4513',
-        runeColor: '#8B4513'
+        runeColor: '#8B4513',
+        labels: {
+          title: t('imageTitle'),
+          description: t('imageDescription'),
+          footer: t('imageFooter')
+        }
       });
       const link = document.createElement('a');
       link.download = `${englishName}_rune_conversion.png`;

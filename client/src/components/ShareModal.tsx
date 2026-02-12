@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Share2, Copy, Download, Facebook, Twitter, Instagram, MessageCircle } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ShareModalProps {
   isOpen: boolean;
@@ -23,6 +24,7 @@ export default function ShareModal({
 }: ShareModalProps) {
   const [isDownloading, setIsDownloading] = useState(false);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const shareText = `${koreanName} (${englishName})의 바이킹 룬 문자: ${runeText}
 
@@ -62,7 +64,12 @@ export default function ShareModal({
         height: 800,
         backgroundColor: '#FAF0E6',
         textColor: '#8B4513',
-        runeColor: '#8B4513'
+        runeColor: '#8B4513',
+        labels: {
+          title: t('imageTitle'),
+          description: t('imageDescription'),
+          footer: t('imageFooter')
+        }
       });
       const link = document.createElement('a');
       link.download = `${englishName}_rune_conversion.png`;
