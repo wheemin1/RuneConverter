@@ -392,6 +392,15 @@ export const translations = {
     // RuneResult
     conversionCompleteMessage: '変換完了！上のルーンをクリックして詳しい意味を確認してください。',
     
+    // Rune Meanings Page
+    homeButton: 'ホーム',
+    exploreRuneMeaningsTitle: 'すべてのルーン文字の意味を探る',
+    exploreRuneMeaningsDesc: '24個のエルダー・フサルクのルーンの意味、象徴、歴史を詳しく学びましょう。',
+    viewRuneMeaningsButton: 'ルーンの意味を見る',
+    convertYourNameTitle: 'あなたの名前をルーン文字に変換',
+    convertYourNameDesc: 'それぞれのルーンの意味を学んだので、あなたの名前にどのルーンが含まれるか確認してみましょう。',
+    convertForFreeButton: '無料で変換',
+    
     // Footer
     footerTitle: 'バイキング ルーン文字変換器',
     footerDesc: '実際の古代バイキング文化とエルダー・フサルクのルーン文字の神秘的な美しさを現代に伝え、あなたの名前に宿る本物の古代の力を発見してください。',
@@ -502,6 +511,15 @@ export const translations = {
     // RuneResult
     conversionCompleteMessage: '转换完成！点击上方的符文查看详细含义。',
     
+    // Rune Meanings Page
+    homeButton: '首页',
+    exploreRuneMeaningsTitle: '探索所有符文的含义',
+    exploreRuneMeaningsDesc: '详细了解24个古老弗萨克符文的含义、象征和历史。',
+    viewRuneMeaningsButton: '查看符文含义',
+    convertYourNameTitle: '将您的姓名转换为符文',
+    convertYourNameDesc: '既然您已经了解了每个符文的含义，现在来看看您的姓名中包含哪些符文。',
+    convertForFreeButton: '免费转换',
+    
     // Footer
     footerTitle: '维京符文转换器',
     footerDesc: '将古代维京文化和古老弗萨克符文的神秘之美带到现代世界，发现您姓名中蕴含的古代力量。',
@@ -602,6 +620,15 @@ export const translations = {
     // RuneResult
     conversionCompleteMessage: '¡Conversión completa! Haz clic en las runas de arriba para ver significados detallados.',
     
+    // Rune Meanings Page
+    homeButton: 'Inicio',
+    exploreRuneMeaningsTitle: 'Explorar Todos los Significados de las Runas',
+    exploreRuneMeaningsDesc: 'Descubre los significados, simbolismo e historia detallados de las 24 runas Elder Futhark.',
+    viewRuneMeaningsButton: 'Ver Significados de Runas',
+    convertYourNameTitle: 'Convierte Tu Nombre a Runas',
+    convertYourNameDesc: 'Ahora que has aprendido los significados, descubre qué runas aparecen en tu nombre.',
+    convertForFreeButton: 'Convertir Gratis',
+    
     // Footer
     footerTitle: 'Convertidor de Runas Vikingas',
     footerDesc: 'Trayendo la belleza mística de la cultura vikinga ancestral y las runas del Futhark Elder al mundo moderno. Descubre el poder ancestral dentro de tu nombre.',
@@ -701,6 +728,15 @@ export const translations = {
     
     // RuneResult
     conversionCompleteMessage: 'Conversion terminée ! Cliquez sur les runes ci-dessus pour voir les significations détaillées.',
+    
+    // Rune Meanings Page
+    homeButton: 'Accueil',
+    exploreRuneMeaningsTitle: 'Explorer Toutes les Significations des Runes',
+    exploreRuneMeaningsDesc: 'Découvrez les significations, le symbolisme et l\'histoire détaillés des 24 runes Elder Futhark.',
+    viewRuneMeaningsButton: 'Voir les Significations',
+    convertYourNameTitle: 'Convertissez Votre Nom en Runes',
+    convertYourNameDesc: 'Maintenant que vous connaissez les significations, découvrez quelles runes apparaissent dans votre nom.',
+    convertForFreeButton: 'Convertir Gratuitement',
     
     // Footer
     footerTitle: 'Convertisseur de Runes Vikings',

@@ -45,7 +45,7 @@ export default function RuneMeanings() {
               <Link href={language === 'ko' ? '/' : `/?lang=${language}`}>
                 <Button variant="ghost" size="sm" className="text-amber-900 hover:text-amber-700">
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  {language === 'ko' ? '홈으로' : 'Home'}
+                  {t('homeButton')}
                 </Button>
               </Link>
             </div>
@@ -146,16 +146,14 @@ export default function RuneMeanings() {
               <Card className="inline-block bg-gradient-to-r from-amber-100/80 to-stone-100/80 border-amber-300/50 shadow-lg">
                 <CardContent className="p-8">
                   <h2 className="text-2xl md:text-3xl font-bold text-amber-900 mb-4">
-                    {language === 'ko' ? '당신의 이름을 룬 문자로 변환해보세요' : 'Convert Your Name to Runes'}
+                    {t('convertYourNameTitle')}
                   </h2>
                   <p className="text-stone-700 mb-6 max-w-2xl">
-                    {language === 'ko'
-                      ? '각 룬의 의미를 배웠으니 이제 당신의 이름에 어떤 룬이 포함되는지 확인해보세요.'
-                      : 'Now that you know the meanings, discover which runes appear in your name.'}
+                    {t('convertYourNameDesc')}
                   </p>
                   <Link href={language === 'ko' ? '/' : `/?lang=${language}`}>
                     <Button size="lg" className="bg-amber-700 hover:bg-amber-800 text-white font-semibold">
-                      {language === 'ko' ? '무료로 변환하기' : 'Convert for Free'}
+                      {t('convertForFreeButton')}
                     </Button>
                   </Link>
                 </CardContent>

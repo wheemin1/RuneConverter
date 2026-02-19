@@ -123,11 +123,11 @@ export default function Home() {
             ) : null}
 
             <p
-              className={`mt-4 md:mt-6 text-base md:text-lg lg:text-xl text-text-brown-light leading-relaxed mx-auto text-pretty${
+              className={`mt-4 md:mt-6 text-base md:text-lg lg:text-xl text-text-brown-light leading-relaxed mx-auto${
                 language === "de" || language === "fr" ? " max-w-3xl" : " max-w-2xl"
-              }${language === "ko" ? " break-keep" : ""}`}
+              }${language === "ko" ? " break-keep" : ""}${language === "ko" ? " text-balance" : "text-pretty"}`}
             >
-              {language === "ko" ? "자신의 이름을 신비로운 고대 룬 문자로 정확하게 변환해보세요." : t("subtitle")}
+              {t("subtitle")}
             </p>
 
             {language === "en" && (
@@ -216,16 +216,14 @@ export default function Home() {
               <CardContent className="p-8 text-center">
                 <BookOpen className="w-12 h-12 mx-auto mb-4 text-amber-800" />
                 <h2 className="text-2xl md:text-3xl font-bold text-amber-900 mb-3">
-                  {language === 'ko' ? '모든 룬 문자의 의미 알아보기' : 'Explore All Rune Meanings'}
+                  {t('exploreRuneMeaningsTitle')}
                 </h2>
                 <p className="text-stone-700 mb-6 max-w-2xl mx-auto">
-                  {language === 'ko'
-                    ? '24개 엘더 푸타르크 룬의 의미, 상징, 역사를 상세히 알아보세요.'
-                    : 'Discover the detailed meanings, symbolism, and history of all 24 Elder Futhark runes.'}
+                  {t('exploreRuneMeaningsDesc')}
                 </p>
                 <a href={`/rune-meanings?lang=${language}`}>
                   <Button size="lg" className="bg-amber-700 hover:bg-amber-800 text-white font-semibold">
-                    {language === 'ko' ? '룬 의미 보기' : 'View Rune Meanings'}
+                    {t('viewRuneMeaningsButton')}
                   </Button>
                 </a>
               </CardContent>
