@@ -18,53 +18,29 @@ interface RuneResultProps {
 }
 
 export default function RuneResult({ runeText, englishName, koreanName }: RuneResultProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isDownloading, setIsDownloading] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showSavedRunes, setShowSavedRunes] = useState(false);
   const { toast } = useToast();
 
   // Get rune details for quick preview
-  const runeDetails = getRuneDetails(runeText);
+  const runeDetails = getRuneDetails(runeText, language);
 
   // Function to generate combined meaning from multiple runes
   const generateCombinedMeaning = (runeDetails: any[]): string => {
-    if (runeDetails.length === 0) return "신비로운 힘을 담은 이름입니다.";
-    
-    // Extract key themes from all runes
-    const allKeywords = runeDetails.flatMap(rune => rune.keywords);
-    const themes = allKeywords.filter((keyword, index) => allKeywords.indexOf(keyword) === index); // Remove duplicates
-    
-    // Create meaningful combinations based on common themes
-    const positiveThemes = themes.filter(theme => 
-      ['성공', '풍요', '지혜', '용기', '보호', '행운', '힘', '성장', '번영', '조화', '균형', '창조', '발전', '승리', '희망'].includes(theme)
-    );
-    
-    const personalityThemes = themes.filter(theme => 
-      ['리더십', '소통', '여행', '모험', '변화', '직관', '인내', '의지', '열정', '집중', '완성', '통찰'].includes(theme)
-    );
-    
-    // Generate combined meaning
-    let meaning = "";
-    
-    if (positiveThemes.length > 0 && personalityThemes.length > 0) {
-      meaning = `${positiveThemes.slice(0, 2).join('과 ')}을 바탕으로 ${personalityThemes.slice(0, 2).join('과 ')}을 발휘하여 목표를 달성하는 인물`;
-    } else if (positiveThemes.length > 0) {
-      meaning = `${positiveThemes.slice(0, 3).join(', ')}의 기운을 가진 축복받은 이름`;
-    } else if (personalityThemes.length > 0) {
-      meaning = `${personalityThemes.slice(0, 3).join(', ')}의 특성을 지닌 강인한 인물`;
-    } else {
-      // Fallback to general meaning based on rune count
-      if (runeDetails.length <= 3) {
-        meaning = "간결하면서도 강력한 에너지를 지닌 이름";
-      } else if (runeDetails.length <= 6) {
-        meaning = "균형잡힌 힘과 지혜를 겸비한 이름";
-      } else {
-        meaning = "복합적이고 깊은 의미를 담은 풍부한 이름";
-      }
+    if (runeDetails.length === 0) {
+      return t('combinedMeaningDefault');
     }
     
-    return meaning + ".";
+    // Simple fallback based on rune count for now (fully i18n)
+    if (runeDetails.length <= 3) {
+      return t('combinedMeaningShort');
+    } else if (runeDetails.length <= 6) {
+      return t('combinedMeaningMedium');
+    } else {
+      return t('combinedMeaningLong');
+    }
   };
 
   const handleQuickCopy = async () => {
@@ -207,7 +183,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                   {/* Mystical Quote */}
                   <div className="text-center">
                     <p className="text-sm text-text-brown-light italic">
-                      "이 룬들은 당신의 이름에 담긴 고대의 힘을 나타냅니다"
+                      {t('runeQuote')}
                     </p>
                   </div>
                 </div>
@@ -269,7 +245,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                     variant="outline"
                     className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors text-sm"
                   >
-                    각 룬의 세부 의미 보기 <ChevronDown className="w-4 h-4 ml-1" />
+                    {t('detailButton')} <ChevronDown className="w-4 h-4 ml-1" />
                   </Button>
                 </div>
               </div>

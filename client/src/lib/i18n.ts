@@ -119,6 +119,11 @@ export const translations = {
     
     // RuneResult  
     conversionCompleteMessage: '변환 완료! 위의 룬들을 클릭하여 자세한 의미를 확인해보세요.',
+    runeQuote: '"이 룬들은 당신의 이름에 담긴 고대의 힘을 나타냅니다"',
+    combinedMeaningDefault: '신비로운 힘을 담은 이름입니다.',
+    combinedMeaningShort: '간결하면서도 강력한 에너지를 지니 이름입니다.',
+    combinedMeaningMedium: '균형잡힌 힘과 지혜를 겸비한 이름입니다.',
+    combinedMeaningLong: '복합적이고 깊은 의미를 담은 풍부한 이름입니다.',
     
     // Footer
     footerTitle: '바이킹 룬 문자 변환기',
@@ -257,6 +262,11 @@ export const translations = {
     
     // RuneResult
     conversionCompleteMessage: 'Conversion complete! Click on the runes above to see detailed meanings.',
+    runeQuote: '"These runes represent the ancient power within your name"',
+    combinedMeaningDefault: 'A name imbued with mystical power.',
+    combinedMeaningShort: 'A concise yet powerful name with strong energy.',
+    combinedMeaningMedium: 'A balanced name combining strength and wisdom.',
+    combinedMeaningLong: 'A rich name carrying deep and complex meanings.',
     
     // Footer
     footerTitle: 'Viking Rune Converter',
@@ -391,6 +401,11 @@ export const translations = {
     
     // RuneResult
     conversionCompleteMessage: '変換完了！上のルーンをクリックして詳しい意味を確認してください。',
+    runeQuote: '「これらのルーンはあなたの名前に秘められた古代の力を表しています」',
+    combinedMeaningDefault: '神秘的な力を内包する名前です。',
+    combinedMeaningShort: '簡潔でありながら強力なエネルギーを持つ名前です。',
+    combinedMeaningMedium: '力と知恵を兼ね備えたバランスの良い名前です。',
+    combinedMeaningLong: '複雑で深い意味を持つ豊かな名前です。',
     
     // Rune Meanings Page
     homeButton: 'ホーム',
@@ -510,6 +525,11 @@ export const translations = {
     
     // RuneResult
     conversionCompleteMessage: '转换完成！点击上方的符文查看详细含义。',
+    runeQuote: '「这些符文代表您姓名中蕴含的古代力量」',
+    combinedMeaningDefault: '充满神秘力量的姓名。',
+    combinedMeaningShort: '简洁而强大的姓名，具有强烈的能量。',
+    combinedMeaningMedium: '兼具力量与智慧的平衡姓名。',
+    combinedMeaningLong: '蕴含深刻而复杂意义的丰富姓名。',
     
     // Rune Meanings Page
     homeButton: '首页',
@@ -619,6 +639,11 @@ export const translations = {
     
     // RuneResult
     conversionCompleteMessage: '¡Conversión completa! Haz clic en las runas de arriba para ver significados detallados.',
+    runeQuote: '"Estas runas representan el poder ancestral dentro de tu nombre"',
+    combinedMeaningDefault: 'Un nombre imbuido con poder místico.',
+    combinedMeaningShort: 'Un nombre conciso pero poderoso con fuerte energía.',
+    combinedMeaningMedium: 'Un nombre equilibrado que combina fuerza y sabiduría.',
+    combinedMeaningLong: 'Un nombre rico que lleva significados profundos y complejos.',
     
     // Rune Meanings Page
     homeButton: 'Inicio',
@@ -728,6 +753,11 @@ export const translations = {
     
     // RuneResult
     conversionCompleteMessage: 'Conversion terminée ! Cliquez sur les runes ci-dessus pour voir les significations détaillées.',
+    runeQuote: '"Ces runes représentent le pouvoir ancestral dans votre nom"',
+    combinedMeaningDefault: 'Un nom imprégné de pouvoir mystique.',
+    combinedMeaningShort: 'Un nom concis mais puissant avec une forte énergie.',
+    combinedMeaningMedium: 'Un nom équilibré combinant force et sagesse.',
+    combinedMeaningLong: 'Un nom riche portant des significations profondes et complexes.',
     
     // Rune Meanings Page
     homeButton: 'Accueil',
