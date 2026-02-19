@@ -5,7 +5,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import NameInput from "@/components/NameInput";
 import LanguageSelector from "@/components/LanguageSelector";
 import ConvertingPage from "./ConvertingPage";
-import AdSenseAutoAds from "@/components/AdSenseAutoAds";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookOpen } from "lucide-react";
@@ -74,7 +73,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen relative">
-      <AdSenseAutoAds />
       <div className="vignette-overlay" />
 
       <div className="parchment-bg min-h-screen font-cinzel relative z-10">

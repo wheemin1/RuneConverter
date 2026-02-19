@@ -44,13 +44,13 @@ export default function ShareModal({
     try {
       await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
       toast({
-        title: "텍스트가 복사되었습니다",
-        description: "클립보드에 룬 변환 결과가 복사되었습니다.",
+        title: t('copyTextSuccess'),
+        description: t('copyTextSuccessDesc'),
       });
     } catch (error) {
       toast({
-        title: "복사 실패",
-        description: "텍스트 복사 중 오류가 발생했습니다.",
+        title: t('copyTextFailed'),
+        description: t('copyTextFailedDesc'),
         variant: "destructive",
       });
     }
@@ -77,13 +77,13 @@ export default function ShareModal({
       link.click();
       
       toast({
-        title: "이미지 다운로드 완료",
-        description: "룬 문자 변환 결과가 저장되었습니다.",
+        title: t('downloadImageSuccess'),
+        description: t('downloadImageSuccessDesc'),
       });
     } catch (error) {
       toast({
-        title: "다운로드 실패",
-        description: "이미지 생성 중 오류가 발생했습니다.",
+        title: t('downloadImageFailed'),
+        description: t('downloadImageFailedDesc'),
         variant: "destructive",
       });
     }
@@ -149,7 +149,7 @@ export default function ShareModal({
             ᚱᚢᚾᛖ ᛊᚺᚨᚱᛁᚾᚷ
           </DialogTitle>
           <p className="text-center text-text-brown-light">
-            룬 문자 변환 결과를 친구들과 공유해보세요
+            {t('shareDescription')}
           </p>
         </DialogHeader>
 
@@ -178,7 +178,7 @@ export default function ShareModal({
             className="btn-viking text-white font-bold py-3 px-4 rounded-lg font-cinzel flex items-center justify-center gap-2"
           >
             <Copy className="w-4 h-4" />
-            텍스트 복사
+            {t('copyTextButton')}
           </Button>
 
           {/* Image Download */}
@@ -188,14 +188,14 @@ export default function ShareModal({
             className="btn-viking text-white font-bold py-3 px-4 rounded-lg font-cinzel flex items-center justify-center gap-2"
           >
             <Download className="w-4 h-4" />
-            {isDownloading ? "저장 중..." : "이미지 저장"}
+            {isDownloading ? t('downloadingButton') : t('downloadImageButton')}
           </Button>
         </div>
 
         {/* Social Media Sharing */}
         <div className="mt-6">
           <h4 className="text-lg font-semibold text-viking-brown mb-4 text-center">
-            소셜 미디어 공유
+            {t('socialMediaShareTitle')}
           </h4>
           <div className="grid grid-cols-3 gap-4">
             <Button

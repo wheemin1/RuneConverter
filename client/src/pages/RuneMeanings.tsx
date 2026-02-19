@@ -2,6 +2,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { elderFutharkRunesBase } from '@/lib/runes';
 import { getRuneLocalization } from '@/lib/runeLocalization';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import AdSenseAutoAds from '@/components/AdSenseAutoAds';
 import { Badge } from '@/components/ui/badge';
 import { Helmet } from 'react-helmet-async';
 import { getSeoData, getSeoLang } from '@shared/seo';
@@ -35,6 +36,7 @@ export default function RuneMeanings() {
       </Helmet>
 
       <div className="min-h-screen relative">
+        <AdSenseAutoAds />
         <div className="vignette-overlay" />
 
         <div className="parchment-bg min-h-screen font-cinzel relative z-10">

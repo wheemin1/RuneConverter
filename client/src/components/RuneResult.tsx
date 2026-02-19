@@ -280,7 +280,7 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
               <div className="inline-flex items-center gap-2 bg-viking-gold/10 border border-viking-gold/20 rounded-lg px-4 py-2">
                 <Sparkles className="w-4 h-4 text-viking-gold" />
                 <span className="text-sm text-viking-brown font-semibold">
-                  변환 완료! 위의 룬들을 클릭하여 자세한 의미를 확인해보세요.
+                  {t('conversionCompleteMessage')}
                 </span>
               </div>
             </div>

@@ -101,6 +101,25 @@ export const translations = {
     imageDescription: '고대 엘더 푸타르크 룬',
     imageFooter: '룬 문자 변환기',
     
+    // ShareModal
+    shareTitle: '룬 변환 결과 공유',
+    shareDescription: '룬 문자 변환 결과를 친구들과 공유해보세요',
+    copyTextButton: '텍스트 복사',
+    copyTextSuccess: '텍스트가 복사되었습니다',
+    copyTextSuccessDesc: '클립보드에 룬 변환 결과가 복사되었습니다.',
+    copyTextFailed: '복사 실패',
+    copyTextFailedDesc: '텍스트 복사 중 오류가 발생했습니다.',
+    downloadImageButton: '이미지 저장',
+    downloadImageSuccess: '이미지 다운로드 완료',
+    downloadImageSuccessDesc: '룬 문자 변환 결과가 저장되었습니다.',
+    downloadImageFailed: '다운로드 실패',
+    downloadImageFailedDesc: '이미지 생성 중 오류가 발생했습니다.',
+    socialMediaShareTitle: '소셜 미디어 공유',
+    shareLinkTitle: '공유 링크',
+    
+    // RuneResult  
+    conversionCompleteMessage: '변환 완료! 위의 룬들을 클릭하여 자세한 의미를 확인해보세요.',
+    
     // Footer
     footerTitle: '바이킹 룬 문자 변환기',
     footerDesc: '고대 바이킹 문화와 엘더 푸타르크 룬 문자의 신비로운 아름다움을 현대에 전하며, 실제 당신의 이름에 담긴 고대의 힘을 발견하세요.',
@@ -124,6 +143,13 @@ export const translations = {
     runeMeaningsTitle: '엘더 푸타르크 룬 문자 의미',
     runeMeaningsSubtitle: '24개 고대 바이킹 룬의 의미, 상징, 역사를 알아보세요',
     runeMeaningsDescription: '각 룬 문자는 단순한 글자가 아니라 깊은 상징적 의미를 담고 있습니다. 고대 북유럽에서는 룬을 문자뿐만 아니라 점술과 마법에도 사용했습니다.',
+    homeButton: '홈으로',
+    exploreRuneMeaningsTitle: '모든 룬 문자의 의미 알아보기',
+    exploreRuneMeaningsDesc: '24개 엘더 푸타르크 룬의 의미, 상징, 역사를 상세히 알아보세요.',
+    viewRuneMeaningsButton: '룬 의미 보기',
+    convertYourNameTitle: '당신의 이름을 룬 문자로 변환해보세요',
+    convertYourNameDesc: '각 룬의 의미를 배웠으니 이제 당신의 이름에 어떤 룬이 포함되는지 확인해보세요.',
+    convertForFreeButton: '무료로 변환하기',
     phonetic: '발음',
     keywords: '키워드',
     learnMore: '더 알아보기',
@@ -213,6 +239,25 @@ export const translations = {
     imageDescription: 'Ancient Elder Futhark Runes',
     imageFooter: 'Rune Converter',
     
+    // ShareModal
+    shareTitle: 'Share Rune Result',
+    shareDescription: 'Share your rune conversion result with friends',
+    copyTextButton: 'Copy Text',
+    copyTextSuccess: 'Text copied successfully',
+    copyTextSuccessDesc: 'Rune conversion result copied to clipboard.',
+    copyTextFailed: 'Copy failed',
+    copyTextFailedDesc: 'An error occurred while copying text.',
+    downloadImageButton: 'Save Image',
+    downloadImageSuccess: 'Image downloaded successfully',
+    downloadImageSuccessDesc: 'Rune conversion result saved.',
+    downloadImageFailed: 'Download failed',
+    downloadImageFailedDesc: 'An error occurred while generating image.',
+    socialMediaShareTitle: 'Social Media Sharing',
+    shareLinkTitle: 'Share Link',
+    
+    // RuneResult
+    conversionCompleteMessage: 'Conversion complete! Click on the runes above to see detailed meanings.',
+    
     // Footer
     footerTitle: 'Viking Rune Converter',
     footerDesc: 'Bringing the mystical beauty of authentic Viking culture and Elder Futhark runes to the modern world. Discover the real ancient power within your name.',
@@ -236,6 +281,13 @@ export const translations = {
     runeMeaningsTitle: 'Elder Futhark Rune Meanings',
     runeMeaningsSubtitle: 'Discover the meanings, symbolism, and history of all 24 ancient Viking runes',
     runeMeaningsDescription: 'Each rune is not just a letter but carries deep symbolic meaning. In ancient Norse culture, runes were used not only for writing but also for divination and magic.',
+    homeButton: 'Home',
+    exploreRuneMeaningsTitle: 'Explore All Rune Meanings',
+    exploreRuneMeaningsDesc: 'Discover the detailed meanings, symbolism, and history of all 24 Elder Futhark runes.',
+    viewRuneMeaningsButton: 'View Rune Meanings',
+    convertYourNameTitle: 'Convert Your Name to Runes',
+    convertYourNameDesc: 'Now that you know the meanings, discover which runes appear in your name.',
+    convertForFreeButton: 'Convert for Free',
     phonetic: 'Phonetic',
     keywords: 'Keywords',
     learnMore: 'Learn More',
@@ -320,6 +372,25 @@ export const translations = {
     imageTitle: 'バイキングルーン変換',
     imageDescription: '古代エルダーフサルクルーン',
     imageFooter: 'ルーン文字変換',
+    
+    // ShareModal
+    shareTitle: 'ルーン変換結果の共有',
+    shareDescription: 'ルーン文字変換結果を友達と共有しましょう',
+    copyTextButton: 'テキストをコピー',
+    copyTextSuccess: 'テキストがコピーされました',
+    copyTextSuccessDesc: 'ルーン変換結果がクリップボードにコピーされました。',
+    copyTextFailed: 'コピー失敗',
+    copyTextFailedDesc: 'テキストのコピー中にエラーが発生しました。',
+    downloadImageButton: '画像を保存',
+    downloadImageSuccess: '画像ダウンロード完了',
+    downloadImageSuccessDesc: 'ルーン文字変換結果が保存されました。',
+    downloadImageFailed: 'ダウンロード失敗',
+    downloadImageFailedDesc: '画像生成中にエラーが発生しました。',
+    socialMediaShareTitle: 'ソーシャルメディア共有',
+    shareLinkTitle: '共有リンク',
+    
+    // RuneResult
+    conversionCompleteMessage: '変換完了！上のルーンをクリックして詳しい意味を確認してください。',
     
     // Footer
     footerTitle: 'バイキング ルーン文字変換器',
@@ -412,6 +483,25 @@ export const translations = {
     imageDescription: '古代长老福萨克符文',
     imageFooter: '符文转换器',
     
+    // ShareModal
+    shareTitle: '分享符文结果',
+    shareDescription: '与朋友分享您的符文转换结果',
+    copyTextButton: '复制文本',
+    copyTextSuccess: '文本已复制',
+    copyTextSuccessDesc: '符文转换结果已复制到剪贴板。',
+    copyTextFailed: '复制失败',
+    copyTextFailedDesc: '复制文本时发生错误。',
+    downloadImageButton: '保存图片',
+    downloadImageSuccess: '图片下载完成',
+    downloadImageSuccessDesc: '符文转换结果已保存。',
+    downloadImageFailed: '下载失败',
+    downloadImageFailedDesc: '生成图片时发生错误。',
+    socialMediaShareTitle: '社交媒体分享',
+    shareLinkTitle: '分享链接',
+    
+    // RuneResult
+    conversionCompleteMessage: '转换完成！点击上方的符文查看详细含义。',
+    
     // Footer
     footerTitle: '维京符文转换器',
     footerDesc: '将古代维京文化和古老弗萨克符文的神秘之美带到现代世界，发现您姓名中蕴含的古代力量。',
@@ -493,6 +583,25 @@ export const translations = {
     imageDescription: 'Runas Elder Futhark Antiguas',
     imageFooter: 'Convertidor de Runas',
     
+    // ShareModal
+    shareTitle: 'Compartir Resultado de Runas',
+    shareDescription: 'Comparte tu resultado de conversión de runas con amigos',
+    copyTextButton: 'Copiar Texto',
+    copyTextSuccess: 'Texto copiado exitosamente',
+    copyTextSuccessDesc: 'Resultado de conversión de runas copiado al portapapeles.',
+    copyTextFailed: 'Fallo al copiar',
+    copyTextFailedDesc: 'Ocurrió un error al copiar el texto.',
+    downloadImageButton: 'Guardar Imagen',
+    downloadImageSuccess: 'Imagen descargada exitosamente',
+    downloadImageSuccessDesc: 'Resultado de conversión de runas guardado.',
+    downloadImageFailed: 'Fallo en la descarga',
+    downloadImageFailedDesc: 'Ocurrió un error al generar la imagen.',
+    socialMediaShareTitle: 'Compartir en Redes Sociales',
+    shareLinkTitle: 'Enlace para Compartir',
+    
+    // RuneResult
+    conversionCompleteMessage: '¡Conversión completa! Haz clic en las runas de arriba para ver significados detallados.',
+    
     // Footer
     footerTitle: 'Convertidor de Runas Vikingas',
     footerDesc: 'Trayendo la belleza mística de la cultura vikinga ancestral y las runas del Futhark Elder al mundo moderno. Descubre el poder ancestral dentro de tu nombre.',
@@ -573,6 +682,25 @@ export const translations = {
     imageTitle: 'Conversion de Runes Vikings',
     imageDescription: 'Runes Elder Futhark Anciennes',
     imageFooter: 'Convertisseur de Runes',
+    
+    // ShareModal
+    shareTitle: 'Partager le Résultat des Runes',
+    shareDescription: 'Partagez votre résultat de conversion de runes avec vos amis',
+    copyTextButton: 'Copier le Texte',
+    copyTextSuccess: 'Texte copié avec succès',
+    copyTextSuccessDesc: 'Résultat de conversion de runes copié dans le presse-papiers.',
+    copyTextFailed: 'Échec de la copie',
+    copyTextFailedDesc: 'Une erreur s\'est produite lors de la copie du texte.',
+    downloadImageButton: 'Enregistrer l\'Image',
+    downloadImageSuccess: 'Image téléchargée avec succès',
+    downloadImageSuccessDesc: 'Résultat de conversion de runes enregistré.',
+    downloadImageFailed: 'Échec du téléchargement',
+    downloadImageFailedDesc: 'Une erreur s\'est produite lors de la génération de l\'image.',
+    socialMediaShareTitle: 'Partage sur les Réseaux Sociaux',
+    shareLinkTitle: 'Lien de Partage',
+    
+    // RuneResult
+    conversionCompleteMessage: 'Conversion terminée ! Cliquez sur les runes ci-dessus pour voir les significations détaillées.',
     
     // Footer
     footerTitle: 'Convertisseur de Runes Vikings',
