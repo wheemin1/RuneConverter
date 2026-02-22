@@ -63,7 +63,8 @@ export default function RuneExplanation({ runeDetails }: RuneExplanationProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {runeDetails.map((rune, index) => (
               <div 
-                key={index} 
+                key={index}
+                data-rune-index={index}
                 className="bg-gradient-to-br from-parchment to-parchment-darker rounded-xl p-6 ancient-border relative overflow-hidden group hover:shadow-lg transition-all duration-300"
               >
                 {/* Background decoration */}

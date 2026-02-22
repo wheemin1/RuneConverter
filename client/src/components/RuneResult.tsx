@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Share2, Download, Copy, Sparkles, Eye, ChevronDown, Save, History } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Share2, Download, Copy, Sparkles, Eye, ChevronDown, Save, History, ChevronUp } from "lucide-react";
 import { generateRuneImage } from "@/lib/imageGenerator";
 import { useToast } from "@/hooks/use-toast";
-import { getRuneDetails } from "@/lib/runeDatabase";
+import { getRuneDetails, getRuneByCharacter } from "@/lib/runeDatabase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ShareModal from "./ShareModal";
 import { saveRuneConversion } from "@/lib/localStorageUtils";
@@ -22,10 +24,25 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
   const [isDownloading, setIsDownloading] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showSavedRunes, setShowSavedRunes] = useState(false);
+  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const { toast } = useToast();
 
   // Get rune details for quick preview
   const runeDetails = getRuneDetails(runeText, language);
+  
+  // Individual rune characters for interactive display
+  const runeCharacters = Array.from(runeText);
+
+  // Function to scroll to specific rune in detailed explanation
+  const scrollToRune = (index: number) => {
+    const runeElement = document.querySelector(`[data-rune-index="${index}"]`);
+    if (runeElement) {
+      runeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Highlight animation
+      runeElement.classList.add('highlight-pulse');
+      setTimeout(() => runeElement.classList.remove('highlight-pulse'), 2000);
+    }
+  };
 
   // Function to generate combined meaning from multiple runes
   const generateCombinedMeaning = (runeDetails: any[]): string => {
@@ -161,12 +178,51 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                     </div>
                   </div>
                   
-                  {/* Rune Text - Main Feature */}
+                  {/* Rune Text - Main Feature with Interactive Tooltips */}
                   <div className="mb-6 relative">
                     <div className="text-lg text-text-brown-light mb-3">Elder Futhark Runes</div>
-                    <div className="text-6xl md:text-8xl rune-character-large mb-4 leading-tight">
-                      {runeText}
-                    </div>
+                    <TooltipProvider delayDuration={300}>
+                      <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 mb-4">
+                        {runeCharacters.map((char, index) => {
+                          const runeDetail = getRuneByCharacter(char, language);
+                          if (!runeDetail) return <span key={index} className="text-6xl md:text-8xl rune-character-large">{char}</span>;
+                          
+                          return (
+                            <Tooltip key={index}>
+                              <TooltipTrigger asChild>
+                                <button
+                                  onClick={() => scrollToRune(index)}
+                                  className="text-5xl md:text-7xl rune-character-large hover:text-viking-gold hover:scale-110 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-viking-gold focus:ring-offset-2 rounded-lg px-1"
+                                  aria-label={`${runeDetail.name} rune`}
+                                >
+                                  {char}
+                                </button>
+                              </TooltipTrigger>
+                              <TooltipContent 
+                                side="top" 
+                                className="bg-gradient-to-br from-amber-50 to-stone-100 border-amber-300 shadow-xl max-w-xs p-4"
+                              >
+                                <div className="space-y-2">
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-2xl rune-character">{char}</span>
+                                    <div>
+                                      <p className="font-bold text-amber-900">{runeDetail.name}</p>
+                                      <p className="text-xs text-stone-600">{runeDetail.phonetic}</p>
+                                    </div>
+                                  </div>
+                                  <p className="text-sm text-stone-700 leading-relaxed">
+                                    {runeDetail.meaning.split('.')[0]}.
+                                  </p>
+                                  <p className="text-xs text-amber-700 italic">
+                                    {t('clickForDetails') || 'Click for full details'}
+                                  </p>
+                                </div>
+                              </TooltipContent>
+                            </Tooltip>
+                          );
+                        })}
+                      </div>
+                    </TooltipProvider>
                     
                     {/* Quick Copy Button */}
                     <Button
@@ -234,21 +290,81 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                     {generateCombinedMeaning(runeDetails)}
                   </p>
                 </div>
-                <div className="mt-4 text-center">
-                  <Button
-                    onClick={() => {
-                      const detailElement = document.querySelector('[data-scroll-target="detailed-explanation"]');
-                      if (detailElement) {
-                        detailElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }
-                    }}
-                    variant="outline"
-                    className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors text-sm"
-                  >
-                    {t('detailButton')} <ChevronDown className="w-4 h-4 ml-1" />
-                  </Button>
-                </div>
               </div>
+            </div>
+
+            {/* Quick View Section - Collapsible */}
+            <div className="mt-6">
+              <Collapsible open={isQuickViewOpen} onOpenChange={setIsQuickViewOpen}>
+                <div className="bg-gradient-to-br from-amber-50/80 to-stone-50/80 rounded-lg border border-amber-200/50 overflow-hidden">
+                  <CollapsibleTrigger asChild>
+                    <button className="w-full p-4 flex items-center justify-between hover:bg-amber-100/50 transition-colors">
+                      <div className="flex items-center gap-2">
+                        <Eye className="w-5 h-5 text-amber-700" />
+                        <span className="font-semibold text-amber-900">
+                          {t('quickViewTitle') || 'Quick View - All Rune Meanings'}
+                        </span>
+                      </div>
+                      {isQuickViewOpen ? (
+                        <ChevronUp className="w-5 h-5 text-amber-700" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5 text-amber-700" />
+                      )}
+                    </button>
+                  </CollapsibleTrigger>
+                  
+                  <CollapsibleContent className="border-t border-amber-200/50">
+                    <div className="p-4 space-y-3">
+                      {runeDetails.map((rune, index) => (
+                        <div 
+                          key={index}
+                          className="flex items-start gap-3 p-3 bg-white/50 rounded-lg hover:bg-amber-50 transition-colors cursor-pointer"
+                          onClick={() => scrollToRune(index)}
+                        >
+                          <span className="text-3xl rune-character flex-shrink-0">{rune.character}</span>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h5 className="font-bold text-amber-900">{rune.name}</h5>
+                              <Badge variant="outline" className="text-xs border-amber-300 text-amber-700">
+                                {rune.phonetic}
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-stone-700 leading-relaxed line-clamp-2">
+                              {rune.meaning}
+                            </p>
+                            <div className="flex flex-wrap gap-1 mt-2">
+                              {rune.keywords.slice(0, 3).map((keyword, ki) => (
+                                <span 
+                                  key={ki} 
+                                  className="text-xs px-2 py-0.5 bg-amber-100 text-amber-800 rounded-full"
+                                >
+                                  {keyword}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CollapsibleContent>
+                </div>
+              </Collapsible>
+            </div>
+
+            {/* Scroll to Detailed Button */}
+            <div className="mt-6 text-center">
+              <Button
+                onClick={() => {
+                  const detailElement = document.querySelector('[data-scroll-target="detailed-explanation"]');
+                  if (detailElement) {
+                    detailElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                variant="outline"
+                className="border-viking-tan hover:bg-viking-tan hover:text-white transition-colors"
+              >
+                {t('detailButton')} <ChevronDown className="w-4 h-4 ml-1" />
+              </Button>
             </div>
 
             {/* Success Message */}

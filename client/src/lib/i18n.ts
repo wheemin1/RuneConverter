@@ -124,6 +124,8 @@ export const translations = {
     combinedMeaningShort: '간결하면서도 강력한 에너지를 지니 이름입니다.',
     combinedMeaningMedium: '균형잡힌 힘과 지혜를 겸비한 이름입니다.',
     combinedMeaningLong: '복합적이고 깊은 의미를 담은 풍부한 이름입니다.',
+    clickForDetails: '클릭하면 상세보기',
+    quickViewTitle: '빠른 보기 - 모든 룬 의미',
     
     // Footer
     footerTitle: '바이킹 룬 문자 변환기',
@@ -267,6 +269,8 @@ export const translations = {
     combinedMeaningShort: 'A concise yet powerful name with strong energy.',
     combinedMeaningMedium: 'A balanced name combining strength and wisdom.',
     combinedMeaningLong: 'A rich name carrying deep and complex meanings.',
+    clickForDetails: 'Click for full details',
+    quickViewTitle: 'Quick View - All Rune Meanings',
     
     // Footer
     footerTitle: 'Viking Rune Converter',
@@ -406,6 +410,8 @@ export const translations = {
     combinedMeaningShort: '簡潔でありながら強力なエネルギーを持つ名前です。',
     combinedMeaningMedium: '力と知恵を兼ね備えたバランスの良い名前です。',
     combinedMeaningLong: '複雑で深い意味を持つ豊かな名前です。',
+    clickForDetails: 'クリックで詳細を表示',
+    quickViewTitle: 'クイックビュー - すべてのルーンの意味',
     
     // Rune Meanings Page
     homeButton: 'ホーム',
@@ -530,6 +536,8 @@ export const translations = {
     combinedMeaningShort: '简洁而强大的姓名，具有强烈的能量。',
     combinedMeaningMedium: '兼具力量与智慧的平衡姓名。',
     combinedMeaningLong: '蕴含深刻而复杂意义的丰富姓名。',
+    clickForDetails: '点击查看详细信息',
+    quickViewTitle: '快速查看 - 所有符文意义',
     
     // Rune Meanings Page
     homeButton: '首页',
@@ -644,6 +652,8 @@ export const translations = {
     combinedMeaningShort: 'Un nombre conciso pero poderoso con fuerte energía.',
     combinedMeaningMedium: 'Un nombre equilibrado que combina fuerza y sabiduría.',
     combinedMeaningLong: 'Un nombre rico que lleva significados profundos y complejos.',
+    clickForDetails: 'Clic para ver detalles completos',
+    quickViewTitle: 'Vista Rápida - Todos los Significados',
     
     // Rune Meanings Page
     homeButton: 'Inicio',
@@ -758,6 +768,8 @@ export const translations = {
     combinedMeaningShort: 'Un nom concis mais puissant avec une forte énergie.',
     combinedMeaningMedium: 'Un nom équilibré combinant force et sagesse.',
     combinedMeaningLong: 'Un nom riche portant des significations profondes et complexes.',
+    clickForDetails: 'Cliquez pour les détails complets',
+    quickViewTitle: 'Aperçu Rapide - Toutes les Significations',
     
     // Rune Meanings Page
     homeButton: 'Accueil',
