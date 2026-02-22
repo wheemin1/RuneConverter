@@ -1,5 +1,5 @@
 import { useEffect, useMemo, lazy, Suspense } from "react";
-import { Redirect, useSearch, Link } from "wouter";
+import { Redirect, useSearch, Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { convertToRunes } from "@/lib/runeConverter";
 import { getRuneDetails } from "@/lib/runeDatabase";
@@ -14,6 +14,7 @@ export default function Result() {
   const { language, setLanguage, t } = useLanguage();
   const search = useSearch();
   const searchParams = new URLSearchParams(search);
+  const [_, setLocation] = useLocation();
 
   const native = (searchParams.get("native") ?? "").trim();
   const roman = (searchParams.get("roman") ?? "").trim();
@@ -21,7 +22,7 @@ export default function Result() {
 
   useEffect(() => {
     // If a shared link includes lang, apply it.
-    if (urlLang && (urlLang === "ko" || urlLang === "en" || urlLang === "ja" || urlLang === "zh" || urlLang === "zh-TW" || urlLang === "es" || urlLang === "fr" || urlLang === "de" || urlLang === "pt-BR")) {
+    if (urlLang && (urlLang === "ko" || urlLang === "en" || urlLang === "ja" || urlLang === "zh" || urlLang === "es" || urlLang === "fr")) {
       if (urlLang !== language) setLanguage(urlLang);
     }
   }, [language, setLanguage, urlLang]);
@@ -35,6 +36,20 @@ export default function Result() {
     if (!runeText) return [];
     return getRuneDetails(runeText, language);
   }, [language, runeText]);
+
+  const handleLoadResult = (savedResult: {koreanName: string; englishName: string; runeText: string; language: string}) => {
+    // Update URL parameters with the loaded result
+    const params = new URLSearchParams();
+    params.set("native", savedResult.koreanName || savedResult.englishName);
+    params.set("roman", savedResult.englishName);
+    if (savedResult.language) {
+      params.set("lang", savedResult.language);
+    }
+    setLocation(`/result?${params.toString()}`);
+    
+    // Scroll to top of page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   if (!roman) {
     return <Redirect to="/" replace />;
@@ -60,7 +75,12 @@ export default function Result() {
 
         <main className="max-w-7xl mx-auto px-4 md:px-6 pb-12 md:pb-16 pt-2 md:pt-4">
           <div id="rune-result" data-scroll-target="result" className="max-w-4xl mx-auto">
-            <RuneResult runeText={runeText} englishName={roman} koreanName={native} runeDetails={runeDetails} />
+            <RuneResult 
+              runeText={runeText} 
+              englishName={roman} 
+              koreanName={native} 
+              onLoadResult={handleLoadResult} 
+            />
             <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="text-amber-900">Loading...</div></div>}>
               <RuneExplanation runeDetails={runeDetails} />
             </Suspense>

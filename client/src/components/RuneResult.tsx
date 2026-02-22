@@ -17,9 +17,10 @@ interface RuneResultProps {
   runeText: string;
   englishName: string;
   koreanName: string;
+  onLoadResult?: (savedResult: {koreanName: string; englishName: string; runeText: string; language: string}) => void;
 }
 
-export default function RuneResult({ runeText, englishName, koreanName }: RuneResultProps) {
+export default function RuneResult({ runeText, englishName, koreanName, onLoadResult }: RuneResultProps) {
   const { t, language } = useLanguage();
   const [isDownloading, setIsDownloading] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
@@ -111,16 +112,16 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
   };
 
   const handleSaveToLocal = () => {
-    try {
-      saveRuneConversion(koreanName, englishName, runeText);
+    const result = saveRuneConversion(koreanName, englishName, runeText);
+    if (result) {
       toast({
         title: t('savedSuccessfully'),
         description: `${koreanName} (${englishName})`,
       });
-    } catch (error) {
+    } else {
       toast({
-        title: "Error saving result",
-        description: "Could not save to local storage",
+        title: t('saveFailed'),
+        description: t('saveFailedDesc'),
         variant: "destructive",
       });
     }
@@ -128,12 +129,15 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
 
   // Function to handle loading saved result
   const handleLoadSavedResult = (savedResult: any) => {
-    // 로컬 저장에서 불러온 결과를 처리하는 로직은 
-    // 실제로는 상위 컴포넌트에서 처리해야 할 수 있습니다.
-    toast({
-      title: savedResult.koreanName,
-      description: savedResult.runeText,
-    });
+    if (onLoadResult) {
+      onLoadResult(savedResult);
+    } else {
+      // Fallback: show toast if onLoadResult not provided
+      toast({
+        title: savedResult.koreanName,
+        description: savedResult.runeText,
+      });
+    }
   };
 
   return (
@@ -316,33 +320,58 @@ export default function RuneResult({ runeText, englishName, koreanName }: RuneRe
                   <CollapsibleContent className="border-t border-amber-200/50">
                     <div className="p-4 space-y-3">
                       {runeDetails.map((rune, index) => (
-                        <div 
-                          key={index}
-                          className="flex items-start gap-3 p-3 bg-white/50 rounded-lg hover:bg-amber-50 transition-colors cursor-pointer"
-                          onClick={() => scrollToRune(index)}
-                        >
-                          <span className="text-3xl rune-character flex-shrink-0">{rune.character}</span>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              <h5 className="font-bold text-amber-900">{rune.name}</h5>
-                              <Badge variant="outline" className="text-xs border-amber-300 text-amber-700">
-                                {rune.phonetic}
-                              </Badge>
+                        <div key={index} className="relative group">
+                          <button 
+                            className="w-full flex items-start gap-3 p-3 bg-white/50 rounded-lg hover:bg-amber-50 focus:bg-amber-50 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors text-left"
+                            onClick={() => scrollToRune(index)}
+                            aria-label={`View details for ${rune.name} rune`}
+                          >
+                            <span className="text-3xl rune-character flex-shrink-0">{rune.character}</span>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 mb-1">
+                                <h5 className="font-bold text-amber-900">{rune.name}</h5>
+                                <Badge variant="outline" className="text-xs border-amber-300 text-amber-700">
+                                  {rune.phonetic}
+                                </Badge>
+                              </div>
+                              <p className="text-sm text-stone-700 leading-relaxed line-clamp-2">
+                                {rune.meaning}
+                              </p>
+                              <div className="flex flex-wrap gap-1 mt-2">
+                                {rune.keywords.slice(0, 3).map((keyword, ki) => (
+                                  <span 
+                                    key={ki} 
+                                    className="text-xs px-2 py-0.5 bg-amber-100 text-amber-800 rounded-full"
+                                  >
+                                    {keyword}
+                                  </span>
+                                ))}
+                              </div>
                             </div>
-                            <p className="text-sm text-stone-700 leading-relaxed line-clamp-2">
-                              {rune.meaning}
-                            </p>
-                            <div className="flex flex-wrap gap-1 mt-2">
-                              {rune.keywords.slice(0, 3).map((keyword, ki) => (
-                                <span 
-                                  key={ki} 
-                                  className="text-xs px-2 py-0.5 bg-amber-100 text-amber-800 rounded-full"
-                                >
-                                  {keyword}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
+                          </button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const copyText = `${rune.character} ${rune.name} (${rune.phonetic}): ${rune.meaning}`;
+                              navigator.clipboard.writeText(copyText).then(() => {
+                                toast({
+                                  title: t('copyRuneSuccess'),
+                                  description: t('copyRuneSuccessDesc'),
+                                });
+                              }).catch(() => {
+                                toast({
+                                  title: t('copyFailed'),
+                                  variant: "destructive",
+                                });
+                              });
+                            }}
+                            aria-label={`Copy ${rune.name} information`}
+                          >
+                            <Copy className="w-4 h-4" />
+                          </Button>
                         </div>
                       ))}
                     </div>

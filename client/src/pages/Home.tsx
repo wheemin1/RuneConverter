@@ -8,6 +8,7 @@ import ConvertingPage from "./ConvertingPage";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookOpen } from "lucide-react";
+import { RuneReferenceSkeleton, HistoricalInfoSkeleton, FAQSkeleton } from "@/components/Skeleton";
 
 // Lazy load heavy components
 const RuneReference = lazy(() => import("@/components/RuneReference"));
@@ -207,28 +208,32 @@ export default function Home() {
             </div>
           </div>
 
-          <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="text-amber-900">Loading...</div></div>}>
+          <Suspense fallback={<RuneReferenceSkeleton />}>
             <RuneReference />
+          </Suspense>
+          <Suspense fallback={<HistoricalInfoSkeleton />}>
             <HistoricalInfo />
+          </Suspense>
             
-            {/* Rune Meanings CTA */}
-            <Card className="w-full max-w-4xl mx-auto my-12 bg-gradient-to-r from-amber-100/80 to-stone-100/80 border-amber-300/50 shadow-lg">
-              <CardContent className="p-8 text-center">
-                <BookOpen className="w-12 h-12 mx-auto mb-4 text-amber-800" />
-                <h2 className="text-2xl md:text-3xl font-bold text-amber-900 mb-3">
-                  {t('exploreRuneMeaningsTitle')}
-                </h2>
-                <p className="text-stone-700 mb-6 max-w-2xl mx-auto">
-                  {t('exploreRuneMeaningsDesc')}
-                </p>
-                <a href={`/rune-meanings?lang=${language}`}>
-                  <Button size="lg" className="bg-amber-700 hover:bg-amber-800 text-white font-semibold">
-                    {t('viewRuneMeaningsButton')}
-                  </Button>
-                </a>
-              </CardContent>
-            </Card>
+          {/* Rune Meanings CTA */}
+          <Card className="w-full max-w-4xl mx-auto my-12 bg-gradient-to-r from-amber-100/80 to-stone-100/80 border-amber-300/50 shadow-lg">
+            <CardContent className="p-8 text-center">
+              <BookOpen className="w-12 h-12 mx-auto mb-4 text-amber-800" />
+              <h2 className="text-2xl md:text-3xl font-bold text-amber-900 mb-3">
+                {t('exploreRuneMeaningsTitle')}
+              </h2>
+              <p className="text-stone-700 mb-6 max-w-2xl mx-auto">
+                {t('exploreRuneMeaningsDesc')}
+              </p>
+              <a href={`/rune-meanings?lang=${language}`}>
+                <Button size="lg" className="bg-amber-700 hover:bg-amber-800 text-white font-semibold">
+                  {t('viewRuneMeaningsButton')}
+                </Button>
+              </a>
+            </CardContent>
+          </Card>
             
+          <Suspense fallback={<FAQSkeleton />}>
             <FAQ />
           </Suspense>
         </main>

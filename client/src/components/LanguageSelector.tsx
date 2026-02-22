@@ -17,6 +17,9 @@ export default function LanguageSelector() {
         <Button 
           variant="outline" 
           className="border-viking-tan hover:bg-viking-tan/10 transition-colors gap-2 min-w-[120px]"
+          aria-label="Select language"
+          aria-haspopup="menu"
+          aria-expanded={isOpen}
         >
           <Globe className="w-4 h-4" />
           <span className="hidden sm:inline">{currentLanguage?.flag}</span>

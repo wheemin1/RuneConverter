@@ -26,19 +26,12 @@ export default function ShareModal({
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  const shareText = `${koreanName} (${englishName})의 바이킹 룬 문자: ${runeText}
-
-고대 엘더 푸타르크 룬으로 변환된 나의 이름을 확인해보세요!
-
-#바이킹룬문자 #룬변환기 #고대문자`;
+  const shareText = t('shareTextTemplate')
+    .replace('{name}', `${koreanName} (${englishName})`)
+    .replace('{runes}', runeText)
+    .replace('{url}', `${window.location.origin}?name=${encodeURIComponent(koreanName)}`);
 
   const shareUrl = `${window.location.origin}?name=${encodeURIComponent(koreanName)}`;
-  
-  // Create meta image URL for OG image when sharing
-  const getMetaImageUrl = () => {
-    // Create a simple URL that could be used for meta image generation
-    return `${window.location.origin}/api/og?name=${encodeURIComponent(koreanName)}&rune=${encodeURIComponent(runeText)}`;
-  };
 
   const handleCopyText = async () => {
     try {
@@ -94,23 +87,8 @@ export default function ShareModal({
     const encodedText = encodeURIComponent(shareText);
     const encodedUrl = encodeURIComponent(shareUrl);
     
-    // Add meta tags for sharing preview when possible
-    const metaTags = document.querySelectorAll('meta[property^="og:"]');
-    const ogImageTag = document.querySelector('meta[property="og:image"]');
-    
-    // Try to update OG image if possible
-    if (ogImageTag) {
-      const currentUrl = ogImageTag.getAttribute('content');
-      const dynamicUrl = getMetaImageUrl();
-      ogImageTag.setAttribute('content', dynamicUrl);
-      
-      // Restore the original URL after a delay
-      setTimeout(() => {
-        if (currentUrl) {
-          ogImageTag.setAttribute('content', currentUrl);
-        }
-      }, 5000);
-    }
+    // Note: OG image must be set server-side for social media crawlers.
+    // See netlify/functions/og.js for dynamic OG image generation.
     
     let url = '';
     

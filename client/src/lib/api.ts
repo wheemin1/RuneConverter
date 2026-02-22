@@ -1,77 +1,18 @@
-// 로컬 테스트를 위한 API 연결 설정
+// Local test API connection settings
 
-import { RuneConversion } from "@shared/schema";
+// Note: Server storage functionality is not currently implemented.
+// All rune conversions are stored in localStorage only.
+// See localStorageUtils.ts for client-side storage implementation.
 
-// API 기본 URL 설정
+// If server-side storage is needed in the future, implement the following:
+// - POST /api/rune-conversions - Save conversion to database
+// - GET /api/rune-conversions - Get all conversions
+// - GET /api/rune-conversions/popular - Get popular conversions
+
+// API base URL configuration
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
   ? '/api' 
   : 'http://localhost:5000/api';
 
-/**
- * 룬 변환 결과를 서버에 저장
- */
-export async function saveRuneConversionToServer(
-  koreanName: string, 
-  englishName: string, 
-  runeText: string
-): Promise<RuneConversion> {
-  try {
-    const response = await fetch(`${API_BASE_URL}/rune-conversions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        koreanName,
-        englishName,
-        runeText,
-        createdAt: new Date().toISOString(),
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Server responded with status: ${response.status}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Failed to save rune conversion:', error);
-    throw error;
-  }
-}
-
-/**
- * 모든 룬 변환 결과 가져오기
- */
-export async function getAllRuneConversions(): Promise<RuneConversion[]> {
-  try {
-    const response = await fetch(`${API_BASE_URL}/rune-conversions`);
-
-    if (!response.ok) {
-      throw new Error(`Server responded with status: ${response.status}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Failed to fetch rune conversions:', error);
-    return [];
-  }
-}
-
-/**
- * 인기 있는 룬 변환 결과 가져오기
- */
-export async function getPopularRuneConversions(): Promise<RuneConversion[]> {
-  try {
-    const response = await fetch(`${API_BASE_URL}/rune-conversions/popular`);
-
-    if (!response.ok) {
-      throw new Error(`Server responded with status: ${response.status}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Failed to fetch popular rune conversions:', error);
-    return [];
-  }
-}
+// Export API_BASE_URL for potential future use
+export { API_BASE_URL };

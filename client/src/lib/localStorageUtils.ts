@@ -12,60 +12,73 @@ const STORAGE_KEY = 'viking-rune-converter-saved-results';
 
 /**
  * Save a rune conversion result to local storage
+ * Returns the saved conversion on success, null on failure (e.g., quota exceeded, private mode)
  */
-export function saveRuneConversion(koreanName: string, englishName: string, runeText: string): SavedRuneConversion {
-  // Get existing saved conversions
-  const savedConversions = getSavedConversions();
-  
-  // Create new conversion with unique ID
-  const newConversion: SavedRuneConversion = {
-    id: generateId(),
-    koreanName,
-    englishName,
-    runeText,
-    timestamp: Date.now(),
-  };
-  
-  // Add to the beginning of the array (most recent first)
-  savedConversions.unshift(newConversion);
-  
-  // Limit to 10 saved conversions
-  const limitedConversions = savedConversions.slice(0, 10);
-  
-  // Save to local storage
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(limitedConversions));
-  
-  return newConversion;
+export function saveRuneConversion(koreanName: string, englishName: string, runeText: string): SavedRuneConversion | null {
+  try {
+    // Get existing saved conversions
+    const savedConversions = getSavedConversions();
+    
+    // Create new conversion with unique ID
+    const newConversion: SavedRuneConversion = {
+      id: generateId(),
+      koreanName,
+      englishName,
+      runeText,
+      timestamp: Date.now(),
+    };
+    
+    // Add to the beginning of the array (most recent first)
+    savedConversions.unshift(newConversion);
+    
+    // Limit to 10 saved conversions
+    const limitedConversions = savedConversions.slice(0, 10);
+    
+    // Save to local storage
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(limitedConversions));
+    
+    return newConversion;
+  } catch (error) {
+    console.error('Error saving to localStorage:', error);
+    return null; // Failed to save (quota exceeded, private mode, etc.)
+  }
 }
 
 /**
  * Get all saved conversions from local storage
+ * Returns empty array on error
  */
 export function getSavedConversions(): SavedRuneConversion[] {
-  const savedData = localStorage.getItem(STORAGE_KEY);
-  if (!savedData) return [];
-  
   try {
+    const savedData = localStorage.getItem(STORAGE_KEY);
+    if (!savedData) return [];
+    
     return JSON.parse(savedData) as SavedRuneConversion[];
   } catch (error) {
-    console.error('Error parsing saved conversions:', error);
+    console.error('Error getting saved conversions:', error);
     return [];
   }
 }
 
 /**
  * Delete a saved conversion by ID
+ * Returns true on successful deletion, false otherwise
  */
 export function deleteRuneConversion(id: string): boolean {
-  const savedConversions = getSavedConversions();
-  const filteredConversions = savedConversions.filter(conv => conv.id !== id);
-  
-  if (filteredConversions.length === savedConversions.length) {
-    return false; // Nothing was deleted
+  try {
+    const savedConversions = getSavedConversions();
+    const filteredConversions = savedConversions.filter(conv => conv.id !== id);
+    
+    if (filteredConversions.length === savedConversions.length) {
+      return false; // Nothing was deleted
+    }
+    
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(filteredConversions));
+    return true;
+  } catch (error) {
+    console.error('Error deleting from localStorage:', error);
+    return false;
   }
-  
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(filteredConversions));
-  return true;
 }
 
 /**
