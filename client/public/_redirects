@@ -1,2 +1,7 @@
+/ads.txt  /ads.txt  200
+/robots.txt  /robots.txt  200
+/sitemap.xml  /sitemap.xml  200
+/manifest.json  /manifest.json  200
+/schema.json  /schema.json  200
 /api/*  /.netlify/functions/api/:splat  200
 /*    /index.html   200
