@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://viking-rune-converter.netlify.app/</loc>
-    <lastmod>2026-02-12</lastmod>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ko" href="https://viking-rune-converter.netlify.app/?lang=ko" />
@@ -24,7 +24,7 @@
   <!-- Rune Meanings Page -->
   <url>
     <loc>https://viking-rune-converter.netlify.app/rune-meanings</loc>
-    <lastmod>2026-02-12</lastmod>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ko" href="https://viking-rune-converter.netlify.app/rune-meanings?lang=ko" />
