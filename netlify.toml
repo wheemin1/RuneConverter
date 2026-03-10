@@ -27,26 +27,8 @@
   to = "/.netlify/functions/api/:splat"
   status = 200
 
-# 정적 파일은 리다이렉트하지 않음 (ads.txt, robots.txt, sitemap.xml 등)
-[[redirects]]
-  from = "/ads.txt"
-  to = "/ads.txt"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/robots.txt"
-  to = "/robots.txt"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/sitemap.xml"
-  to = "/sitemap.xml"
-  status = 200
-  force = true
-
-# 모든 요청을 index.html로 리다이렉트 (SPA 처리) - 단, 위의 정적 파일 제외
+# 모든 요청을 index.html로 리다이렉트 (SPA 처리)
+# Netlify는 정적 파일(ads.txt, robots.txt, sitemap.xml 등)을 리다이렉트보다 먼저 처리하므로 별도 규칙 불필요
 [[redirects]]
   from = "/*"
   to = "/index.html"

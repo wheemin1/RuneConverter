@@ -21,7 +21,7 @@ export default function RuneMeanings() {
       ? window.location.origin
       : 'https://viking-rune-converter.netlify.app';
 
-  const canonicalUrl = `${siteOrigin}/rune-meanings?lang=${seoLang}`;
+  const canonicalUrl = `${siteOrigin}/rune-meanings`;
 
   return (
     <>
